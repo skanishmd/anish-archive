@@ -1,0 +1,85 @@
+{
+  "tracks": [
+    {
+      "id": "education",
+      "label": "EDUCATION",
+      "color": "#3B82F6",
+      "nodes": [
+        {
+          "id": "bsc-makaut",
+          "title": "BSc Bioinformatics",
+          "institution": "MAKAUT, West Bengal",
+          "startDate": "2024-08-01",
+          "endDate": "2027-06-01",
+          "status": "in-progress",
+          "description": "Bachelor of Science in Bioinformatics. Focus on computational biology, structural bioinformatics, and AI-driven drug discovery.",
+          "tags": ["bioinformatics", "computational-biology"],
+          "archiveSlug": "bioinformatics-bsc"
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "label": "RESEARCH",
+      "color": "#FF2A00",
+      "nodes": [
+        {
+          "id": "fgfr4-research",
+          "title": "FGFR4 Inhibitor Identification",
+          "institution": "Independent Research",
+          "startDate": "2025-09-01",
+          "endDate": "2026-07-15",
+          "status": "published",
+          "description": "ML-driven identification of FGFR4 inhibitors for Hepatocellular Carcinoma using molecular docking and 100ns+ MD simulations.",
+          "tags": ["FGFR4", "HCC", "molecular-dynamics", "machine-learning"],
+          "technologies": ["Python", "GROMACS", "AutoDock Vina", "PyMOL", "RDKit"],
+          "archiveSlug": "fgfr4-hcc-discovery"
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "label": "PROJECTS",
+      "color": "#0038FF",
+      "nodes": [
+        {
+          "id": "chronobase",
+          "title": "ChronoBase",
+          "startDate": "2026-01-01",
+          "endDate": null,
+          "status": "in-progress",
+          "description": "Platform for optimizing medication timing using circadian data and AI.",
+          "tags": ["chronobiology", "AI", "drug-discovery"],
+          "technologies": ["Python", "FastAPI", "PyTorch", "Docker"],
+          "archiveSlug": "chronobase"
+        },
+        {
+          "id": "omicclock",
+          "title": "OmicsClock",
+          "startDate": "2026-03-01",
+          "endDate": null,
+          "status": "in-progress",
+          "description": "Multi-omics circadian integration tool for rhythmicity analysis.",
+          "tags": ["omics", "circadian-biology", "computational-biology"],
+          "technologies": ["Python", "R", "Scanpy"]
+        },
+        {
+          "id": "evodrug",
+          "title": "EvoDrug",
+          "startDate": "2026-05-01",
+          "endDate": null,
+          "status": "in-progress",
+          "description": "Evolutionary algorithm-driven drug candidate optimization pipeline.",
+          "tags": ["evolutionary-algorithms", "drug-design", "cheminformatics"],
+          "technologies": ["Python", "RDKit", "DeepChem"]
+        }
+      ]
+    },
+    {
+      "id": "achievements",
+      "label": "ACHIEVEMENTS",
+      "color": "#FFAA00",
+      "nodes": []
+    }
+  ]
+}

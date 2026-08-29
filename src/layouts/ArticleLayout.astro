@@ -1,0 +1,176 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FluidBackground from '@components/canvas/FluidBackground.tsx';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'writing' | 'research' | 'creative' | 'observations'>;
+}
+
+const { entry } = Astro.props;
+const { title, date, description, tags, fields, readingTime = '7 MIN READ' } = entry.data;
+
+// Format date like '2026.08.15'
+const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
+
+// The abstract background color based on collection
+const signalColor = entry.collection === 'research' ? '#FF2A00' :
+                   entry.collection === 'writing' ? '#00FF66' :
+                   entry.collection === 'creative' ? '#9D00FF' : '#00F0FF';
+---
+
+<BaseLayout title={`${title} — Sk Anish Md`} noHeaderFooter={true}>
+  
+  <!-- Reading Progress Bar -->
+  <div id="prog" class="fixed top-0 left-0 h-[2px] w-0 z-[9999] transition-[width] duration-75 ease-linear" style={`background: linear-gradient(to right, ${signalColor}, #c4a25a)`}></div>
+
+  <!-- Main Split Layout -->
+  <main class="min-h-screen bg-void text-bone flex flex-col md:flex-row relative">
+    
+    <!-- Left Cover (Sticky) -->
+    <aside class="md:w-[45vw] md:h-screen md:sticky md:top-0 border-b md:border-b-0 md:border-r border-hairline relative overflow-hidden flex items-center justify-center">
+      <!-- Blueprint Grid Overlay -->
+      <div class="absolute inset-0 z-0 pointer-events-none opacity-20"
+           style="background-image: linear-gradient(30deg, rgba(196,162,90,0.1) 1px, transparent 1px), linear-gradient(150deg, rgba(196,162,90,0.1) 1px, transparent 1px); background-size: 56px 56px;">
+      </div>
+      
+      <!-- Shader or Abstract visual -->
+      <div class="absolute inset-0 z-0 opacity-40">
+        <FluidBackground client:only="react" />
+      </div>
+
+      <!-- Center Logo / Geo -->
+      <div class="relative z-10 w-48 h-48 border border-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+        <div class="w-32 h-32 border border-white/20 rotate-45 flex items-center justify-center">
+           <span class="font-cinematic text-2xl -rotate-45" style={`color: ${signalColor}`}>A</span>
+        </div>
+      </div>
+      
+      <!-- Bottom Left Nav Rail (Sticky) -->
+      <a href="/" class="absolute bottom-8 left-8 z-20 font-mono text-[10px] uppercase tracking-widest text-ash hover:text-bone transition-colors flex items-center gap-2">
+        <span class="w-4 h-[1px] bg-ash"></span> RETURN
+      </a>
+    </aside>
+
+    <!-- Right Content (Scrollable) -->
+    <article class="md:w-[55vw] min-h-screen relative">
+      
+      <!-- Sticky Banner -->
+      <div class="sticky top-0 z-50 bg-[#141416]/95 backdrop-blur-md border-b border-white/5 px-8 py-3 flex items-center justify-between">
+        <span class="font-mono text-[9px] uppercase tracking-[0.25em] text-bone-muted">
+          SK ANISH MD // {entry.collection.toUpperCase()}
+        </span>
+        <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-ash">
+          {formattedDate}
+        </span>
+      </div>
+
+      <div class="p-8 md:p-16 lg:p-24 lg:pr-32 max-w-4xl">
+        
+        <!-- Metadata Header -->
+        <header class="mb-20">
+          <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-[#c4a25a] mb-12 flex items-center gap-4">
+             <span class="w-8 h-[1px] bg-[#c4a25a]/50"></span> THE ARCHIVE
+          </div>
+          
+          <h1 class="font-cinematic font-semibold text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-[0.02em] text-bone mb-6">
+            {title}
+          </h1>
+          
+          <p class="font-literary italic text-xl md:text-2xl text-[#c4a25a]/70 leading-relaxed max-w-2xl mb-12">
+            {description}
+          </p>
+          
+          <div class="w-16 h-[2px] my-12" style={`background: linear-gradient(to right, ${signalColor}, transparent)`}></div>
+          
+          <!-- Structured Fields (Data-Driven Hero) -->
+          <div class="border-t border-[#c4a25a]/10 flex flex-col">
+            <div class="grid grid-cols-[120px_1fr] gap-4 items-baseline border-b border-[#c4a25a]/5 py-4">
+              <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#c4a25a]/50">DATE</span>
+              <span class="font-literary text-lg text-bone-muted">{formattedDate}</span>
+            </div>
+            {fields && fields[0] && (
+              <div class="grid grid-cols-[120px_1fr] gap-4 items-baseline border-b border-[#c4a25a]/5 py-4">
+                <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#c4a25a]/50">FIELD</span>
+                <span class="font-literary text-lg text-bone-muted">{fields[0]}</span>
+              </div>
+            )}
+            <div class="grid grid-cols-[120px_1fr] gap-4 items-baseline border-b border-[#c4a25a]/5 py-4">
+              <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#c4a25a]/50">TAGS</span>
+              <div class="flex gap-2 flex-wrap">
+                {tags.map(t => <span class="font-literary text-lg text-bone-muted">{t}</span>)}
+              </div>
+            </div>
+            <div class="grid grid-cols-[120px_1fr] gap-4 items-baseline border-b border-[#c4a25a]/5 py-4">
+              <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#c4a25a]/50">READ TIME</span>
+              <span class="font-literary text-lg text-bone-muted">{readingTime}</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Markdown Content -->
+        <div class="editorial-prose prose prose-invert prose-p:font-literary prose-p:text-xl prose-p:leading-[1.8] prose-p:text-bone/80 prose-headings:font-cinematic prose-headings:text-[#c4a25a] prose-a:text-signal-research prose-strong:text-bone max-w-none">
+          <slot />
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <script>
+    // Reading Progress Bar
+    const prog = document.getElementById('prog');
+    if (prog) {
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        prog.style.width = scrolled + '%';
+      });
+    }
+
+    // Scroll Reveal (Simple Implementation)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-6');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.editorial-prose p, .editorial-prose h2, .editorial-prose h3, .editorial-prose ul').forEach((el) => {
+      el.classList.add('transition-all', 'duration-1000', 'ease-out', 'opacity-0', 'translate-y-6');
+      observer.observe(el);
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  /* Custom overrides for the editorial manuscript look */
+  .editorial-prose p {
+    margin-bottom: 2rem;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  
+  .editorial-prose h2 {
+    font-size: 2.25rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(196,162,90,0.2);
+    padding-bottom: 0.5rem;
+  }
+
+  .editorial-prose blockquote {
+    font-family: var(--font-cinematic);
+    font-size: 1.5rem;
+    color: rgba(196,162,90,0.8);
+    border-left: 2px solid rgba(196,162,90,0.5);
+    padding-left: 2rem;
+    font-style: italic;
+    margin: 3rem 0;
+  }
+</style>

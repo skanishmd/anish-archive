@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticleLayout from '@layouts/ArticleLayout.astro';
+import ProjectLayout from '@layouts/ProjectLayout.astro';
+
+export async function getStaticPaths() {
+  const collectionNames = ['observations', 'projects', 'research', 'writing', 'achievements', 'creative'] as const;
+  const paths = [];
+  const allEntries: Map<string, any> = new Map();
+
+  for (const name of collectionNames) {
+    const entries = await getCollection(name);
+    for (const entry of entries) {
+      allEntries.set(entry.id, { ...entry, collectionName: name });
+      paths.push({
+        params: { slug: `${name}/${entry.id}` },
+        props: { entry, collectionName: name },
+      });
+    }
+  }
+
+  // Resolve connections for each entry
+  for (const path of paths) {
+    const entry = path.props.entry;
+    const resolvedConnections = (entry.data.connections || []).map((connId: string) => {
+      const conn = allEntries.get(connId);
+      if (conn) {
+        return {
+          slug: conn.id,
+          collection: conn.collectionName,
+          title: conn.data.title,
+          type: conn.data.type,
+        };
+      }
+      return null;
+    }).filter(Boolean);
+    path.props.resolvedConnections = resolvedConnections;
+  }
+
+  return paths;
+}
+
+const { entry, collectionName, resolvedConnections } = Astro.props;
+const { Content } = await render(entry);
+
+// Rough reading time calculation
+const wordCount = entry.body ? entry.body.split(/\s+/).length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// Add reading time to entry data so layouts can use it
+entry.data.readingTime = `${readingTime} MIN READ`;
+---
+
+{collectionName === 'projects' ? (
+  <ProjectLayout entry={entry} connections={resolvedConnections || []}>
+    <Content />
+  </ProjectLayout>
+) : (
+  <ArticleLayout entry={entry}>
+    <Content />
+  </ArticleLayout>
+)}

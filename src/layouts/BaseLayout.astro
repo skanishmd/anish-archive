@@ -1,0 +1,167 @@
+---
+import Header from '@components/layout/Header.astro';
+import Footer from '@components/layout/Footer.astro';
+import SmoothScroll from '@components/animations/SmoothScroll.tsx';
+import FluidBackground from '@components/canvas/FluidBackground.tsx';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noHeaderFooter?: boolean;
+}
+
+const {
+  title,
+  description = 'Computational Oncologist specializing in AI-driven Circadian Therapeutics.',
+  noHeaderFooter = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} — Sk Anish Md` : 'Sk Anish Md';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://skanishmd.dev');
+---
+
+<!doctype html>
+<html lang="en" class="bg-void">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Editorial Font Stack -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Oswald:wght@300;400;500;700&family=Syne:wght@400;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Theme Script -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+
+    <!-- KaTeX -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Fonts (preload critical) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-void text-bone min-h-screen flex flex-col relative overflow-x-hidden">
+    <SmoothScroll client:load />
+
+    <!-- Boot Sequence -->
+    <div id="boot-overlay" class="fixed inset-0 bg-void z-[10000] flex flex-col items-center justify-center transition-all duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)]">
+      <div class="text-center">
+        <div id="boot-text" class="font-display text-[clamp(2.5rem,5vw,5rem)] text-bone italic opacity-0 translate-y-5 transition-all duration-1000 ease-out">
+          The Cruel Standard.
+        </div>
+        <div id="boot-subtext" class="font-mono text-[11px] text-ash uppercase tracking-[0.2em] mt-5 opacity-0 transition-all duration-1000 ease-out delay-500">
+          Compiling context...
+        </div>
+      </div>
+    </div>
+
+    <!-- Fluid Organic Background (WebGL) -->
+    <FluidBackground client:only="react" />
+
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-void focus:text-bone focus:px-4 focus:py-2 focus:border focus:border-hairline text-system"
+    >
+      Skip to content
+    </a>
+    
+    <!-- DUALITY TOGGLE -->
+    <button id="mode-toggle" class="fixed bottom-6 right-6 z-[9999] px-4 py-2 border border-hairline bg-void/80 text-system text-ash hover:text-bone hover:border-bone transition-all backdrop-blur-md cursor-crosshair">
+      <!-- Injected by script -->
+    </button>
+
+    {!noHeaderFooter && <Header />}
+    <main id="main-content" class="flex-1 opacity-0 transition-opacity duration-1000 delay-500" data-app-main>
+      <slot />
+    </main>
+    {!noHeaderFooter && <Footer />}
+
+    <script>
+      // Boot Sequence Logic
+      document.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('boot-overlay');
+        const bText = document.getElementById('boot-text');
+        const bSub = document.getElementById('boot-subtext');
+        const app = document.querySelector('[data-app-main]');
+
+        if (overlay && bText && bSub && app) {
+          // If already booted in this session, skip animation
+          if (sessionStorage.getItem('booted')) {
+            overlay.style.display = 'none';
+            app.classList.remove('opacity-0');
+            app.classList.add('opacity-100');
+            return;
+          }
+
+          setTimeout(() => { bText.classList.remove('opacity-0', 'translate-y-5'); }, 400);
+          setTimeout(() => { bSub.classList.remove('opacity-0'); }, 1600);
+          
+          setTimeout(() => {
+            overlay.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
+            setTimeout(() => {
+              overlay.style.display = 'none';
+              app.classList.remove('opacity-0');
+              app.classList.add('opacity-100');
+              sessionStorage.setItem('booted', 'true');
+            }, 1200);
+          }, 3500);
+        }
+      });
+
+      // Dual Mode Toggle Logic
+      const toggleBtn = document.getElementById('mode-toggle');
+      const root = document.documentElement;
+      
+      if (toggleBtn) {
+        const currentMode = localStorage.getItem('anish_mode') || 'brand';
+        root.setAttribute('data-mode', currentMode);
+        updateToggleButton(currentMode);
+
+        toggleBtn.addEventListener('click', () => {
+          const isBrand = root.getAttribute('data-mode') === 'brand';
+          const newMode = isBrand ? 'author' : 'brand';
+          
+          root.setAttribute('data-mode', newMode);
+          localStorage.setItem('anish_mode', newMode);
+          updateToggleButton(newMode);
+        });
+
+        function updateToggleButton(mode) {
+          if (mode === 'brand') {
+            toggleBtn.innerHTML = '<span class="text-signal-project">■</span> BRAND MODE';
+          } else {
+            toggleBtn.innerHTML = '<span class="text-signal-creative">◆</span> AUTHOR MODE';
+          }
+        }
+      }
+
+      // Glass Specular Highlight — tracks mouse position on glass-card elements
+      document.querySelectorAll('.glass-card').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--mouse-x', `${x}%`);
+          card.style.setProperty('--mouse-y', `${y}%`);
+        });
+      });
+    </script>
+  </body>
+</html>

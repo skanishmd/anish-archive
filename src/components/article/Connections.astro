@@ -1,0 +1,48 @@
+---
+interface Connection {
+  slug: string;
+  collection: string;
+  title: string;
+  type: string;
+}
+
+interface Props {
+  connections: Connection[];
+}
+
+const { connections } = Astro.props;
+
+const TYPE_COLORS: Record<string, string> = {
+  research: '#FF2A00',
+  project: '#0038FF',
+  writing: '#00FF66',
+  achievement: '#FFAA00',
+  creative: '#9D00FF',
+  experiment: '#00F0FF',
+  observation: '#00FF66',
+};
+---
+
+{connections.length > 0 && (
+  <div class="mt-8">
+    <h3 class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-4 pb-2 border-b border-hairline">
+      CONNECTIONS
+    </h3>
+    <ul class="flex flex-col gap-3">
+      {connections.map((conn) => (
+        <li>
+          <a
+            href={`/archive/${conn.collection}/${conn.slug}`}
+            class="flex items-center gap-2 text-bone-muted hover:text-bone transition-colors duration-150"
+          >
+            <span
+              class="inline-block w-2 h-2"
+              style={`background: ${TYPE_COLORS[conn.type] || '#6A6A6A'}`}
+            />
+            <span class="text-sm">{conn.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}

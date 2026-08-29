@@ -1,0 +1,85 @@
+---
+import LiquidLogo from '@components/canvas/LiquidLogo.tsx';
+const pathname = Astro.url.pathname;
+const navItems = [
+  { label: 'ARCHIVE', href: '/archive' },
+  { label: 'TIMELINE', href: '/timeline' },
+  { label: 'ABOUT', href: '/about' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-void/90 backdrop-blur-sm border-b border-hairline">
+  <nav class="max-w-[1280px] mx-auto px-[clamp(1rem,4vw,3rem)] h-14 flex items-center justify-between">
+    <a href="/" class="hover:opacity-80 transition-opacity duration-200">
+      <LiquidLogo text="SK ANISH MD" client:load fontSize={13} speed={0.8} />
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-8">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'font-mono text-[13px] tracking-[0.05em] uppercase transition-colors duration-150',
+              pathname.startsWith(item.href)
+                ? 'text-bone border-b-2 border-bone pb-0.5'
+                : 'text-ash hover:text-bone',
+            ]}
+            aria-current={pathname.startsWith(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden font-mono text-[13px] tracking-[0.05em] uppercase text-ash hover:text-bone"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      MENU
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden fixed inset-0 top-14 bg-void z-40"
+  >
+    <ul class="flex flex-col items-center justify-center h-full gap-12">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'font-mono text-xl tracking-[0.05em] uppercase',
+              pathname.startsWith(item.href) ? 'text-bone' : 'text-ash',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<!-- Spacer to account for fixed header -->
+<div class="h-14"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      btn.textContent = isOpen ? 'MENU' : 'CLOSE';
+    });
+  }
+</script>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  label: string;
+  colorClass?: string;
+}
+
+const { label, colorClass = 'text-ash border-ash' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-block font-mono text-[11px] tracking-[0.08em] uppercase px-2 py-0.5 border',
+    colorClass,
+  ]}
+>
+  {label}
+</span>

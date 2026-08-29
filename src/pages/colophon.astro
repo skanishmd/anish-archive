@@ -1,0 +1,105 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import Separator from '@components/ui/Separator.astro';
+import Badge from '@components/ui/Badge.astro';
+---
+
+<PageLayout title="Colophon">
+  <div class="max-w-[800px]">
+    <p class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-6">
+      COLOPHON
+    </p>
+
+    <h1 class="font-serif text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.1] text-bone mb-6">
+      How This Site Is Made
+    </h1>
+
+    <p class="text-bone-muted text-lg leading-relaxed mb-8 max-w-[55ch]">
+      This site is designed and built as an artifact of identity, not a template.
+      Every visual decision communicates something. If it doesn't, it's removed.
+    </p>
+
+    <Separator />
+
+    <!-- Typography Specimens -->
+    <section class="mt-12">
+      <h2 class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-6">TYPOGRAPHY</h2>
+      <div class="flex flex-col gap-8">
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash mb-2">EDITORIAL — Playfair Display</p>
+          <p class="font-serif text-4xl font-bold text-bone">The Archive of Discovery</p>
+        </div>
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash mb-2">BODY — Inter</p>
+          <p class="font-sans text-lg text-bone-muted">Every cell in your body knows what time it is. This is not a metaphor.</p>
+        </div>
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash mb-2">SYSTEM — JetBrains Mono</p>
+          <p class="font-mono text-[13px] tracking-[0.05em] uppercase text-bone-muted">RESEARCH · 2026.08 · COMPUTATIONAL ONCOLOGY</p>
+        </div>
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash mb-2">DISPLAY — Syne</p>
+          <p class="font-display text-5xl font-bold text-bone">ARCHIVE</p>
+        </div>
+      </div>
+    </section>
+
+    <Separator />
+
+    <!-- Color System -->
+    <section class="mt-12">
+      <h2 class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-6">SIGNAL COLORS</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-4 h-4 bg-signal-research"></div>
+          <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">RESEARCH</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-4 h-4 bg-signal-project"></div>
+          <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">PROJECT</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-4 h-4 bg-signal-writing"></div>
+          <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">WRITING</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-4 h-4 bg-signal-achievement"></div>
+          <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">ACHIEVEMENT</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-4 h-4 bg-signal-creative"></div>
+          <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">CREATIVE</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-4 h-4 bg-signal-experiment"></div>
+          <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">EXPERIMENT</span>
+        </div>
+      </div>
+    </section>
+
+    <Separator />
+
+    <!-- Tech Stack -->
+    <section class="mt-12">
+      <h2 class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-6">TECHNOLOGY</h2>
+      <div class="grid grid-cols-2 gap-y-3 gap-x-8 font-mono text-[13px] text-bone-muted">
+        <span>Framework</span><span class="text-bone">Astro 5</span>
+        <span>Islands</span><span class="text-bone">React 19</span>
+        <span>Styling</span><span class="text-bone">Tailwind CSS v4</span>
+        <span>Animation</span><span class="text-bone">GSAP 3.12</span>
+        <span>3D</span><span class="text-bone">React Three Fiber</span>
+        <span>Content</span><span class="text-bone">Astro Content Collections</span>
+        <span>Syntax</span><span class="text-bone">Shiki</span>
+        <span>Math</span><span class="text-bone">KaTeX</span>
+        <span>Deployment</span><span class="text-bone">Cloudflare Pages</span>
+        <span>Scroll</span><span class="text-bone">Lenis</span>
+      </div>
+    </section>
+
+    <Separator />
+
+    <p class="mt-8 font-mono text-[13px] tracking-[0.05em] uppercase text-ash">
+      DESIGNED & BUILT BY ANISH MOHAMMAD · 2026
+    </p>
+  </div>
+</PageLayout>

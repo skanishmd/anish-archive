@@ -1,0 +1,133 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const research = await getCollection('research');
+const writing = await getCollection('writing');
+const achievements = await getCollection('achievements');
+
+const allItems = [
+  ...projects.map(p => ({ ...p, type: 'PROJECT' })),
+  ...research.map(r => ({ ...r, type: 'RESEARCH' })),
+  ...writing.map(w => ({ ...w, type: 'WRITING' })),
+  ...achievements.map(a => ({ ...a, type: 'ACHIEVEMENT' }))
+].sort((a, b) => a.data.date.getTime() - b.data.date.getTime()); // Chronological
+
+// Group by year
+const itemsByYear = allItems.reduce((acc, item) => {
+  const year = item.data.date.getFullYear();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(item);
+  return acc;
+}, {} as Record<number, typeof allItems>);
+
+const years = Object.keys(itemsByYear).map(Number).sort();
+---
+
+<BaseLayout title="Spatial Timeline — Sk Anish Md" noHeaderFooter={true}>
+  
+  <div class="fixed top-8 left-8 z-50">
+    <a href="/" class="font-mono text-[10px] uppercase tracking-widest text-ash hover:text-bone transition-colors flex items-center gap-2 bg-void/50 backdrop-blur-md px-4 py-2 border border-white/5">
+      <span class="w-4 h-[1px] bg-ash"></span> RETURN
+    </a>
+  </div>
+
+  <div class="fixed top-8 right-8 z-50 text-right">
+    <div class="font-cinematic text-xl text-bone">THE ARCHIVE TIMELINE</div>
+    <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-ash">SPATIAL NAVIGATION</div>
+  </div>
+
+  <main class="h-screen w-screen overflow-x-auto overflow-y-hidden bg-[#0c1628] text-bone flex items-center hide-scrollbar cursor-ew-resize" id="timeline-container">
+    
+    <!-- Horizon Line -->
+    <div class="fixed top-1/2 left-0 w-[1000vw] h-px bg-white/10 z-0 transform -translate-y-1/2"></div>
+    
+    <div class="flex gap-32 px-[10vw] relative z-10 min-w-max items-center h-full">
+      
+      {years.map((year, i) => (
+        <div class="relative flex gap-16 items-center">
+          
+          <!-- Year Marker -->
+          <div class="absolute -top-32 left-0 font-cinematic text-8xl md:text-[12rem] font-bold text-white/[0.03] select-none pointer-events-none">
+            {year}
+          </div>
+
+          <!-- Items in Year -->
+          {itemsByYear[year].map((item, j) => {
+            const isTop = j % 2 === 0;
+            const signalColor = 
+              item.type === 'RESEARCH' ? '#FF2A00' :
+              item.type === 'WRITING' ? '#00FF66' :
+              item.type === 'ACHIEVEMENT' ? '#FFAA00' : '#0038FF';
+
+            return (
+              <div class="timeline-node relative flex flex-col group w-[280px]" style={`margin-top: ${isTop ? '-200px' : '200px'}`}>
+                
+                <!-- Connector Line -->
+                <div class={`absolute left-4 w-px bg-white/20 transition-all duration-500 group-hover:bg-white/50 ${isTop ? 'top-full h-[180px]' : 'bottom-full h-[180px]'}`}></div>
+                
+                <!-- Dot -->
+                <div class={`absolute left-3.5 w-2 h-2 rounded-full border border-void transition-all duration-300 group-hover:scale-150 ${isTop ? 'bottom-[-184px]' : 'top-[-184px]'}`} style={`background-color: ${signalColor}; box-shadow: 0 0 10px ${signalColor}`}></div>
+
+                <!-- Content Card (Glass) -->
+                <a href={`/archive/${item.collection}/${item.id}`} class="glass-card p-6 border border-white/5 hover:border-white/20 transition-all duration-300 z-10 cursor-pointer block">
+                  <div class="glass-specular" data-glass-specular></div>
+                  <div class="relative z-10">
+                    <div class="font-mono text-[9px] uppercase tracking-[0.2em] mb-3 flex items-center justify-between" style={`color: ${signalColor}`}>
+                      <span>{item.type}</span>
+                      <span>{item.data.date.toISOString().slice(0, 10)}</span>
+                    </div>
+                    <h3 class="font-cinematic text-xl text-bone mb-2 leading-tight group-hover:text-white transition-colors">
+                      {item.data.title}
+                    </h3>
+                    <p class="font-sans text-xs text-bone-muted line-clamp-3">
+                      {item.data.description}
+                    </p>
+                  </div>
+                </a>
+
+              </div>
+            );
+          })}
+        </div>
+      ))}
+      
+    </div>
+  </main>
+
+  <style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <script>
+    // Horizontal scroll with mouse wheel
+    const container = document.getElementById('timeline-container');
+    if (container) {
+      container.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY * 2;
+        }
+      });
+    }
+
+    // Glass specular logic
+    document.querySelectorAll('.glass-card').forEach((card) => {
+      card.addEventListener('mousemove', (e: Event) => {
+        const me = e as MouseEvent;
+        const rect = (card as HTMLElement).getBoundingClientRect();
+        const x = ((me.clientX - rect.left) / rect.width) * 100;
+        const y = ((me.clientY - rect.top) / rect.height) * 100;
+        (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
+        (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
+      });
+    });
+  </script>
+</BaseLayout>

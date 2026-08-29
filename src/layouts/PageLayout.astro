@@ -1,0 +1,16 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="max-w-[1280px] mx-auto px-[clamp(1rem,4vw,3rem)] py-16">
+    <slot />
+  </div>
+</BaseLayout>

@@ -1,0 +1,119 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Experiment // Duality" noHeaderFooter={false}>
+  <div class="max-w-3xl mx-auto py-24 px-8 relative z-10" id="poem-container">
+    
+    <div class="mb-16">
+      <p class="text-system text-ash mb-2">OBSERVATION // 001</p>
+      <h1 class="font-editorial text-5xl text-bone" id="poem-title">The Fractured Glass</h1>
+    </div>
+
+    <div class="font-sans text-lg text-bone-muted leading-loose space-y-8 poem-content">
+      <p>
+        The system demands a clean alignment.<br/>
+        A matrix of inputs, perfectly weighed.<br/>
+        But the cell does not care for your integers,<br/>
+        It divides in the dark, unafraid.
+      </p>
+      <p>
+        I built a cage of glass and logic,<br/>
+        To hold the stochastic noise in place.<br/>
+        But the glass is melting under the pressure,<br/>
+        Of a rhythm I cannot trace.
+      </p>
+      <p>
+        Toggle the mode. Break the containment.<br/>
+        Let the algorithm fail and weep.<br/>
+        For beneath the rigid, brutalist structure,<br/>
+        The water is dark, and the water is deep.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- SVG Filter for Liquid Glass Effect -->
+  <svg class="fixed opacity-0 pointer-events-none w-0 h-0">
+    <filter id="liquid-glass">
+      <feTurbulence id="turbulence" type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+      <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <style>
+    /* -------------------------------------------------------------
+       BRAND MODE (DEFAULT)
+       Strict, readable, clinical, editorial.
+       ------------------------------------------------------------- */
+    #poem-container {
+      transition: all 1s ease-in-out;
+    }
+
+    /* -------------------------------------------------------------
+       AUTHOR MODE (ART DIRECTION HIJACK)
+       Liquid glass distortion, chaotic typography, chromatic aberration
+       ------------------------------------------------------------- */
+    :global(html[data-mode="author"]) #poem-container {
+      /* Dramatically shift layout */
+      transform: scale(1.05);
+    }
+
+    :global(html[data-mode="author"]) #poem-title {
+      font-family: var(--font-display);
+      font-size: 7rem;
+      line-height: 0.8;
+      text-transform: uppercase;
+      color: var(--color-signal-research);
+      text-shadow: 4px 4px 0px rgba(0,255,255,0.5), -4px -4px 0px rgba(255,0,255,0.5);
+      mix-blend-mode: exclusion;
+      filter: url(#liquid-glass);
+    }
+
+    :global(html[data-mode="author"]) .poem-content {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2rem;
+      line-height: 1.2;
+      color: #fff;
+      filter: url(#liquid-glass);
+    }
+
+    :global(html[data-mode="author"]) .poem-content p:nth-child(even) {
+      transform: translateX(10%);
+      color: var(--color-signal-project);
+    }
+  </style>
+
+  <script>
+    // Liquid Glass Animation Logic
+    // This script animates the SVG turbulence filter ONLY when Author Mode is active
+    let req;
+    let phase = 0;
+
+    function animateLiquid() {
+      const mode = document.documentElement.getAttribute('data-mode');
+      const turbulence = document.getElementById('turbulence');
+      const displacement = document.getElementById('displacement');
+
+      if (mode === 'author') {
+        phase += 0.05;
+        // Shift the base frequency slightly to create a boiling/liquid effect
+        const freqX = 0.01 + Math.sin(phase * 0.1) * 0.005;
+        const freqY = 0.01 + Math.cos(phase * 0.1) * 0.005;
+        turbulence.setAttribute('baseFrequency', `${freqX} ${freqY}`);
+        
+        // Increase the scale of displacement to warp the text
+        displacement.setAttribute('scale', '25');
+      } else {
+        // Reset in Brand mode
+        displacement.setAttribute('scale', '0');
+      }
+
+      req = requestAnimationFrame(animateLiquid);
+    }
+
+    // Start loop
+    animateLiquid();
+  </script>
+</BaseLayout>

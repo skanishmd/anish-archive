@@ -1,0 +1,114 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  readingTime?: number;
+  connections?: any[];
+}
+
+const { entry, connections } = Astro.props;
+const { title, date, description, tags, fields, link, github } = entry.data;
+
+const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
+---
+
+<BaseLayout title={`${title} — Sk Anish Md`} noHeaderFooter={true}>
+  
+  <main class="min-h-screen bg-[#111] text-bone relative overflow-hidden font-sans">
+    
+    <!-- Blueprint Grid Background -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-[0.03]"
+         style="background-image: linear-gradient(0deg, #fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 32px 32px;">
+    </div>
+    <div class="grain-overlay absolute inset-0 z-10 pointer-events-none"></div>
+
+    <div class="relative z-20 flex flex-col xl:flex-row min-h-screen">
+      
+      <!-- Left Sidebar: Technical Specs -->
+      <aside class="xl:w-[320px] 2xl:w-[400px] bg-[#0a0a0a]/90 backdrop-blur-xl border-r border-white/10 p-8 flex flex-col sticky top-0 xl:h-screen overflow-y-auto">
+        <a href="/archive?filter=project" class="font-brutalist text-xs uppercase tracking-widest text-ash hover:text-bone transition-colors mb-16 flex items-center gap-2">
+          ← BACK TO SYSTEMS
+        </a>
+
+        <div class="mb-12">
+          <h1 class="font-brutalist text-4xl md:text-5xl uppercase text-white leading-none tracking-tight mb-4">
+            {title}
+          </h1>
+          <div class="font-mono text-[10px] text-signal-project tracking-[0.2em] uppercase">
+            VERSION 1.0 // {formattedDate}
+          </div>
+        </div>
+
+        <p class="font-sans text-sm text-bone-muted leading-relaxed mb-12">
+          {description}
+        </p>
+
+        <!-- Data Grid -->
+        <div class="flex flex-col gap-6 mt-auto">
+          {fields && fields.length > 0 && (
+            <div>
+              <div class="font-brutalist text-[10px] text-ash uppercase tracking-widest mb-1 border-b border-white/10 pb-1">CLASSIFICATION</div>
+              <div class="font-mono text-xs text-bone uppercase">{fields[0]}</div>
+            </div>
+          )}
+          
+          <div>
+            <div class="font-brutalist text-[10px] text-ash uppercase tracking-widest mb-1 border-b border-white/10 pb-1">TECHNOLOGY STACK</div>
+            <div class="flex flex-wrap gap-1 mt-2">
+              {tags.map(t => (
+                <span class="font-mono text-[9px] uppercase tracking-wider text-signal-project bg-signal-project/10 px-2 py-1 border border-signal-project/20">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2 mt-4">
+            {link && (
+              <a href={link} target="_blank" class="glass-card text-center py-3 font-brutalist tracking-widest text-sm hover:text-white hover:border-signal-project/50 transition-colors">
+                LAUNCH SYSTEM ↗
+              </a>
+            )}
+            {github && (
+              <a href={github} target="_blank" class="glass-card text-center py-3 font-brutalist tracking-widest text-sm hover:text-white hover:border-signal-project/50 transition-colors">
+                SOURCE CODE ↗
+              </a>
+            )}
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Content: The Readout -->
+      <article class="flex-1 p-8 md:p-12 xl:p-24 max-w-[1000px] mx-auto">
+        <div class="glass-card p-8 md:p-12 mb-12 shadow-2xl relative">
+          <div class="glass-specular" data-glass-specular></div>
+          <div class="relative z-10">
+            <h2 class="font-brutalist text-xl tracking-widest text-ash mb-8 border-b border-white/10 pb-2">SYSTEM ARCHITECTURE & NOTES</h2>
+            
+            <div class="dossier-prose prose prose-invert prose-p:font-mono prose-p:text-sm prose-p:text-bone/70 prose-headings:font-brutalist prose-headings:uppercase prose-headings:tracking-widest prose-headings:text-bone max-w-none">
+              <slot />
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <script>
+    // Glass specular tracking
+    document.querySelectorAll('.glass-card').forEach((card) => {
+      card.addEventListener('mousemove', (e: Event) => {
+        const me = e as MouseEvent;
+        const rect = (card as HTMLElement).getBoundingClientRect();
+        const x = ((me.clientX - rect.left) / rect.width) * 100;
+        const y = ((me.clientY - rect.top) / rect.height) * 100;
+        (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
+        (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
+      });
+    });
+  </script>
+
+</BaseLayout>

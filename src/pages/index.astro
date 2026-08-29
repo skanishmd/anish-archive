@@ -1,0 +1,151 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RevealText from '@components/animations/RevealText.tsx';
+import StaggerReveal from '@components/animations/StaggerReveal.tsx';
+import FluidBackground from '@components/canvas/FluidBackground.tsx';
+import LiquidLogo from '@components/canvas/LiquidLogo.tsx';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const writing = await getCollection('writing');
+const research = await getCollection('research');
+
+// Grab a few highlights
+const featuredProjects = projects.filter(p => p.data.featured).slice(0, 3);
+const latestWriting = writing.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+const latestResearch = research.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+---
+
+<BaseLayout noHeaderFooter={true}>
+  <div class="flex flex-col md:flex-row min-h-screen">
+    
+    <!-- Fixed Left Hero Panel -->
+    <aside class="md:w-[35vw] md:h-screen md:sticky md:top-0 border-b md:border-b-0 md:border-r border-hairline bg-void z-10 flex flex-col justify-between p-8 md:p-[10vh_4vw] relative overflow-hidden">
+      
+      <!-- 3D Overlay -->
+      <div class="absolute inset-0 z-0 pointer-events-auto mix-blend-screen opacity-50 md:opacity-80">
+        <FluidBackground client:only="react" />
+      </div>
+
+      <div class="relative z-10">
+        <h1 class="font-display font-bold leading-[0.9] text-bone mb-4">
+          <LiquidLogo text="SK ANISH" client:load className="text-[clamp(2.5rem,4vw,5rem)]" speed={1.2} /><br />
+          <LiquidLogo text="MD" client:load className="text-[clamp(2.5rem,4vw,5rem)]" speed={1.2} />
+        </h1>
+
+        <p class="font-mono text-[12px] tracking-[0.1em] uppercase text-ash max-w-[280px] leading-relaxed">
+          Computational Oncologist specializing in AI-driven Circadian Therapeutics.
+        </p>
+
+        <nav class="mt-12 flex flex-col gap-4">
+          <StaggerReveal client:visible selector="a" className="flex flex-col gap-4">
+            <a href="/about" class="font-mono text-[12px] uppercase tracking-[0.2em] text-bone hover:text-signal-project transition-colors duration-300 w-fit">
+              Profile
+            </a>
+            <a href="/archive?filter=research" class="font-mono text-[12px] uppercase tracking-[0.2em] text-ash hover:text-bone transition-colors duration-300 w-fit">
+              Research & Theses
+            </a>
+            <a href="/archive?filter=project" class="font-mono text-[12px] uppercase tracking-[0.2em] text-ash hover:text-bone transition-colors duration-300 w-fit">
+              Systems & Works
+            </a>
+            <a href="/archive?filter=writing" class="font-mono text-[12px] uppercase tracking-[0.2em] text-ash hover:text-bone transition-colors duration-300 w-fit">
+              Essays & Logs
+            </a>
+            <a href="/timeline" class="font-mono text-[12px] uppercase tracking-[0.2em] text-ash hover:text-bone transition-colors duration-300 w-fit">
+              Timeline & Pubs
+            </a>
+            <a href="/colophon" class="font-mono text-[12px] uppercase tracking-[0.2em] text-ash hover:text-bone transition-colors duration-300 w-fit italic mt-4">
+              The Standard
+            </a>
+          </StaggerReveal>
+        </nav>
+      </div>
+
+      <div class="relative z-10 mt-16 md:mt-auto font-mono text-[11px] uppercase tracking-[0.1em] text-ash flex flex-wrap gap-6">
+        <a href="https://github.com/skanishmd" target="_blank" class="hover:text-bone transition-colors border-b border-transparent hover:border-bone pb-1">GitHub</a>
+        <a href="https://www.linkedin.com/in/skanishmd/" target="_blank" class="hover:text-bone transition-colors border-b border-transparent hover:border-bone pb-1">LinkedIn</a>
+        <a href="https://www.instagram.com/sk4nishmd" target="_blank" class="hover:text-bone transition-colors border-b border-transparent hover:border-bone pb-1">Instagram</a>
+        <a href="mailto:skanishmd321@gmail.com" class="hover:text-bone transition-colors border-b border-transparent hover:border-bone pb-1">Email</a>
+      </div>
+    </aside>
+
+    <!-- Right Scrolling Content Area -->
+    <main class="flex-1 md:h-screen md:overflow-y-auto overflow-x-hidden p-8 md:p-[10vh_5vw] bg-void/50 backdrop-blur-sm relative">
+      <div class="max-w-4xl mx-auto flex flex-col gap-[15vh]">
+        
+        <!-- Intro Profile -->
+        <section>
+          <RevealText client:visible>
+            <h2 class="font-mono text-[14px] uppercase tracking-[0.2em] text-ash mb-8">Initialize Context</h2>
+          </RevealText>
+          <RevealText client:visible delay={0.2}>
+            <p class="font-editorial text-2xl md:text-3xl text-bone leading-relaxed mb-10 max-w-2xl font-light">
+              Biology is not a text generation problem. Stop treating it like one. We have taken 3.8 billion years of ruthless, deterministic engineering and reduced it to fuzzy string matching.
+            </p>
+          </RevealText>
+          <RevealText client:visible delay={0.4}>
+            <div class="p-8 border-l-2 border-signal-research bg-signal-research/5 mb-10">
+              <p class="font-mono text-[14px] text-bone leading-relaxed">
+                "DNA is not a string. Protein is not a string. They are discrete, deterministic mathematical structures. I discard legacy abstractions and encode biological reality directly at the bit level."
+              </p>
+            </div>
+          </RevealText>
+        </section>
+
+        <!-- Selected Systems -->
+        <section>
+          <RevealText client:visible>
+            <h2 class="font-mono text-[14px] uppercase tracking-[0.2em] text-ash mb-10">Selected Systems</h2>
+          </RevealText>
+          <div class="flex flex-col gap-10">
+          {featuredProjects.map((p, i) => (
+              <a href={`/archive/projects/${p.id}`} class="glass-card grain-overlay group block p-8 md:p-12 hover:shadow-2xl transition-all duration-500 ease-out md:ml-auto w-full md:w-[90%] odd:md:ml-0 odd:md:mr-auto">
+                <div class="glass-specular" data-glass-specular></div>
+                <div class="relative z-10">
+                  <div class="font-mono text-[10px] uppercase tracking-[0.15em] text-ash mb-4 group-hover:text-signal-project transition-colors t-caption">
+                    SYSTEM // {p.data.fields[0] || 'COMPUTE'}
+                  </div>
+                  <h3 class="font-editorial text-3xl text-bone mb-4 group-hover:text-white transition-colors">{p.data.title}</h3>
+                  <p class="font-sans text-base text-bone-muted max-w-xl">{p.data.description}</p>
+                  <div class="mt-6 flex flex-wrap gap-2">
+                    {p.data.tags.slice(0, 3).map(t => (
+                      <span class="t-caption text-signal-project/80">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            ))}
+            {featuredProjects.length === 0 && (
+              <div class="p-8 border border-hairline font-mono text-ash text-sm text-center">Systems compiling...</div>
+            )}
+          </div>
+        </section>
+
+        <!-- Theses & Research -->
+        <section>
+          <RevealText client:visible>
+            <h2 class="font-mono text-[14px] uppercase tracking-[0.2em] text-ash mb-10">Research & Theses</h2>
+          </RevealText>
+          <div class="flex flex-col gap-10">
+            {latestResearch.map((r, i) => (
+              <a href={`/archive/research/${r.id}`} class="glass-card grain-overlay group block p-8 md:p-12 hover:shadow-2xl transition-all duration-500 ease-out md:ml-auto w-full md:w-[90%] odd:md:ml-0 odd:md:mr-auto">
+                <div class="glass-specular" data-glass-specular></div>
+                <div class="relative z-10">
+                  <div class="t-caption text-ash mb-4 group-hover:text-signal-research transition-colors">
+                    THESIS // {r.data.date.getFullYear()}
+                  </div>
+                  <h3 class="font-editorial text-3xl text-bone mb-4 group-hover:text-white transition-colors">{r.data.title}</h3>
+                  <p class="font-sans text-base text-bone-muted max-w-xl">{r.data.description}</p>
+                </div>
+              </a>
+            ))}
+             {latestResearch.length === 0 && (
+              <div class="p-8 border border-hairline font-mono text-ash text-sm text-center">Theses compiling...</div>
+            )}
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</BaseLayout>

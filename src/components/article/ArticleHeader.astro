@@ -1,0 +1,60 @@
+---
+import Badge from '@components/ui/Badge.astro';
+import Separator from '@components/ui/Separator.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  type: string;
+  fields: string[];
+  description: string;
+  readingTime: number;
+}
+
+const { title, date, type, fields, description, readingTime } = Astro.props;
+
+const TYPE_COLORS: Record<string, string> = {
+  research: 'text-signal-research border-signal-research',
+  project: 'text-signal-project border-signal-project',
+  writing: 'text-signal-writing border-signal-writing',
+  achievement: 'text-signal-achievement border-signal-achievement',
+  creative: 'text-signal-creative border-signal-creative',
+  experiment: 'text-signal-experiment border-signal-experiment',
+  observation: 'text-signal-writing border-signal-writing',
+};
+
+const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+---
+
+<header class="mb-12">
+  <div class="flex items-center gap-3 mb-6">
+    <a href="/archive" class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash hover:text-bone transition-colors duration-150">
+      ← ARCHIVE
+    </a>
+    <span class="text-ash">·</span>
+    <span class="font-mono text-[13px] tracking-[0.05em] text-ash">{formattedDate}</span>
+  </div>
+
+  <h1 class="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.1] text-bone mb-4">
+    {title}
+  </h1>
+
+  <p class="text-bone-muted text-lg mb-6 max-w-[65ch]">
+    {description}
+  </p>
+
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <Badge label={type.toUpperCase()} colorClass={TYPE_COLORS[type] || 'text-ash border-ash'} />
+    {fields.map((field) => (
+      <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">
+        {field}
+      </span>
+    ))}
+    <span class="text-ash">·</span>
+    <span class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash">
+      {readingTime} MIN READ
+    </span>
+  </div>
+
+  <Separator />
+</header>

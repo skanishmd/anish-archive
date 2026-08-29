@@ -1,0 +1,23 @@
+---
+interface Props {
+  type?: 'info' | 'warning' | 'tip' | 'caution';
+}
+
+const { type = 'info' } = Astro.props;
+
+const styles: Record<string, { border: string; label: string }> = {
+  info: { border: 'border-info', label: 'NOTE' },
+  warning: { border: 'border-warning', label: 'WARNING' },
+  tip: { border: 'border-success', label: 'TIP' },
+  caution: { border: 'border-danger', label: 'CAUTION' },
+};
+
+const { border, label } = styles[type];
+---
+
+<div class:list={['border-l-2 pl-4 py-2 my-6', border]}>
+  <p class="font-mono text-[11px] tracking-[0.08em] uppercase text-ash mb-2">{label}</p>
+  <div class="text-bone-muted text-[0.95rem]">
+    <slot />
+  </div>
+</div>

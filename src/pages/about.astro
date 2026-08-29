@@ -1,0 +1,77 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import Separator from '@components/ui/Separator.astro';
+---
+
+<PageLayout title="About">
+  <div class="max-w-[800px]">
+    <p class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-6">
+      ABOUT
+    </p>
+
+    <h1 class="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.1] text-bone mb-6">
+      Computational Oncologist
+    </h1>
+
+    <p class="text-bone-muted text-lg leading-relaxed mb-8 max-w-[55ch]">
+      I work at the intersection of structural bioinformatics,
+      machine learning, and chronobiology — identifying <em>when</em>
+      drugs work best, not just <em>which</em> drugs work.
+    </p>
+
+    <Separator />
+
+    <div class="grid gap-12 mt-12">
+      <div>
+        <h2 class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-4">CURRENTLY</h2>
+        <ul class="flex flex-col gap-2 text-bone-muted">
+          <li>→ BSc Bioinformatics, MAKAUT (2024–2027)</li>
+          <li>→ Building ChronoBase — circadian drug timing platform</li>
+          <li>→ FGFR4 inhibitor research for Hepatocellular Carcinoma</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-4">DIRECTION</h2>
+        <ul class="flex flex-col gap-2 text-bone-muted">
+          <li>→ Master's at Tier-1/2 (IIT / IISER / JNU)</li>
+          <li>→ Fully-funded PhD (EMBL / ETH / Stanford / Salk / Max Planck)</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash mb-4">ALSO</h2>
+        <ul class="flex flex-col gap-2 text-bone-muted">
+          <li>→ Ghazals & Nazms — science × creative writing</li>
+        </ul>
+      </div>
+    </div>
+
+    <Separator />
+
+    <div class="flex gap-6 mt-8">
+      <a
+        href="https://github.com/anishmohammad"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash hover:text-bone transition-colors duration-150"
+      >
+        GITHUB ↗
+      </a>
+      <a
+        href="https://linkedin.com/in/anishmohammad"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash hover:text-bone transition-colors duration-150"
+      >
+        LINKEDIN ↗
+      </a>
+      <a
+        href="mailto:anish@example.com"
+        class="font-mono text-[13px] tracking-[0.05em] uppercase text-ash hover:text-bone transition-colors duration-150"
+      >
+        EMAIL ↗
+      </a>
+    </div>
+  </div>
+</PageLayout>
