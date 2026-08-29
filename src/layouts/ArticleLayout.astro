@@ -29,21 +29,16 @@ const signalColor = entry.collection === 'research' ? '#FF2A00' :
     
     <!-- Left Cover (Sticky) -->
     <aside class="md:w-[45vw] md:h-screen md:sticky md:top-0 border-b md:border-b-0 md:border-r border-hairline relative overflow-hidden flex items-center justify-center">
-      <!-- Blueprint Grid Overlay -->
-      <div class="absolute inset-0 z-0 pointer-events-none opacity-20"
-           style="background-image: linear-gradient(30deg, rgba(196,162,90,0.1) 1px, transparent 1px), linear-gradient(150deg, rgba(196,162,90,0.1) 1px, transparent 1px); background-size: 56px 56px;">
-      </div>
-      
-      <!-- Shader or Abstract visual -->
-      <div class="absolute inset-0 z-0 opacity-40">
+      <!-- Randomized Vibrant Fluid Background -->
+      <div class="absolute inset-0 z-0">
         <FluidBackground client:only="react" />
       </div>
 
-      <!-- Center Logo / Geo -->
-      <div class="relative z-10 w-48 h-48 border border-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-        <div class="w-32 h-32 border border-white/20 rotate-45 flex items-center justify-center">
-           <span class="font-cinematic text-2xl -rotate-45" style={`color: ${signalColor}`}>A</span>
-        </div>
+      <!-- Unique Editorial Typography Overlay -->
+      <div class="relative z-10 w-full h-full flex items-center justify-center pointer-events-none mix-blend-overlay opacity-80">
+        <h2 class="font-cinematic text-[15vh] md:text-[20vh] text-white leading-none -rotate-90 tracking-widest whitespace-nowrap">
+          {entry.collection.toUpperCase()}
+        </h2>
       </div>
       
       <!-- Bottom Left Nav Rail (Sticky) -->
