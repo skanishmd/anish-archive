@@ -1,6 +1,4 @@
-# Anish Mohammad — Personal Archive
-
-A digital identity and archive platform for a Computational Oncologist specializing in AI-driven Circadian Therapeutics.
+# Sk Anish Md (Personal Archive)
 
 ## Architecture
 
