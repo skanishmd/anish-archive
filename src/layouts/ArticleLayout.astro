@@ -29,16 +29,19 @@ const signalColor = entry.collection === 'research' ? '#FF2A00' :
     
     <!-- Left Cover (Sticky) -->
     <aside class="md:w-[45vw] md:h-screen md:sticky md:top-0 border-b md:border-b-0 md:border-r border-hairline relative overflow-hidden flex items-center justify-center">
-      <!-- Randomized Vibrant Fluid Background -->
-      <div class="absolute inset-0 z-0">
-        <FluidBackground client:only="react" />
+    
+      <!-- Deep Void with Subtle Grain -->
+      <div class="absolute inset-0 z-0 bg-[#070708]">
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
       </div>
 
-      <!-- Unique Editorial Typography Overlay -->
-      <div class="relative z-10 w-full h-full flex items-center justify-center pointer-events-none mix-blend-overlay opacity-80">
-        <h2 class="font-cinematic text-[15vh] md:text-[20vh] text-white leading-none -rotate-90 tracking-widest whitespace-nowrap">
-          {entry.collection.toUpperCase()}
-        </h2>
+      <!-- Delicate Focal Point -->
+      <div class="relative z-10 flex flex-col items-center justify-center gap-6 opacity-30">
+        <div class="w-[1px] h-24 bg-gradient-to-b from-transparent via-bone to-transparent"></div>
+        <div class="font-mono text-[9px] uppercase tracking-[0.4em] text-bone rotate-90 my-8">
+          {entry.collection}
+        </div>
+        <div class="w-[1px] h-24 bg-gradient-to-b from-transparent via-bone to-transparent"></div>
       </div>
       
       <!-- Bottom Left Nav Rail (Sticky) -->
