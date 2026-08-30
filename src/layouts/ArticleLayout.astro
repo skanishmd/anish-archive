@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title, date, description, tags, fields, readingTime = '7 MIN READ' } = entry.data;
+const { title, date, description, tags, fields, readingTime = '7 MIN READ', topics, technologies, related } = entry.data;
 
 // Format date like '2026.08.15'
 const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
