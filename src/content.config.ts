@@ -8,10 +8,12 @@ const archiveSchema = z.object({
   status: z.enum(['published', 'in-progress', 'archived']).default('published'),
   fields: z.array(z.string()).default([]),
   tags: z.array(z.string()).default([]),
+  topics: z.array(z.string()).default([]),
+  technologies: z.array(z.string()).default([]),
+  related: z.array(z.string()).default([]), // Array of slugs linking to other content
   description: z.string().max(300),
   coverImage: z.string().optional(),
   featured: z.boolean().default(false),
-  connections: z.array(z.string()).default([]),
 });
 
 const observations = defineCollection({ loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/observations" }), schema: archiveSchema });

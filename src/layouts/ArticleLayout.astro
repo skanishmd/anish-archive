@@ -29,25 +29,71 @@ const signalColor = entry.collection === 'research' ? '#FF2A00' :
     
     <!-- Left Cover (Sticky) -->
     <aside class="md:w-[45vw] md:h-screen md:sticky md:top-0 border-b md:border-b-0 md:border-r border-hairline relative overflow-hidden flex items-center justify-center">
-    
-      <!-- Deep Void with Subtle Grain -->
-      <div class="absolute inset-0 z-0 bg-[#070708]">
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
-      </div>
+      <!-- Layer 2: Explore (The Knowledge Graph) -->
+      <div class="absolute inset-0 z-10 bg-[#0a0a0c] p-8 md:p-12 lg:p-16 flex flex-col justify-between overflow-y-auto">
+        
+        <div>
+          <a href="/archive" class="inline-flex items-center font-mono text-[9px] uppercase tracking-widest text-ash hover:text-bone transition-colors mb-16">
+            <span class="w-4 h-[1px] bg-ash mr-3"></span> RETURN TO ARCHIVE
+          </a>
+          
+          <!-- Contextual Identity -->
+          <div class="mb-12">
+            <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#c4a25a]/50 mb-4">Current Object</div>
+            <div class="font-cinematic text-2xl text-bone mb-2">{title}</div>
+            <div class="font-mono text-[10px] uppercase tracking-wider" style={`color: ${signalColor}`}>{entry.collection}</div>
+          </div>
 
-      <!-- Delicate Focal Point -->
-      <div class="relative z-10 flex flex-col items-center justify-center gap-6 opacity-30">
-        <div class="w-[1px] h-24 bg-gradient-to-b from-transparent via-bone to-transparent"></div>
-        <div class="font-mono text-[9px] uppercase tracking-[0.4em] text-bone rotate-90 my-8">
-          {entry.collection}
+          <!-- The Graph: Topics & Tech -->
+          <div class="space-y-8 border-t border-white/5 pt-8">
+            
+            {topics && topics.length > 0 && (
+              <div>
+                <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-ash mb-4">Topics</div>
+                <ul class="flex flex-col gap-2">
+                  {topics.map(t => (
+                    <li>
+                      <a href={`/archive?topic=${t.toLowerCase()}`} class="font-literary text-lg text-bone/60 hover:text-[#c4a25a] transition-colors italic">
+                        {t}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {technologies && technologies.length > 0 && (
+              <div>
+                <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-ash mb-4">Technologies</div>
+                <div class="flex flex-wrap gap-2">
+                  {technologies.map(t => (
+                    <span class="font-mono text-[9px] border border-white/10 px-2 py-1 text-bone/60">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {related && related.length > 0 && (
+              <div>
+                <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-ash mb-4">Related Nodes</div>
+                <ul class="flex flex-col gap-3 border-l border-white/10 pl-4">
+                  {related.map(r => (
+                    <li>
+                      <a href={`/archive/${entry.collection}/${r}`} class="font-literary text-lg text-bone/80 hover:text-[#c4a25a] transition-colors">
+                        {r.replace(/-/g, ' ')}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
+          </div>
         </div>
-        <div class="w-[1px] h-24 bg-gradient-to-b from-transparent via-bone to-transparent"></div>
+
       </div>
-      
-      <!-- Bottom Left Nav Rail (Sticky) -->
-      <a href="/" class="absolute bottom-8 left-8 z-20 font-mono text-[10px] uppercase tracking-widest text-ash hover:text-bone transition-colors flex items-center gap-2">
-        <span class="w-4 h-[1px] bg-ash"></span> RETURN
-      </a>
     </aside>
 
     <!-- Right Content (Scrollable) -->

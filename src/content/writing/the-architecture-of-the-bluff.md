@@ -6,6 +6,8 @@ type: writing
 status: published
 fields: ["Psychology", "Behavioral Science", "Sociology"]
 tags: ["Imposter Syndrome", "Leadership", "Human Judgment", "Competence"]
+topics: ["behavioral-science", "psychology"]
+related: []
 featured: true
 ---
 # Why Confidence Is Mistaken for Competence and Nervousness for Inability
