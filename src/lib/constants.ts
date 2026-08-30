@@ -1,7 +1,7 @@
 export const SITE = {
   title: 'Sk Anish Md',
   description: 'Computational Oncologist specializing in AI-driven Circadian Therapeutics. Structural Bioinformatics × Creative Writing.',
-  url: 'https://anishmohammad.dev',
+  url: 'https://skanishmd.dev',
   author: 'Sk Anish Md',
 } as const;
 

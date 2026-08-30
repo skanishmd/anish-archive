@@ -1,0 +1,53 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { entry } = Astro.props;
+const { title, description, date } = entry.data;
+
+const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
+---
+
+<BaseLayout title={`Experiment: ${title}`}>
+  <div class="fixed inset-0 bg-[#050505] z-[-1]"></div>
+
+  <main class="max-w-4xl mx-auto px-6 pt-24 pb-32">
+    
+    <!-- Terminal Window Frame -->
+    <div class="border border-[#333] rounded bg-[#0A0A0A] overflow-hidden shadow-2xl">
+      
+      <!-- Top Bar -->
+      <div class="flex items-center px-4 py-2 border-b border-[#333] bg-[#111]">
+        <div class="flex gap-2 mr-4">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+          <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+        </div>
+        <div class="font-mono text-[10px] text-[#666] flex-1 text-center font-bold tracking-widest">
+          LAB // EXPERIMENT LOG
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="p-8 md:p-12">
+        <header class="mb-12 border-b border-[#333] pb-12">
+          <div class="font-mono text-[12px] text-[#27C93F] mb-2">RUN DATE: {formattedDate}</div>
+          <h1 class="font-mono text-2xl text-[#E0E0E0] mb-4 uppercase">{title}</h1>
+          <p class="font-mono text-[14px] text-[#888]">{description}</p>
+        </header>
+
+        <article class="prose prose-invert max-w-none
+          prose-p:font-mono prose-p:text-[13px] prose-p:leading-[1.8] prose-p:text-[#A0A0A0]
+          prose-headings:font-mono prose-headings:text-[#E0E0E0] prose-headings:uppercase prose-headings:text-lg prose-headings:mt-12
+          prose-hr:border-[#333]
+          prose-strong:text-[#27C93F] prose-strong:font-normal
+          prose-blockquote:border-l-[#FFBD2E] prose-blockquote:bg-[#FFBD2E]/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-[#E0E0E0]
+          prose-pre:bg-[#000] prose-pre:border prose-pre:border-[#333] prose-pre:rounded-none
+        ">
+          <slot />
+        </article>
+      </div>
+
+    </div>
+
+  </main>
+</BaseLayout>

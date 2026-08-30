@@ -23,79 +23,63 @@ const collectionLabel: Record<string, string> = {
   creative:     'CRE',
 };
 
-interface ArchiveItem {
-  id: string;
-  collection: string;
-  href: string;
-  title: string;
-  description: string;
-  date: string;
-  tags: string[];
-  fields: string[];
-  featured: boolean;
-  color: string;
-  label: string;
+// Fetch all entries
+let allItems = [];
+for (const col of collectionNames) {
+  const entries = await getCollection(col);
+  const mapped = entries.map(e => ({
+    href: `/archive/${col}/${e.slug}`,
+    collection: col,
+    label: collectionLabel[col],
+    color: signalColor[col],
+    title: e.data.title,
+    description: e.data.description,
+    date: e.data.date.toISOString().slice(0, 10).replace(/-/g, ' '),
+    tags: e.data.tags || [],
+    timestamp: e.data.date.getTime(),
+  }));
+  allItems = [...allItems, ...mapped];
 }
 
-const allItems: ArchiveItem[] = [];
-for (const name of collectionNames) {
-  const entries = await getCollection(name);
-  for (const entry of entries) {
-    if (entry.data.status !== 'archived') {
-      allItems.push({
-        id: entry.id,
-        collection: name,
-        href: `/archive/${name}/${entry.id}`,
-        title: entry.data.title,
-        description: entry.data.description,
-        date: entry.data.date.toISOString().slice(0, 10),
-        tags: entry.data.tags,
-        fields: entry.data.fields || [],
-        featured: entry.data.featured || false,
-        color: signalColor[name],
-        label: collectionLabel[name],
-      });
-    }
-  }
-}
-
-// Sort by date descending
-allItems.sort((a, b) => b.date.localeCompare(a.date));
-
-const totalItems = allItems.length;
+// Sort descending by date
+allItems.sort((a, b) => b.timestamp - a.timestamp);
 ---
 
 <BaseLayout title="Archive — Sk Anish Md">
-  <div class="max-w-[1400px] mx-auto px-[clamp(1rem,4vw,3rem)] pt-28 pb-24">
+  
+  <div class="absolute inset-0 ambient-bg pointer-events-none z-0 mix-blend-screen opacity-60"></div>
+  <div class="absolute inset-0 grain-overlay pointer-events-none z-0 opacity-10"></div>
 
-    <!-- Archive Header (SLP.gallery inspired) -->
-    <div class="border-b border-hairline pb-6 mb-12">
-      <div class="flex items-end justify-between">
-        <div>
-          <p class="t-label text-ash mb-2">SK ANISH MD // ARCHIVE</p>
-          <h1 class="font-mono text-[28px] md:text-[40px] tracking-[-0.02em] text-bone leading-none">
-            ALL OBJECTS
-          </h1>
+  <div class="max-w-[1400px] mx-auto px-6 md:px-12 pt-32 pb-32 relative z-10">
+    
+    <!-- Header -->
+    <header class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8">
+      <div>
+        <div class="font-mono text-[9px] uppercase tracking-widest text-[#94A3B8] mb-4 flex items-center gap-4">
+          <span>SK ANISH MD</span>
+          <span class="w-8 h-[1px] bg-white/10"></span>
+          <span>THE GRAPH</span>
         </div>
-        <div class="text-right">
-          <p class="t-label text-ash mb-1">TOTAL</p>
-          <p class="font-mono text-[28px] text-ash">{String(totalItems).padStart(3, '0')}</p>
-        </div>
+        <h1 class="font-cinematic text-4xl md:text-5xl text-[#F8FAFC] tracking-wide">
+          ALL OBJECTS
+        </h1>
       </div>
+      <div class="font-mono text-[11px] text-[#94A3B8] mt-8 md:mt-0">
+        TOTAL : {String(allItems.length).padStart(3, '0')}
+      </div>
+    </header>
 
-      <!-- Filter bar -->
-      <div class="mt-8 flex flex-wrap gap-3" id="filter-bar">
-        <button
-          class="filter-btn active font-mono text-[10px] uppercase tracking-[0.12em] px-3 py-1.5 border border-hairline text-ash hover:border-bone hover:text-bone transition-all duration-150"
-          data-filter="all"
-        >
+    <!-- Filters (SLP Style) -->
+    <div class="mb-12 overflow-x-auto pb-4 hide-scrollbar">
+      <div class="flex gap-3">
+        <button class="filter-btn active font-mono text-[10px] uppercase tracking-wider px-4 py-2 border border-white/10 text-white bg-white/10 rounded-md transition-colors whitespace-nowrap" data-filter="all">
           ALL
         </button>
         {Object.entries(collectionLabel).map(([col, lbl]) => (
-          <button
-            class="filter-btn font-mono text-[10px] uppercase tracking-[0.12em] px-3 py-1.5 border border-hairline text-ash hover:border-bone hover:text-bone transition-all duration-150"
+          <button 
+            class="filter-btn font-mono text-[10px] uppercase tracking-wider px-4 py-2 border border-white/5 text-[#94A3B8] hover:border-white/20 transition-colors whitespace-nowrap rounded-md" 
             data-filter={col}
-            style={`--signal: ${signalColor[col]}`}
+            style={`--active-bg: ${signalColor[col]}20; --active-border: ${signalColor[col]};`}
           >
             {lbl} — {col}
           </button>
@@ -103,158 +87,107 @@ const totalItems = allItems.length;
       </div>
     </div>
 
-    <!-- Pixel Bloom Grid (slp.gallery inspired) -->
-    <div
-      id="archive-grid"
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-px bg-hairline border border-hairline"
-    >
-      {allItems.map((item) => (
-        <a
-          href={item.href}
-          class="pixel-bloom-item bg-void group"
-          data-collection={item.collection}
-          style={`--signal-color: ${item.color}`}
-        >
-          <!-- Pixel blob preview (the "before" state) -->
-          <div class="pixel-bloom-preview h-[160px] flex items-center justify-center" style={`background: ${item.color}08`}>
-            <!-- 4x4 pixelated color block -->
-            <div
-              class="w-12 h-12"
-              style={`
-                background-color: ${item.color};
-                image-rendering: pixelated;
-                box-shadow:
-                  8px 0 0 0 ${item.color}88,
-                  -8px 0 0 0 ${item.color}44,
-                  0 8px 0 0 ${item.color}66,
-                  0 -8px 0 0 ${item.color}33,
-                  16px 8px 0 0 ${item.color}22,
-                  -16px -8px 0 0 ${item.color}44;
-                opacity: 0.7;
-              `}
-            ></div>
-          </div>
+    <!-- The Masonry/Gallery Grid (Sulkysubject x SLP) -->
+    <div id="archive-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      
+      {allItems.map((item, index) => {
+        // Compute RGB for box-shadows
+        const r = parseInt(item.color.slice(1, 3), 16);
+        const g = parseInt(item.color.slice(3, 5), 16);
+        const b = parseInt(item.color.slice(5, 7), 16);
+        const rgb = `${r}, ${g}, ${b}`;
 
-          <!-- Full card content (the "after" reveal) -->
-          <div class="pixel-bloom-content p-4 border-t border-hairline">
-            <div class="flex items-center justify-between mb-2">
-              <span
-                class="t-caption"
-                style={`color: ${item.color}`}
-              >{item.label}</span>
-              <span class="t-label text-ash">{item.date}</span>
+        return (
+          <a href={item.href} 
+             class="archive-card group flex flex-col h-[280px] bg-[#0F172A]/50 backdrop-blur-xl border border-white/5 rounded-xl overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 relative"
+             data-collection={item.collection}
+             style={`--signal: ${item.color}; --signal-rgb: ${rgb}; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.05), 0 10px 30px -10px rgba(0,0,0,0.5);`}
+          >
+            <!-- Left Signal Border Accent -->
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-current transition-all duration-300 group-hover:w-[6px]" style={`color: ${item.color}`}></div>
+            
+            <div class="p-6 pl-8 flex flex-col h-full z-10 relative">
+              <!-- Meta -->
+              <div class="flex justify-between items-center mb-4">
+                <span class="font-mono text-[10px] font-semibold uppercase tracking-widest" style={`color: ${item.color}`}>{item.label}</span>
+                <span class="font-mono text-[9px] text-[#64748B] tracking-widest">{item.date}</span>
+              </div>
+              
+              <!-- Content -->
+              <h3 class="font-cinematic text-[22px] leading-tight text-[#F8FAFC] mb-3 group-hover:text-white transition-colors line-clamp-3">
+                {item.title}
+              </h3>
+              <p class="font-literary text-[15px] italic text-[#94A3B8] line-clamp-3 mb-6">
+                {item.description}
+              </p>
+              
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-2 mt-auto">
+                {item.tags.slice(0, 3).map(tag => (
+                  <span class="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] bg-white/5 border border-white/5 px-2 py-1 rounded transition-colors group-hover:bg-white/10">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-            <h3 class="font-mono text-[11px] text-bone leading-tight mb-2 line-clamp-2 tracking-[0.02em]">
-              {item.title}
-            </h3>
-            <p class="font-sans text-[10px] text-bone-muted leading-relaxed line-clamp-2 mb-3">
-              {item.description}
-            </p>
-            <div class="flex flex-wrap gap-1">
-              {item.tags.slice(0, 2).map(tag => (
-                <span class="t-label text-ash border border-hairline px-1 py-0.5">{tag}</span>
-              ))}
-            </div>
-          </div>
 
-          <!-- Hover accent line at top -->
-          <div
-            class="absolute top-0 left-0 right-0 h-[2px] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-            style={`background: ${item.color}`}
-          ></div>
-        </a>
-      ))}
+            <!-- Hover Glow Spotlight -->
+            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+                 style={`background: radial-gradient(circle at center, rgba(var(--signal-rgb), 0.12) 0%, transparent 80%); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 0 20px -5px rgba(var(--signal-rgb), 0.3); border: 1px solid rgba(var(--signal-rgb), 0.3); border-radius: 0.75rem;`}>
+            </div>
+          </a>
+        )
+      })}
+
     </div>
 
-    <!-- Empty state -->
-    {allItems.length === 0 && (
-      <div class="py-32 text-center">
-        <p class="t-caption text-ash">NO OBJECTS IN ARCHIVE</p>
-      </div>
-    )}
   </div>
 
-  <!-- Filter + specular JS -->
   <script>
-    // Filter buttons
+    // Filtering logic
     const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-    const gridItems = document.querySelectorAll<HTMLElement>('.pixel-bloom-item');
+    const cards = document.querySelectorAll<HTMLElement>('.archive-card');
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter || 'all';
-
-        // Update active state
-        filterBtns.forEach(b => b.classList.remove('active'));
+        
+        // Reset buttons
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'text-white', 'bg-white/10');
+          b.style.borderColor = 'rgba(255,255,255,0.05)';
+          b.style.backgroundColor = 'transparent';
+          b.style.color = '#94A3B8';
+        });
+        
+        // Activate button
         btn.classList.add('active');
+        if(filter === 'all') {
+          btn.classList.add('text-white', 'bg-white/10');
+          btn.style.borderColor = 'rgba(255,255,255,0.1)';
+        } else {
+          btn.style.borderColor = btn.style.getPropertyValue('--active-border');
+          btn.style.backgroundColor = btn.style.getPropertyValue('--active-bg');
+          btn.style.color = '#fff';
+        }
 
-        // Filter items
-        gridItems.forEach(item => {
-          const col = item.dataset.collection;
-          const show = filter === 'all' || col === filter;
-          item.style.display = show ? '' : 'none';
+        // Animate cards out, then in
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.collection === filter) {
+            card.style.display = 'flex';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 10);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
         });
       });
     });
-
-    // Glass specular on any glass-cards that appear here
-    document.querySelectorAll('.glass-card').forEach(card => {
-      card.addEventListener('mousemove', (e: Event) => {
-        const me = e as MouseEvent;
-        const rect = (card as HTMLElement).getBoundingClientRect();
-        const x = ((me.clientX - rect.left) / rect.width) * 100;
-        const y = ((me.clientY - rect.top) / rect.height) * 100;
-        (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
-        (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
-      });
-    });
   </script>
-
-  <style>
-    .filter-btn.active {
-      border-color: var(--signal, #F0EDE8);
-      color: var(--signal, #F0EDE8);
-    }
-
-    /* Pixel bloom item must be position:relative for the accent line */
-    .pixel-bloom-item {
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* The pixel preview takes the full card when not hovered */
-    .pixel-bloom-item .pixel-bloom-preview {
-      position: relative;
-      opacity: 1;
-      transform: scale(1);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .pixel-bloom-item .pixel-bloom-content {
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transform: translateY(6px);
-      transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s, max-height 0.4s ease;
-    }
-
-    /* On hover: collapse preview, bloom content */
-    .pixel-bloom-item:hover .pixel-bloom-preview {
-      opacity: 0;
-      transform: scale(0.95);
-      position: absolute;
-      pointer-events: none;
-    }
-
-    .pixel-bloom-item:hover .pixel-bloom-content {
-      opacity: 1;
-      max-height: 300px;
-      transform: translateY(0);
-    }
-
-    /* Author Mode: stronger accent, more saturated */
-    html[data-mode="author"] .pixel-bloom-item:hover {
-      box-shadow: 0 0 30px color-mix(in srgb, var(--signal-color) 30%, transparent);
-    }
-  </style>
 </BaseLayout>

@@ -1,32 +1,67 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import ShaderHero from '@components/canvas/ShaderHero.tsx';
+import LiquidLogo from '@components/canvas/LiquidLogo.tsx';
+
+// Content species for the navigation
+const species = [
+  { name: 'Research', type: 'research', color: 'bg-[#FF2A00]' },
+  { name: 'Technical', type: 'project', color: 'bg-[#0038FF]' },
+  { name: 'Essays', type: 'writing', color: 'bg-[#00FF66]' },
+  { name: 'Experiments', type: 'experiment', color: 'bg-[#00F0FF]' },
+  { name: 'Achievements', type: 'achievement', color: 'bg-[#FFAA00]' },
+];
 ---
 
 <BaseLayout noHeaderFooter={true}>
-  <main class="min-h-screen bg-void text-bone flex flex-col justify-center px-8 md:px-[10vw]">
-    <div class="max-w-4xl opacity-0 translate-y-4 animate-[fade-in-up_1s_ease-out_forwards]">
+  <main class="min-h-screen bg-[#050508] text-bone flex flex-col justify-center px-8 md:px-[10vw] relative overflow-hidden">
+    
+    <!-- Deep-Tech Ambient Background (ShaderGradient + Grain) -->
+    <ShaderHero client:only="react" />
+
+    <div class="max-w-6xl w-full z-20 flex flex-col md:flex-row justify-between items-start md:items-center gap-16">
       
-      <h1 class="font-cinematic font-semibold text-5xl md:text-7xl tracking-[0.05em] mb-8">
-        ANISH MOHAMMAD
-      </h1>
-      
-      <div class="font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-ash flex flex-wrap gap-6 md:gap-10 mb-8">
-        <span class="hover:text-bone transition-colors">Bioinformatics</span>
-        <span class="hover:text-bone transition-colors">Research</span>
-        <span class="hover:text-bone transition-colors">Software</span>
-        <span class="hover:text-bone transition-colors">Writing</span>
-        <span class="hover:text-bone transition-colors">Experiments</span>
+      <!-- Left Column: Identity -->
+      <div class="flex-1 opacity-0 translate-y-4 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_forwards]">
+        <!-- Using the LiquidGlass procedural shimmer for the name -->
+        <div class="mb-8 scale-150 origin-left">
+          <LiquidLogo client:only="react" text="SK ANISH MD" />
+        </div>
+        
+        <div class="font-mono text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#94A3B8] flex flex-wrap gap-6 md:gap-10 mb-8 stagger-fade">
+          <span>Bioinformatics</span>
+          <span>Research</span>
+          <span>Software</span>
+          <span>Writing</span>
+        </div>
+        
+        <hr class="border-t border-white/10 mb-10 w-full max-w-2xl" />
+        
+        <p class="font-literary text-2xl md:text-4xl text-[#CBD5E1] italic max-w-2xl leading-[1.6]">
+          The form of a page should reflect the nature of the knowledge it contains.
+        </p>
       </div>
-      
-      <hr class="border-t border-white/10 mb-10 w-full" />
-      
-      <p class="font-literary text-2xl md:text-4xl text-bone/70 italic max-w-3xl leading-[1.6] mb-12">
-        A living digital archive of a computational biologist's work, where writing, research, projects and evidence are connected as one system.
-      </p>
-      
-      <div class="flex items-center gap-8">
-        <a href="/archive" class="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:text-signal-research transition-colors border border-white/20 px-6 py-3 hover:border-signal-research">
-          [ Enter Archive ]
+
+      <!-- Right Column: The Six Species Navigation (Sulkysubject / SLP inspired) -->
+      <div class="w-full md:w-auto flex flex-col gap-4 opacity-0 translate-y-4 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]">
+        <div class="font-mono text-[10px] text-[#94A3B8] uppercase tracking-[0.2em] mb-4 pl-4 border-l border-white/10">
+          Explore The Graph
+        </div>
+        
+        <div class="flex flex-col gap-2">
+          {species.map(s => (
+            <a href={`/archive?type=${s.type}`} class="group flex items-center justify-between gap-12 px-6 py-4 rounded-xl border border-white/5 bg-[#111827]/40 backdrop-blur-md hover:bg-[#111827]/80 hover:border-white/10 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+              <span class="font-cinematic text-xl text-[#F8FAFC] tracking-wider relative z-10">{s.name}</span>
+              <div class="flex items-center justify-center w-6 h-6 rounded-full bg-white/5 relative z-10">
+                <span class={`w-2 h-2 rounded-full ${s.color} transition-all duration-700 group-hover:shadow-[0_0_15px_3px_currentColor]`}></span>
+              </div>
+            </a>
+          ))}
+        </div>
+        
+        <a href="/archive" class="mt-8 self-end font-mono text-[10px] uppercase tracking-[0.2em] text-[#94A3B8] hover:text-[#06B6D4] transition-colors flex items-center gap-2">
+          View All Objects 
+          <span class="w-8 h-[1px] bg-current"></span>
         </a>
       </div>
 
@@ -36,13 +71,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
 <style>
   @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>

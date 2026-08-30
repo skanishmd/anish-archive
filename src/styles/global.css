@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────────
-   DESIGN TOKENS — The Archive of Anish Mohammad
+   DESIGN TOKENS — The Archive of Sk Anish Md
    ────────────────────────────────────────────── */
 
 @theme {
@@ -191,10 +191,21 @@
   100% { transform: translate(20vw, -10vh) scale(1.3); } 
 }
 
+.ambient-bg {
+  background-color: #080B11;
+  background-image: 
+    radial-gradient(at 20% 15%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(6, 182, 212, 0.08) 0px, transparent 50%);
+}
+
 #fluid-bg {
   background: radial-gradient(circle at center, rgba(157, 0, 255, 0.15) 0%, transparent 60%);
   animation: drift 25s infinite alternate ease-in-out;
 }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #6366F1; }
 
 /* ──────────────────────────────────────────────
    V2: GRAIN OVERLAY (Pryzm.design inspired)

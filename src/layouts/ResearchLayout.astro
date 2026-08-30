@@ -1,0 +1,44 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { entry } = Astro.props;
+const { title, description, date } = entry.data;
+
+const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
+---
+
+<BaseLayout title={`${title} — Research`}>
+  <div class="fixed inset-0 bg-[#FAFAFA] z-[-1]"></div>
+
+  <main class="max-w-[900px] mx-auto px-6 md:px-12 pt-24 pb-48 text-[#111]">
+    
+    <header class="mb-16 border-b-2 border-[#111] pb-12 text-center">
+      <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#666] mb-8">
+        RESEARCH / {formattedDate.split('.')[0]}
+      </div>
+      
+      <h1 class="font-cinematic text-4xl md:text-5xl text-[#111] leading-tight mb-8">
+        {title.toUpperCase()}
+      </h1>
+      
+      <div class="w-24 h-[1px] bg-[#111] mx-auto mb-8"></div>
+      
+      <p class="font-literary text-[17px] text-[#444] italic max-w-2xl mx-auto leading-relaxed">
+        {description}
+      </p>
+    </header>
+
+    <!-- Strict academic 2-column layout on large screens for abstract, 1-col for body -->
+    <article class="prose max-w-none 
+      prose-p:font-literary prose-p:text-[17px] prose-p:leading-[1.9] prose-p:text-[#222] prose-p:text-justify
+      prose-headings:font-mono prose-headings:text-[#111] prose-headings:uppercase prose-headings:text-sm prose-headings:tracking-widest prose-headings:mt-16 prose-headings:mb-6
+      prose-a:text-[#0055FF] prose-a:no-underline hover:prose-a:underline
+      prose-hr:border-[#111]
+      prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-[#444] prose-blockquote:border-l-[3px] prose-blockquote:border-[#111]
+      prose-figure:border prose-figure:border-[#DDD] prose-figure:p-4 prose-figcaption:font-mono prose-figcaption:text-[10px] prose-figcaption:text-[#666] prose-figcaption:text-center prose-figcaption:mt-4
+    ">
+      <slot />
+    </article>
+
+  </main>
+</BaseLayout>

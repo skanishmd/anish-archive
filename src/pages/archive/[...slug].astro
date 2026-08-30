@@ -1,7 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
-import ArticleLayout from '@layouts/ArticleLayout.astro';
-import ProjectLayout from '@layouts/ProjectLayout.astro';
+import EssayLayout from '@layouts/EssayLayout.astro';
+import DossierLayout from '@layouts/DossierLayout.astro';
+import LabLayout from '@layouts/LabLayout.astro';
+import ResearchLayout from '@layouts/ResearchLayout.astro';
 
 export async function getStaticPaths() {
   const collectionNames = ['observations', 'projects', 'research', 'writing', 'achievements', 'creative'] as const;
@@ -13,50 +15,34 @@ export async function getStaticPaths() {
     for (const entry of entries) {
       allEntries.set(entry.id, { ...entry, collectionName: name });
       paths.push({
-        params: { slug: `${name}/${entry.id}` },
+        params: { slug: `${name}/${entry.slug || entry.id}` },
         props: { entry, collectionName: name },
       });
     }
   }
 
-  // Resolve connections for each entry
-  for (const path of paths) {
-    const entry = path.props.entry;
-    const resolvedConnections = (entry.data.connections || []).map((connId: string) => {
-      const conn = allEntries.get(connId);
-      if (conn) {
-        return {
-          slug: conn.id,
-          collection: conn.collectionName,
-          title: conn.data.title,
-          type: conn.data.type,
-        };
-      }
-      return null;
-    }).filter(Boolean);
-    path.props.resolvedConnections = resolvedConnections;
-  }
-
   return paths;
 }
 
-const { entry, collectionName, resolvedConnections } = Astro.props;
+const { entry, collectionName } = Astro.props;
 const { Content } = await render(entry);
 
-// Rough reading time calculation
-const wordCount = entry.body ? entry.body.split(/\s+/).length : 0;
-const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+// Determine the layout based on the content species
+const type = entry.data.type || 'writing';
 
-// Add reading time to entry data so layouts can use it
-entry.data.readingTime = `${readingTime} MIN READ`;
+let Layout = EssayLayout; // Default to literary
+
+if (type === 'project' || type === 'system') {
+  Layout = DossierLayout;
+} else if (type === 'experiment') {
+  Layout = LabLayout;
+} else if (type === 'research') {
+  Layout = ResearchLayout;
+} else if (type === 'achievement') {
+  Layout = EssayLayout; // We'll make a specific RecordLayout later
+}
 ---
 
-{collectionName === 'projects' ? (
-  <ProjectLayout entry={entry} connections={resolvedConnections || []}>
-    <Content />
-  </ProjectLayout>
-) : (
-  <ArticleLayout entry={entry}>
-    <Content />
-  </ArticleLayout>
-)}
+<Layout entry={entry}>
+  <Content />
+</Layout>
