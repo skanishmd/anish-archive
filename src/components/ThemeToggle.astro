@@ -1,0 +1,86 @@
+---
+// ThemeToggle.astro
+// Placed in the header or bottom corner to switch between Light, Dark, and System modes.
+// Inspired by the "AUTHOR MODE" / "BRAND MODE" reference images.
+---
+<button id="theme-toggle" class="flex items-center gap-3 px-4 py-2 border border-[#2A2A2A] dark:border-white/10 rounded-sm hover:border-black dark:hover:border-white/30 transition-colors bg-white/5 dark:bg-[#0A0A0A] backdrop-blur-md relative overflow-hidden group">
+  
+  <!-- Active state shape: Changes based on theme -->
+  <div id="theme-icon" class="w-3 h-3 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center">
+    <!-- SVGs are injected by JS -->
+  </div>
+
+  <span id="theme-text" class="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-[#6A6A6A] dark:text-[#94A3B8] group-hover:text-black dark:group-hover:text-white transition-colors font-semibold">
+    SYSTEM MODE
+  </span>
+</button>
+
+<script>
+  const button = document.getElementById('theme-toggle');
+  const iconContainer = document.getElementById('theme-icon');
+  const textContainer = document.getElementById('theme-text');
+
+  const themes = ['system', 'light', 'dark'];
+  let currentThemeIndex = 0;
+
+  // Shapes
+  const ICONS = {
+    system: `<div class="w-2.5 h-2.5 bg-[#0038FF] transition-all duration-300"></div>`, // Blue square
+    light: `<div class="w-3 h-3 rounded-full bg-[#FF8A5B] transition-all duration-300 shadow-[0_0_10px_rgba(255,138,91,0.6)]"></div>`, // Orange glowing circle
+    dark: `<div class="w-2.5 h-2.5 bg-[#9D00FF] rotate-45 transition-all duration-300 shadow-[0_0_10px_rgba(157,0,255,0.6)]"></div>`, // Purple diamond
+  };
+
+  const LABELS = {
+    system: 'SYSTEM MODE',
+    light: 'LABS MODE',
+    dark: 'DEEP MODE'
+  };
+
+  function updateThemeUI(theme: string) {
+    if (iconContainer) iconContainer.innerHTML = ICONS[theme as keyof typeof ICONS];
+    if (textContainer) textContainer.innerText = LABELS[theme as keyof typeof LABELS];
+    
+    // Style active vs inactive
+    if (theme === 'system') {
+      button?.classList.remove('border-black', 'dark:border-white/40');
+      textContainer?.classList.remove('text-black', 'dark:text-white');
+    } else {
+      button?.classList.add('border-black', 'dark:border-white/40');
+      textContainer?.classList.add('text-black', 'dark:text-white');
+    }
+  }
+
+  function applyTheme(theme: string) {
+    if (theme === 'system') {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', isDark);
+      localStorage.removeItem('theme');
+    } else {
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      localStorage.setItem('theme', theme);
+    }
+    updateThemeUI(theme);
+  }
+
+  // Initialize
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    currentThemeIndex = themes.indexOf(savedTheme);
+  } else {
+    currentThemeIndex = 0; // system
+  }
+  
+  applyTheme(themes[currentThemeIndex]);
+
+  button?.addEventListener('click', () => {
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    applyTheme(themes[currentThemeIndex]);
+  });
+
+  // Listen for system preference changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (themes[currentThemeIndex] === 'system') {
+      document.documentElement.classList.toggle('dark', e.matches);
+    }
+  });
+</script>

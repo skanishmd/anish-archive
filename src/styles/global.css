@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 
 /* ──────────────────────────────────────────────
    DESIGN TOKENS — The Archive of Sk Anish Md
@@ -16,33 +17,65 @@
   --font-cinematic: 'Cinzel', serif;
   --font-brutalist: 'Oswald', 'Bebas Neue', sans-serif;
 
-  /* Foundation Palette */
-  --color-void: #0A0A0A;
-  --color-void-raised: #111111;
-  --color-void-deep: #050505;
-  --color-bone: #F0EDE8;
-  --color-bone-muted: #B0ADA8;
-  --color-ash: #6A6A6A;
-  --color-hairline: #2A2A2A;
-  --color-hairline-hover: #3A3A3A;
-  --color-graphite: #1A1A1A;
+  /* Theme Mapping */
+  --color-void: var(--color-void-theme);
+  --color-void-raised: var(--color-void-raised-theme);
+  --color-void-deep: var(--color-void-deep-theme);
+  --color-bone: var(--color-bone-theme);
+  --color-bone-muted: var(--color-bone-muted-theme);
+  --color-ash: var(--color-ash-theme);
+  --color-hairline: var(--color-hairline-theme);
+  --color-hairline-hover: var(--color-hairline-hover-theme);
+  --color-graphite: var(--color-graphite-theme);
 
-  /* Signal Accents */
-  --color-signal-research: #FF2A00;
-  --color-signal-project: #0038FF;
-  --color-signal-writing: #00FF66;
-  --color-signal-achievement: #FFAA00;
-  --color-signal-creative: #9D00FF;
-  --color-signal-experiment: #00F0FF;
+  --color-signal-research: var(--color-signal-research-theme);
+  --color-signal-project: var(--color-signal-project-theme);
+  --color-signal-writing: var(--color-signal-writing-theme);
+  --color-signal-achievement: var(--color-signal-achievement-theme);
+  --color-signal-creative: var(--color-signal-creative-theme);
+  --color-signal-experiment: var(--color-signal-experiment-theme);
+}
 
-  /* Experimental */
-  --color-chrome: #C0C0C0;
+@layer base {
+  :root {
+    /* LIGHT MODE FOUNDATION */
+    --color-void-theme: #F6F4F0;
+    --color-void-raised-theme: #FFFFFF;
+    --color-void-deep-theme: #EEEEEE;
+    --color-bone-theme: #050505;
+    --color-bone-muted-theme: #4A4A4A;
+    --color-ash-theme: #6A6A6A;
+    --color-hairline-theme: #E5E5E5;
+    --color-hairline-hover-theme: #D5D5D5;
+    --color-graphite-theme: #E0E0E0;
 
-  /* Semantic */
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-info: #3B82F6;
-  --color-danger: #EF4444;
+    --color-signal-research-theme: #FF2A00;
+    --color-signal-project-theme: #0038FF;
+    --color-signal-writing-theme: #00A643;
+    --color-signal-achievement-theme: #E68A00;
+    --color-signal-creative-theme: #9D00FF;
+    --color-signal-experiment-theme: #0099CC;
+  }
+
+  .dark {
+    /* DARK MODE FOUNDATION */
+    --color-void-theme: #0A0A0A;
+    --color-void-raised-theme: #111111;
+    --color-void-deep-theme: #050505;
+    --color-bone-theme: #F0EDE8;
+    --color-bone-muted-theme: #B0ADA8;
+    --color-ash-theme: #94A3B8;
+    --color-hairline-theme: #2A2A2A;
+    --color-hairline-hover-theme: #3A3A3A;
+    --color-graphite-theme: #1A1A1A;
+
+    --color-signal-research-theme: #FF2A00;
+    --color-signal-project-theme: #0038FF;
+    --color-signal-writing-theme: #00FF66;
+    --color-signal-achievement-theme: #FFAA00;
+    --color-signal-creative-theme: #9D00FF;
+    --color-signal-experiment-theme: #00F0FF;
+  }
 }
 
 /* ──────────────────────────────────────────────

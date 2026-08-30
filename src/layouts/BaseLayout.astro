@@ -1,6 +1,7 @@
 ---
 import Header from '@components/layout/Header.astro';
 import Footer from '@components/layout/Footer.astro';
+import ThemeToggle from '@components/ThemeToggle.astro';
 import SmoothScroll from '@components/animations/SmoothScroll.tsx';
 import '@/styles/global.css';
 
@@ -55,8 +56,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://skanishm
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Syne:wght@400;700;800&display=swap"
       rel="stylesheet"
     />
+    <!-- FOUC Prevention Script -->
+    <script is:inline>
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
   </head>
-  <body class="bg-void text-bone min-h-screen flex flex-col relative overflow-x-hidden">
+  <body class="bg-void text-bone min-h-screen flex flex-col relative overflow-x-hidden transition-colors duration-500">
     <SmoothScroll client:load />
 
     <a
@@ -66,10 +76,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://skanishm
       Skip to content
     </a>
     
-    <!-- DUALITY TOGGLE -->
-    <button id="mode-toggle" class="fixed bottom-6 right-6 z-[9999] px-4 py-2 border border-hairline bg-void/80 text-system text-ash hover:text-bone hover:border-bone transition-all backdrop-blur-md cursor-crosshair">
-      <!-- Injected by script -->
-    </button>
+    <!-- Theme Toggle (Fixed bottom right) -->
+    <div class="fixed bottom-6 right-6 z-[9999]">
+      <ThemeToggle />
+    </div>
 
     {!noHeaderFooter && <Header />}
     <main id="main-content" class="flex-1" data-app-main>
@@ -78,41 +88,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://skanishm
     {!noHeaderFooter && <Footer />}
 
     <script>
-      // Dual Mode Toggle Logic
-      const toggleBtn = document.getElementById('mode-toggle');
-      const root = document.documentElement;
-      
-      if (toggleBtn) {
-        const currentMode = localStorage.getItem('anish_mode') || 'brand';
-        root.setAttribute('data-mode', currentMode);
-        updateToggleButton(currentMode);
-
-        toggleBtn.addEventListener('click', () => {
-          const isBrand = root.getAttribute('data-mode') === 'brand';
-          const newMode = isBrand ? 'author' : 'brand';
-          
-          root.setAttribute('data-mode', newMode);
-          localStorage.setItem('anish_mode', newMode);
-          updateToggleButton(newMode);
-        });
-
-        function updateToggleButton(mode) {
-          if (mode === 'brand') {
-            toggleBtn.innerHTML = '<span class="text-signal-project">■</span> BRAND MODE';
-          } else {
-            toggleBtn.innerHTML = '<span class="text-signal-creative">◆</span> AUTHOR MODE';
-          }
-        }
-      }
-
       // Glass Specular Highlight — tracks mouse position on glass-card elements
       document.querySelectorAll('.glass-card').forEach((card) => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
+        card.addEventListener('mousemove', (e: MouseEvent) => {
+          const target = e.currentTarget as HTMLElement;
+          const rect = target.getBoundingClientRect();
           const x = ((e.clientX - rect.left) / rect.width) * 100;
           const y = ((e.clientY - rect.top) / rect.height) * 100;
-          card.style.setProperty('--mouse-x', `${x}%`);
-          card.style.setProperty('--mouse-y', `${y}%`);
+          target.style.setProperty('--mouse-x', `${x}%`);
+          target.style.setProperty('--mouse-y', `${y}%`);
         });
       });
     </script>
