@@ -2,7 +2,6 @@
 import Header from '@components/layout/Header.astro';
 import Footer from '@components/layout/Footer.astro';
 import SmoothScroll from '@components/animations/SmoothScroll.tsx';
-import FluidBackground from '@components/canvas/FluidBackground.tsx';
 import '@/styles/global.css';
 
 interface Props {
@@ -59,9 +58,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://skanishm
   </head>
   <body class="bg-void text-bone min-h-screen flex flex-col relative overflow-x-hidden">
     <SmoothScroll client:load />
-
-    <!-- Fluid Organic Background (WebGL) -->
-    <FluidBackground client:only="react" />
 
     <a
       href="#main-content"
