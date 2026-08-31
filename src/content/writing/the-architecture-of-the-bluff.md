@@ -1,6 +1,6 @@
 ---
 title: "The Art of Bluff: Confidence vs. Competence"
-description: "Why confidence is mistaken for competence, why brilliant minds hesitate, and how biological glitches in human judgment reward charlatans while punishing true expertise."
+description: "Why confidence is mistaken for competence and nervousness for incompetence"
 date: 2026-08-29
 type: writing
 status: published
@@ -10,7 +10,6 @@ topics: ["behavioral-science", "psychology"]
 related: []
 featured: true
 ---
-# Why Confidence Is Mistaken for Competence and Nervousness for Inability
 
 Think about the man who is effortlessly charismatic around his friends. He is witty, sharp and never loses his ocean of thoughts. But the moment he is left alone with the one woman he actually has genuine, terrifying feelings for, he freezes. His natural rhythm collapses, filters every sentence, overthinks his own thoughts and suddenly becomes rigid and guarded. And she walks away thinking he lacks depth or personality [1, 2].
 
@@ -320,4 +319,5 @@ The future belongs to those who have the courage to say, "I don't know yet but l
 99. Price, P. C., & Stone, E. R. (2004). Intuitive evaluation of likelihood judgment producers: Evidence for a confidence heuristic. *Journal of Behavioral Decision Making*, 17(1), 39-57.
 100. Collins, J. (2001). *Good to Great: Why Some Companies Make the Leap... and Others Don't*. HarperBusiness.
 101. Vosoughi, S., Roy, D., & Aral, S. (2018). The spread of true and false news online. *Science*, 359(6380), 1146-1151.
+
 

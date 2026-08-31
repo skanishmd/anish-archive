@@ -1,5 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import ShaderHero from '@components/canvas/ShaderHero.tsx';
+import ParticleCloud from '@components/canvas/ParticleCloud.tsx';
 import { TYPE_COLORS } from '@lib/constants';
 
 const { entry } = Astro.props;
@@ -9,46 +11,70 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
 const color = TYPE_COLORS[type] || 'text-bone';
 ---
 
-<BaseLayout title={`${title} — Sk Anish Md`}>
-  <!-- Very subtle film grain, no WebGL -->
-  <div class="absolute inset-0 grain-overlay pointer-events-none z-0 opacity-10"></div>
+<BaseLayout title={${title} - Sk Anish Md}>
+  
+  <!-- Deep Background Scene (Fixed) -->
+  <div class="fixed inset-0 z-0 w-full h-full pointer-events-none">
+    <!-- Light Mode: Dynamic Particles -->
+    <div class="block dark:hidden absolute inset-0 bg-[#F6F4F0] flex items-center justify-center opacity-30">
+        <ParticleCloud client:only="react" color="#3B82F6" density={200} size={800} />
+    </div>
 
-  <main class="max-w-[720px] mx-auto px-6 md:px-0 pt-32 pb-48 relative z-10 selection:bg-white/20">
+    <!-- Dark Mode: Fluid Shader Hero -->
+    <div class="hidden dark:block absolute inset-0 bg-[#050508] opacity-80">
+      <ShaderHero client:only="react" />
+    </div>
     
-    <header class="mb-24">
-      <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
-        <span class="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8]">ESSAY / REFLECTION</span>
-        <span class="font-mono text-[10px] uppercase tracking-widest text-[#64748B]">{formattedDate}</span>
+    <!-- Grain over everything -->
+    <div class="absolute inset-0 grain-overlay opacity-20"></div>
+  </div>
+
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 pt-32 pb-48 selection:bg-white/20">
+    
+    <header class="mb-16 opacity-0 translate-y-8 animate-[fade-in-up_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]">
+      <div class="flex justify-between items-center mb-12 pb-4 border-b border-black/10 dark:border-white/10">
+        <a href="/archive" class="font-mono text-[10px] uppercase tracking-[0.2em] text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors">← RETURN TO ARCHIVE</a>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-black/40 dark:text-white/40">{formattedDate}</span>
       </div>
       
-      <h1 class="font-literary text-4xl md:text-5xl text-[#F8FAFC] leading-tight mb-8">
-        {title}
-      </h1>
+      <a href={Astro.url.pathname} class="block group">
+        <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-black dark:text-white leading-[1.05] tracking-tight mb-8 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.01] group-hover:drop-shadow-2xl">
+          {title}
+        </h1>
+      </a>
       
       {description && (
-        <p class="font-literary text-xl text-[#94A3B8] italic leading-relaxed">
+        <p class="font-literary text-2xl text-black/60 dark:text-white/60 italic leading-relaxed max-w-3xl border-l-2 border-black/20 dark:border-white/20 pl-6">
           {description}
         </p>
       )}
     </header>
 
-    <article class="prose prose-invert prose-lg max-w-[70ch] mx-auto
-      prose-p:font-literary prose-p:text-[20px] prose-p:leading-[2.0] prose-p:text-[#CBD5E1] prose-p:mb-8
-      prose-headings:font-cinematic prose-headings:text-[#F8FAFC] prose-headings:font-normal prose-headings:mt-16 prose-headings:mb-8
-      prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
-      prose-a:text-[#F8FAFC] prose-a:underline prose-a:decoration-white/20 hover:prose-a:decoration-white transition-colors
-      prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-[#F8FAFC] prose-blockquote:border-l-white/20 prose-blockquote:bg-white/5 prose-blockquote:p-6 prose-blockquote:rounded-r-lg
-      prose-strong:text-[#F8FAFC] prose-strong:font-semibold
-      prose-ul:list-disc prose-ol:list-decimal prose-ul:pl-8 prose-ol:pl-8
-      prose-li:text-[#CBD5E1] prose-li:font-literary prose-li:text-[18px] prose-li:mb-2
-      first-letter:float-left first-letter:text-7xl first-letter:pr-4 first-letter:pt-2 first-letter:font-cinematic first-letter:text-white first-letter:leading-[0.8]
-    ">
-      <slot />
-    </article>
+    <!-- Glass Reading Container -->
+    <div class="glass-card rounded-2xl p-8 md:p-16 lg:p-20 opacity-0 translate-y-12 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards] shadow-[0_0_80px_rgba(0,0,0,0.2)] dark:shadow-[0_0_120px_rgba(0,0,0,0.5)] relative overflow-hidden">
+      
+      <!-- Subtle Specular Mouse Highlight via CSS (glass-specular is in global.css) -->
+      <div class="glass-specular hidden md:block"></div>
+
+      <article class="relative z-10 prose prose-lg md:prose-xl max-w-[70ch] mx-auto
+        dark:prose-invert 
+        prose-p:font-literary prose-p:text-[20px] md:prose-p:text-[22px] prose-p:leading-[2.1] prose-p:text-black/80 dark:prose-p:text-[#CBD5E1] prose-p:mb-8
+        prose-headings:font-cinematic prose-headings:text-black dark:prose-headings:text-[#F8FAFC] prose-headings:font-normal prose-headings:mt-20 prose-headings:mb-10
+        prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+        prose-a:text-black dark:prose-a:text-[#F8FAFC] prose-a:underline prose-a:decoration-black/20 dark:prose-a:decoration-white/20 hover:prose-a:decoration-black dark:hover:prose-a:decoration-white transition-colors
+        prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-black/90 dark:prose-blockquote:text-[#F8FAFC] prose-blockquote:border-l-black/20 dark:prose-blockquote:border-l-white/20 prose-blockquote:bg-black/5 dark:prose-blockquote:bg-white/5 prose-blockquote:p-8 prose-blockquote:rounded-r-xl
+        prose-strong:text-black dark:prose-strong:text-[#F8FAFC] prose-strong:font-semibold
+        prose-ul:list-disc prose-ol:list-decimal prose-ul:pl-8 prose-ol:pl-8 prose-ul:mb-8 prose-ol:mb-8
+        prose-li:text-black/80 dark:prose-li:text-[#CBD5E1] prose-li:font-literary prose-li:text-[18px] md:prose-li:text-[20px] prose-li:leading-[1.9] prose-li:mb-3
+        first-letter:float-left first-letter:text-[6rem] first-letter:pr-6 first-letter:pt-3 first-letter:font-cinematic first-letter:text-black dark:first-letter:text-white first-letter:leading-[0.7] first-letter:drop-shadow-md
+      ">
+        <slot />
+      </article>
+    </div>
     
     <!-- End Mark -->
-    <div class="mt-24 flex justify-center">
-      <span class="w-2 h-2 rounded-full bg-white/20"></span>
+    <div class="mt-32 flex justify-center opacity-50">
+      <div class="w-1 h-16 bg-gradient-to-b from-black/40 dark:from-white/40 to-transparent"></div>
     </div>
 
   </main>
