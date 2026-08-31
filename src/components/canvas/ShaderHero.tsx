@@ -1,7 +1,9 @@
 import React from 'react';
 import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient';
 
-export default function ShaderHero() {
+export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
+  const isLight = theme === 'light';
+  
   return (
     <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
       <ShaderGradientCanvas
@@ -18,27 +20,30 @@ export default function ShaderHero() {
           control="props"
           type="waterPlane"
           animate="on"
-          color1="#4F46E5" // Electric Indigo
-          color2="#06B6D4" // Cyber Teal
-          color3="#C026D3" // Neon Magenta (Pryzm style)
-          uSpeed={0.25}    // Slightly faster
-          uStrength={2.0}  // Higher waves
+          // Light mode: Pearlescent Iridescent (SLP.gallery / Pryzm style)
+          // Dark mode: Deep Electric (Pryzm style)
+          color1={isLight ? "#FFB6C1" : "#4F46E5"} 
+          color2={isLight ? "#87CEFA" : "#06B6D4"}
+          color3={isLight ? "#FFE4E1" : "#C026D3"}
+          uSpeed={0.25}
+          uStrength={isLight ? 1.5 : 2.0}
           uDensity={1.5}
           uFrequency={5.5}
-          uAmplitude={1.5}
+          uAmplitude={isLight ? 1.0 : 1.5}
           cAzimuthAngle={180}
           cPolarAngle={90}
-          cDistance={2.8}  // Closer camera
+          cDistance={2.8}
           cameraZoom={1.0}
           lightType="3d"
-          brightness={1.4} // Brighter
-          reflection={0.2}
+          brightness={isLight ? 2.5 : 1.4}
+          reflection={isLight ? 0.4 : 0.2}
           grain="on"
           wireframe={false}
         />
       </ShaderGradientCanvas>
-      {/* Dark overlay gradient to ensure text remains readable over the bright 3D waves */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050508]/80 via-transparent to-[#050508]/90 z-0"></div>
+      
+      {/* Overlay gradient to blend edges */}
+      <div className={`absolute inset-0 z-0 bg-gradient-to-b ${isLight ? 'from-[#F6F4F0]/60 via-transparent to-[#F6F4F0]/80' : 'from-[#050508]/80 via-transparent to-[#050508]/90'}`}></div>
       
       {/* Film grain overlay for texture */}
       <div className="absolute inset-0 z-10 pointer-events-none mix-blend-overlay opacity-50" 

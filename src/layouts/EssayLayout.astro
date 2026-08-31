@@ -15,15 +15,17 @@ const color = TYPE_COLORS[type] || 'text-bone';
   
   <!-- Deep Background Scene (Fixed) -->
   <div class="fixed inset-0 z-0 w-full h-full pointer-events-none">
-    <!-- Light Mode: Dynamic Particles -->
-    <div class="block dark:hidden absolute inset-0 bg-[#F6F4F0] flex items-center justify-center opacity-30">
-        <ParticleCloud client:only="react" color="#3B82F6" density={200} size={800} />
+    <!-- Light Mode: Iridescent Fluid Shader with Instant CSS Fallback -->
+    <div class="block dark:hidden absolute inset-0 ambient-light-bg opacity-80">
+      <div class="absolute inset-0 animate-[fade-in_2s_ease-out_forwards]">
+        <ShaderHero client:only="react" theme="light" />
+      </div>
     </div>
 
     <!-- Dark Mode: Fluid Shader Hero with Instant CSS Fallback -->
     <div class="hidden dark:block absolute inset-0 ambient-bg opacity-80">
       <div class="absolute inset-0 animate-[fade-in_2s_ease-out_forwards]">
-        <ShaderHero client:only="react" />
+        <ShaderHero client:only="react" theme="dark" />
       </div>
     </div>
     
