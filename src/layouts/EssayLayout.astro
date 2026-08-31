@@ -32,13 +32,16 @@ const color = TYPE_COLORS[type] || 'text-bone';
       )}
     </header>
 
-    <article class="prose prose-invert prose-lg max-w-none 
-      prose-p:font-literary prose-p:text-[18px] prose-p:leading-[1.8] prose-p:text-[#CBD5E1]
-      prose-headings:font-cinematic prose-headings:text-[#F8FAFC] prose-headings:font-normal
-      prose-a:text-[#F8FAFC] prose-a:underline prose-a:decoration-white/20 hover:prose-a:decoration-white
-      prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-[#F8FAFC] prose-blockquote:border-l-white/20
+    <article class="prose prose-invert prose-lg max-w-[70ch] mx-auto
+      prose-p:font-literary prose-p:text-[20px] prose-p:leading-[2.0] prose-p:text-[#CBD5E1] prose-p:mb-8
+      prose-headings:font-cinematic prose-headings:text-[#F8FAFC] prose-headings:font-normal prose-headings:mt-16 prose-headings:mb-8
+      prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+      prose-a:text-[#F8FAFC] prose-a:underline prose-a:decoration-white/20 hover:prose-a:decoration-white transition-colors
+      prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-[#F8FAFC] prose-blockquote:border-l-white/20 prose-blockquote:bg-white/5 prose-blockquote:p-6 prose-blockquote:rounded-r-lg
       prose-strong:text-[#F8FAFC] prose-strong:font-semibold
-      first-letter:float-left first-letter:text-6xl first-letter:pr-4 first-letter:font-cinematic first-letter:text-white first-letter:leading-[0.8]
+      prose-ul:list-disc prose-ol:list-decimal prose-ul:pl-8 prose-ol:pl-8
+      prose-li:text-[#CBD5E1] prose-li:font-literary prose-li:text-[18px] prose-li:mb-2
+      first-letter:float-left first-letter:text-7xl first-letter:pr-4 first-letter:pt-2 first-letter:font-cinematic first-letter:text-white first-letter:leading-[0.8]
     ">
       <slot />
     </article>

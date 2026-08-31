@@ -1,5 +1,5 @@
 ---
-title: "The Architecture of the Bluff: Confidence vs. Competence"
+title: "The Art of Bluff: Confidence vs. Competence"
 description: "Why confidence is mistaken for competence, why brilliant minds hesitate, and how biological glitches in human judgment reward charlatans while punishing true expertise."
 date: 2026-08-29
 type: writing
