@@ -40,9 +40,8 @@ const FloatingShape = ({ type, color, size, initialPosition, delay, rotationSpee
     backgroundColor: color,
     top: initialPosition.top,
     left: initialPosition.left,
-    opacity: 0.85,
-    mixBlendMode: 'multiply' as const,
     zIndex: 0,
+    filter: 'drop-shadow(0px 20px 40px rgba(0,0,0,0.05))'
   };
 
   const renderShape = () => {
@@ -138,9 +137,6 @@ export default function GoogleLabsGeometry() {
         initialPosition={{ top: '70%', left: '60%' }} 
         delay={1.5}
       />
-      
-      {/* Soft gradient mesh overlay to blend them slightly */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent backdrop-blur-[2px]"></div>
     </div>
   );
 }
