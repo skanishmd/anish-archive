@@ -20,9 +20,11 @@ const color = TYPE_COLORS[type] || 'text-bone';
         <ParticleCloud client:only="react" color="#3B82F6" density={200} size={800} />
     </div>
 
-    <!-- Dark Mode: Fluid Shader Hero -->
-    <div class="hidden dark:block absolute inset-0 bg-[#050508] opacity-80">
-      <ShaderHero client:only="react" />
+    <!-- Dark Mode: Fluid Shader Hero with Instant CSS Fallback -->
+    <div class="hidden dark:block absolute inset-0 ambient-bg opacity-80">
+      <div class="absolute inset-0 animate-[fade-in_2s_ease-out_forwards]">
+        <ShaderHero client:only="react" />
+      </div>
     </div>
     
     <!-- Grain over everything -->
