@@ -1,6 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import ShaderHero from '@components/canvas/ShaderHero.tsx';
+import PureFluid from '@components/canvas/PureFluid.astro';
 import ParticleCloud from '@components/canvas/ParticleCloud.tsx';
 import { TYPE_COLORS } from '@lib/constants';
 
@@ -20,11 +20,9 @@ const color = TYPE_COLORS[type] || 'text-bone';
         <ParticleCloud client:only="react" color="#3B82F6" density={200} size={800} />
     </div>
 
-    <!-- Dark Mode: Fluid Shader Hero with Instant CSS Fallback -->
-    <div class="hidden dark:block absolute inset-0 ambient-bg opacity-80">
-      <div class="absolute inset-0 animate-[fade-in_2s_ease-out_forwards]">
-        <ShaderHero client:only="react" />
-      </div>
+    <!-- Dark Mode: Pure CSS Fluid Mesh (Instant Load) -->
+    <div class="hidden dark:block absolute inset-0">
+      <PureFluid />
     </div>
     
     <!-- Grain over everything -->
@@ -81,3 +79,4 @@ const color = TYPE_COLORS[type] || 'text-bone';
 
   </main>
 </BaseLayout>
+

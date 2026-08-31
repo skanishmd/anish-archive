@@ -1,0 +1,62 @@
+---
+// PureFluid.astro
+// A 0kb JS, 60fps pure CSS fluid mesh gradient. Instant load time.
+---
+<div class="fluid-container absolute inset-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+  <div class="fluid-blob blob-1"></div>
+  <div class="fluid-blob blob-2"></div>
+  <div class="fluid-blob blob-3"></div>
+  
+  <!-- Glass/Noise Overlay -->
+  <div class="absolute inset-0 bg-[#050508]/40 backdrop-blur-[60px] mix-blend-overlay z-10"></div>
+  <div class="absolute inset-0 z-20 pointer-events-none opacity-40 mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E')"></div>
+</div>
+
+<style>
+  .fluid-container {
+    background-color: #050508;
+  }
+  
+  .fluid-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.8;
+    animation: flow 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .blob-1 {
+    top: -10%;
+    left: -10%;
+    width: 70vw;
+    height: 70vw;
+    background: radial-gradient(circle, #4F46E5 0%, transparent 70%); /* Electric Indigo */
+    animation-delay: 0s;
+  }
+
+  .blob-2 {
+    bottom: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, #06B6D4 0%, transparent 70%); /* Cyber Teal */
+    animation-delay: -5s;
+    animation-direction: alternate-reverse;
+  }
+
+  .blob-3 {
+    top: 40%;
+    left: 30%;
+    width: 80vw;
+    height: 80vw;
+    background: radial-gradient(circle, #C026D3 0%, transparent 70%); /* Neon Magenta */
+    animation-delay: -10s;
+  }
+
+  @keyframes flow {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(10vw, 15vh) scale(1.1); }
+    66% { transform: translate(-10vw, 5vh) scale(0.9); }
+    100% { transform: translate(5vw, -10vh) scale(1.2); }
+  }
+</style>
