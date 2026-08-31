@@ -20,11 +20,11 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
-          // Light mode: Pearlescent Iridescent (SLP.gallery / Pryzm style)
+          // Light mode: Highly Saturated Iridescent
           // Dark mode: Deep Electric (Pryzm style)
-          color1={isLight ? "#FFB6C1" : "#4F46E5"} 
-          color2={isLight ? "#87CEFA" : "#06B6D4"}
-          color3={isLight ? "#FFE4E1" : "#C026D3"}
+          color1={isLight ? "#FF3366" : "#4F46E5"} 
+          color2={isLight ? "#00C3FF" : "#06B6D4"}
+          color3={isLight ? "#FFCC00" : "#C026D3"}
           uSpeed={0.25}
           uStrength={isLight ? 1.5 : 2.0}
           uDensity={1.5}
