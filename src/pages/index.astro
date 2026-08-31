@@ -1,113 +1,81 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import GoogleLabsGeometry from '@components/canvas/GoogleLabsGeometry.tsx';
-import ParticleCloud from '@components/canvas/ParticleCloud.tsx';
 import ShaderHero from '@components/canvas/ShaderHero.tsx';
 import LiquidLogo from '@components/canvas/LiquidLogo.tsx';
 
-// Content species for the navigation
 const species = [
-  { name: 'Research', type: 'research', color: 'bg-[#FF2A00]' },
-  { name: 'Technical', type: 'project', color: 'bg-[#0038FF]' },
-  { name: 'Essays', type: 'writing', color: 'bg-[#00FF66]' },
-  { name: 'Experiments', type: 'experiment', color: 'bg-[#00F0FF]' },
-  { name: 'Achievements', type: 'achievement', color: 'bg-[#FFAA00]' },
+  { name: 'RESEARCH', type: 'research', color: 'bg-[#FF2A00]', pos: 'top-12 left-12' },
+  { name: 'TECHNICAL', type: 'project', color: 'bg-[#0038FF]', pos: 'top-12 right-12' },
+  { name: 'ESSAYS', type: 'writing', color: 'bg-[#00FF66]', pos: 'bottom-12 left-12' },
+  { name: 'EXPERIMENTS', type: 'experiment', color: 'bg-[#00F0FF]', pos: 'bottom-12 right-12' },
+  { name: 'ACHIEVEMENTS', type: 'achievement', color: 'bg-[#FFAA00]', pos: 'bottom-12 left-1/2 -translate-x-1/2' },
 ];
 ---
 
 <BaseLayout noHeaderFooter={true}>
-  <!-- Import liquid-glass-js -->
   <script>
     import 'liquid-glass-js';
   </script>
 
-  <main class="min-h-screen bg-transparent text-bone flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500">
+  <main class="h-screen w-full bg-transparent text-bone overflow-hidden relative selection:bg-white selection:text-black dark:selection:bg-black dark:selection:text-white">
     
-    <!-- Deep Background Scene (to be refracted) -->
-    <div id="scene" class="absolute inset-0 -z-20 w-full h-full">
+    <!-- THE SCENE (Refracted by Liquid Glass) -->
+    <div id="scene" class="absolute inset-0 z-0 w-full h-full flex flex-col items-center justify-center">
       
-      <!-- Light Mode: Iridescent Fluid Shader -->
-      <div class="block dark:hidden absolute inset-0 ambient-light-bg opacity-80">
-        <div class="absolute inset-0 animate-[fade-in_2s_ease-out_forwards]">
-          <ShaderHero client:only="react" theme="light" />
-        </div>
+      <!-- Shader Backgrounds -->
+      <div class="block dark:hidden absolute inset-0 ambient-light-bg opacity-100">
+        <ShaderHero client:only="react" theme="light" />
+      </div>
+      <div class="hidden dark:block absolute inset-0 ambient-bg opacity-100">
+        <ShaderHero client:only="react" theme="dark" />
       </div>
 
-      <!-- Dark Mode: Fluid Shader Hero -->
-      <div class="hidden dark:block absolute inset-0 ambient-bg opacity-80">
-        <div class="absolute inset-0 animate-[fade-in_2s_ease-out_forwards]">
-          <ShaderHero client:only="react" theme="dark" />
-        </div>
+      <!-- Massive Brutalist Typography (To be refracted) -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none mix-blend-overlay dark:mix-blend-color-dodge opacity-80">
+        <h1 class="font-cinematic text-[14vw] leading-[0.8] text-center tracking-tighter text-black dark:text-white font-black uppercase break-words w-full px-4 drop-shadow-2xl">
+          THE PAPER <br/> CANNOT <br/> HANDLE <br/> YOU
+        </h1>
       </div>
       
     </div>
 
-    <!-- Massive Optical Lens (True Liquid Glass Refraction) -->
-    <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-normal">
-      <!-- Desktop Lens -->
-      <liquid-glass background="#scene" width="800" height="500" scale="40" radius="40" chroma="0.2" tint="0.0" edge="0.5" draggable="true" class="pointer-events-auto hidden md:block opacity-0 animate-[fade-in_2s_ease-out_forwards]"></liquid-glass>
+    <!-- Liquid Glass Lens (Refracts the scene) -->
+    <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none mix-blend-normal">
+      <!-- Massive Desktop Lens -->
+      <liquid-glass background="#scene" width="800" height="800" scale="60" radius="400" chroma="0.4" tint="0.0" edge="0.8" draggable="true" class="pointer-events-auto hidden md:block opacity-0 animate-[fade-in_3s_ease-out_forwards] drop-shadow-[0_0_100px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_100px_rgba(0,0,0,0.5)]"></liquid-glass>
       <!-- Mobile Lens -->
-      <liquid-glass background="#scene" width="340" height="500" scale="30" radius="32" chroma="0.1" tint="0.0" edge="0.4" draggable="true" class="pointer-events-auto block md:hidden opacity-0 animate-[fade-in_2s_ease-out_forwards]"></liquid-glass>
+      <liquid-glass background="#scene" width="340" height="500" scale="40" radius="170" chroma="0.3" tint="0.0" edge="0.6" draggable="true" class="pointer-events-auto block md:hidden opacity-0 animate-[fade-in_3s_ease-out_forwards]"></liquid-glass>
     </div>
 
-    <!-- Foreground Content (Sits over the lens) -->
-    <div class="w-full max-w-5xl mx-auto z-20 flex flex-col md:flex-row items-center justify-between gap-12 px-8 pointer-events-none">
+    <!-- Foreground UI (Spatial Navigation & Identity) -->
+    <div class="absolute inset-0 z-50 pointer-events-none">
       
-      <!-- Left Column: Identity & Manifesto -->
-      <div class="flex-1 flex flex-col pointer-events-auto z-20">
-        <div class="mb-8 scale-[1.8] origin-left opacity-0 translate-y-4 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_forwards]">
-          <LiquidLogo client:only="react" text="SK ANISH MD" color="currentColor" />
-        </div>
-        
-        <p class="font-literary text-4xl md:text-5xl lg:text-[3.5rem] text-black dark:text-white leading-[1.1] tracking-tight mb-8 drop-shadow-xl dark:drop-shadow-[0_4px_24px_rgba(0,0,0,1)] max-w-2xl">
-          <span class="inline-block opacity-0 translate-y-4 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_0.3s_forwards]">There are poems inside you</span> 
-          <span class="inline-block opacity-0 translate-y-4 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_0.5s_forwards] italic font-light text-black/60 dark:text-white/70">that even the paper</span> <br/>
-          <span class="inline-block opacity-0 translate-y-4 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_0.7s_forwards]">can't handle.</span>
-        </p>
-
-        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-black dark:text-white flex flex-wrap gap-x-6 gap-y-2 opacity-0 translate-y-4 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_0.9s_forwards]">
-          <span>Bioinformatics</span>
-          <span>Research</span>
-          <span>Software</span>
-          <span>Writing</span>
-        </div>
+      <!-- Central Floating Logo (Sits exactly inside the lens visually) -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[2.5] opacity-0 animate-[hero-logo-enter_2s_cubic-bezier(0.16,1,0.3,1)_1s_forwards] pointer-events-auto drop-shadow-2xl mix-blend-difference text-white">
+        <LiquidLogo client:only="react" text="SK ANISH MD" color="currentColor" />
       </div>
 
-      <!-- Right Column: The Six Species Navigation -->
-      <div class="w-full md:w-[380px] flex flex-col gap-0 opacity-0 translate-y-8 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_1.1s_forwards] pointer-events-auto z-20">
-        <div class="font-mono text-[9px] text-black/50 dark:text-white/50 uppercase tracking-[0.2em] mb-4 pb-2 border-b border-black/20 dark:border-white/20 drop-shadow-md">
-          Index [{species.length}]
-        </div>
-        
-        <div class="flex flex-col border-t border-black/20 dark:border-white/20">
-          {species.map((s, i) => (
-            <a href={`/archive?type=${s.type}`} class="group flex items-center justify-between py-5 border-b border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 transition-colors relative overflow-hidden">
-              <div class="flex items-center gap-6 relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-4">
-                <span class="font-mono text-[10px] text-black/40 dark:text-white/40">0{i + 1}</span>
-                <span class="text-[1.35rem] font-medium tracking-tight text-black dark:text-white">{s.name}</span>
-              </div>
-              <div class="relative z-10 w-1.5 h-1.5 rounded-full transition-transform duration-500 group-hover:scale-150" class:list={[s.color]}></div>
-              
-              <!-- Hover gradient splash -->
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500" class:list={[s.color]}></div>
-            </a>
-          ))}
-        </div>
-        
-        <a href="/archive" class="mt-8 self-end font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-black dark:text-white hover:opacity-50 transition-opacity flex items-center gap-4 group">
-          View All Objects 
-          <svg class="w-4 h-4 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+      <!-- Spatial Navigation Corners -->
+      {species.map((s, i) => (
+        <a href={`/archive?type=${s.type}`} class={`absolute ${s.pos} group pointer-events-auto flex items-center gap-4 opacity-0 animate-[fade-in_1s_ease-out_${1.5 + (i * 0.2)}s_forwards]`}>
+          <div class="flex items-center justify-center w-12 h-12 rounded-full border border-black/20 dark:border-white/20 bg-white/10 dark:bg-black/10 backdrop-blur-xl group-hover:scale-110 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden relative">
+             <div class={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${s.color}`}></div>
+             <span class="font-mono text-[10px] text-black dark:text-white relative z-10">0{i + 1}</span>
+          </div>
+          <span class="font-mono text-xs tracking-[0.3em] text-black dark:text-white uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] absolute left-16 whitespace-nowrap drop-shadow-lg">
+            {s.name}
+          </span>
         </a>
-      </div>
-
+      ))}
+      
     </div>
   </main>
 </BaseLayout>
 
 <style>
-  @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes hero-logo-enter {
+    from { opacity: 0; transform: translate(-50%, calc(-50% + 40px)); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
   }
   @keyframes fade-in {
     from { opacity: 0; filter: blur(10px); transform: scale(0.95); }
