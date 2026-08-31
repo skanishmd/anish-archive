@@ -20,23 +20,23 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
-          // Light mode: 50% Saturated (Halfway between pastel and neon)
-          // Dark mode: Deep Electric (Pryzm style)
-          color1={isLight ? "#FF7594" : "#4F46E5"} 
-          color2={isLight ? "#44C9FD" : "#06B6D4"}
-          color3={isLight ? "#FFD871" : "#C026D3"}
-          uSpeed={0.25}
-          uStrength={isLight ? 1.5 : 2.0}
-          uDensity={1.5}
-          uFrequency={5.5}
-          uAmplitude={isLight ? 1.0 : 1.5}
+          // Sophisticated, moody, mature colors (Sulkysubject37 / Pryzm aesthetic)
+          color1={isLight ? "#E5E0D8" : "#0A0A0A"} 
+          color2={isLight ? "#C4BCB3" : "#1F2326"}
+          color3={isLight ? "#D1C9C0" : "#2D3748"}
+          uSpeed={0.15}
+          uStrength={isLight ? 1.0 : 1.5}
+          uDensity={1.8}
+          uFrequency={4.5}
+          uAmplitude={isLight ? 0.8 : 1.2}
           cAzimuthAngle={180}
           cPolarAngle={90}
           cDistance={2.8}
           cameraZoom={1.0}
-          lightType="3d"
-          brightness={isLight ? 2.5 : 1.4}
-          reflection={isLight ? 0.4 : 0.2}
+          lightType="env"
+          envPreset="city"
+          brightness={isLight ? 1.2 : 0.8}
+          reflection={isLight ? 0.2 : 0.4}
           grain="on"
           wireframe={false}
         />
