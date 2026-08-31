@@ -482,9 +482,9 @@ html[data-mode="author"] .prose h3 {
 .ambient-light-bg {
   background-color: #F6F4F0;
   background-image: 
-    radial-gradient(at 20% 15%, rgba(255, 51, 102, 0.7) 0px, transparent 60%),
-    radial-gradient(at 80% 80%, rgba(0, 195, 255, 0.6) 0px, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(255, 204, 0, 0.5) 0px, transparent 70%);
+    radial-gradient(at 20% 15%, rgba(255, 117, 148, 0.65) 0px, transparent 60%),
+    radial-gradient(at 80% 80%, rgba(68, 201, 253, 0.55) 0px, transparent 60%),
+    radial-gradient(at 50% 50%, rgba(255, 216, 113, 0.45) 0px, transparent 70%);
 }
 
 

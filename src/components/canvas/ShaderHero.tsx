@@ -20,11 +20,11 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
-          // Light mode: Highly Saturated Iridescent
+          // Light mode: 50% Saturated (Halfway between pastel and neon)
           // Dark mode: Deep Electric (Pryzm style)
-          color1={isLight ? "#FF3366" : "#4F46E5"} 
-          color2={isLight ? "#00C3FF" : "#06B6D4"}
-          color3={isLight ? "#FFCC00" : "#C026D3"}
+          color1={isLight ? "#FF7594" : "#4F46E5"} 
+          color2={isLight ? "#44C9FD" : "#06B6D4"}
+          color3={isLight ? "#FFD871" : "#C026D3"}
           uSpeed={0.25}
           uStrength={isLight ? 1.5 : 2.0}
           uDensity={1.5}
