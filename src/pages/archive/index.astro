@@ -28,7 +28,7 @@ let allItems = [];
 for (const col of collectionNames) {
   const entries = await getCollection(col);
   const mapped = entries.map(e => ({
-    href: `/archive/${col}/${e.slug}`,
+    href: `/archive/${col}/${e.slug || e.id}`,
     collection: col,
     label: collectionLabel[col],
     color: signalColor[col],
