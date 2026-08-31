@@ -99,41 +99,40 @@ allItems.sort((a, b) => b.timestamp - a.timestamp);
 
         return (
           <a href={item.href} 
-             class="archive-card group flex flex-col h-[280px] bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-xl overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 relative shadow-lg dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_10px_30px_-10px_rgba(0,0,0,0.7)]"
+             class="archive-card group flex flex-col h-[280px] bg-transparent border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-all duration-300 relative overflow-hidden"
              data-collection={item.collection}
-             style={`--signal: ${item.color}; --signal-rgb: ${rgb};`}
+             style={`--signal: ${item.color};`}
           >
-            <!-- Left Signal Border Accent -->
-            <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-current transition-all duration-300 group-hover:w-[6px]" style={`color: ${item.color}`}></div>
+            <!-- Top Structural Signal Line -->
+            <div class="absolute top-0 left-0 right-0 h-[1px] bg-current transition-all duration-300 group-hover:h-[4px]" style={`color: ${item.color}`}></div>
             
-            <div class="p-6 pl-8 flex flex-col h-full z-10 relative">
+            <div class="p-6 flex flex-col h-full z-10 relative">
               <!-- Meta -->
-              <div class="flex justify-between items-center mb-4">
-                <span class="font-mono text-[10px] font-semibold uppercase tracking-widest" style={`color: ${item.color}`}>{item.label}</span>
-                <span class="font-mono text-[9px] text-[#64748B] tracking-widest">{item.date}</span>
+              <div class="flex justify-between items-center mb-6">
+                <span class="font-mono text-[9px] font-semibold uppercase tracking-[0.2em]" style={`color: ${item.color}`}>{item.label}</span>
+                <span class="font-mono text-[9px] text-ash dark:text-[#64748B] tracking-[0.1em]">{item.date}</span>
               </div>
               
               <!-- Content -->
-              <h3 class="font-cinematic text-[22px] leading-tight text-black dark:text-[#F8FAFC] mb-3 group-hover:text-black dark:group-hover:text-white transition-colors line-clamp-3">
+              <h3 class="font-sans font-light text-[20px] leading-[1.2] text-black dark:text-[#F8FAFC] mb-4 line-clamp-3">
                 {item.title}
               </h3>
-              <p class="font-literary text-[15px] italic text-ash dark:text-[#94A3B8] line-clamp-3 mb-6">
+              <p class="font-serif text-[14px] text-ash dark:text-[#94A3B8] line-clamp-3 mb-6">
                 {item.description}
               </p>
               
               <!-- Tags -->
               <div class="flex flex-wrap gap-2 mt-auto">
                 {item.tags.slice(0, 3).map(tag => (
-                  <span class="font-mono text-[9px] uppercase tracking-wider text-ash dark:text-[#94A3B8] bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 px-2 py-1 rounded transition-colors group-hover:bg-black/10 dark:group-hover:bg-white/10">
+                  <span class="font-mono text-[8px] uppercase tracking-[0.2em] text-ash dark:text-[#94A3B8] bg-black/5 dark:bg-white/5 px-2 py-1 transition-colors group-hover:bg-black/10 dark:group-hover:bg-white/10">
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
 
-            <!-- Hover Glow Spotlight -->
-            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none dark:mix-blend-normal mix-blend-multiply" 
-                 style={`background: radial-gradient(circle at center, rgba(var(--signal-rgb), 0.12) 0%, transparent 80%); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 0 20px -5px rgba(var(--signal-rgb), 0.3); border: 1px solid rgba(var(--signal-rgb), 0.3); border-radius: 0.75rem;`}>
+            <!-- Hover overlay subtly -->
+            <div class="absolute inset-0 z-0 bg-black/[0.02] dark:bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
             </div>
           </a>
         )
