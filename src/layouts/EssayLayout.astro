@@ -53,22 +53,22 @@ const color = TYPE_COLORS[type] || 'text-bone';
     </header>
 
     <!-- Glass Reading Container -->
-    <div class="rounded-2xl p-8 md:p-16 lg:p-20 opacity-0 translate-y-12 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards] shadow-[0_0_80px_rgba(0,0,0,0.1)] dark:shadow-[0_0_120px_rgba(0,0,0,0.6)] relative overflow-hidden bg-[#F6F4F0]/95 dark:bg-[#050508]/85 backdrop-blur-3xl border border-black/5 dark:border-white/10">
+    <div class="rounded-2xl p-8 md:p-16 lg:p-20 opacity-0 translate-y-12 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards] shadow-[0_0_80px_rgba(0,0,0,0.1)] dark:shadow-[0_0_120px_rgba(0,0,0,0.4)] relative overflow-hidden bg-[#F6F4F0]/80 dark:bg-[#050508]/40 backdrop-blur-[40px] border border-black/5 dark:border-white/10">
       
       <!-- Subtle Specular Mouse Highlight via CSS (glass-specular is in global.css) -->
       <div class="glass-specular hidden md:block"></div>
 
       <article class="relative z-10 prose prose-lg md:prose-xl max-w-[70ch] mx-auto
         dark:prose-invert 
-        prose-p:font-literary prose-p:text-[20px] md:prose-p:text-[22px] prose-p:leading-[2.1] prose-p:text-black/80 dark:prose-p:text-[#CBD5E1] prose-p:mb-8
-        prose-headings:font-cinematic prose-headings:text-black dark:prose-headings:text-[#F8FAFC] prose-headings:font-normal prose-headings:mt-20 prose-headings:mb-10
+        prose-p:font-literary prose-p:text-[20px] md:prose-p:text-[22px] prose-p:leading-[2.1] prose-p:text-black dark:prose-p:text-white dark:prose-p:drop-shadow-md prose-p:mb-8
+        prose-headings:font-cinematic prose-headings:text-black dark:prose-headings:text-white dark:prose-headings:drop-shadow-md prose-headings:font-normal prose-headings:mt-20 prose-headings:mb-10
         prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
-        prose-a:text-black dark:prose-a:text-[#F8FAFC] prose-a:underline prose-a:decoration-black/20 dark:prose-a:decoration-white/20 hover:prose-a:decoration-black dark:hover:prose-a:decoration-white transition-colors
-        prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-black/90 dark:prose-blockquote:text-[#F8FAFC] prose-blockquote:border-l-black/20 dark:prose-blockquote:border-l-white/20 prose-blockquote:bg-black/5 dark:prose-blockquote:bg-white/5 prose-blockquote:p-8 prose-blockquote:rounded-r-xl
-        prose-strong:text-black dark:prose-strong:text-[#F8FAFC] prose-strong:font-semibold
+        prose-a:text-black dark:prose-a:text-white prose-a:underline prose-a:decoration-black/30 dark:prose-a:decoration-white/30 hover:prose-a:decoration-black dark:hover:prose-a:decoration-white transition-colors
+        prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-black dark:prose-blockquote:text-white dark:prose-blockquote:drop-shadow-md prose-blockquote:border-l-black/20 dark:prose-blockquote:border-l-white/20 prose-blockquote:bg-black/5 dark:prose-blockquote:bg-white/5 prose-blockquote:p-8 prose-blockquote:rounded-r-xl
+        prose-strong:text-black dark:prose-strong:text-white dark:prose-strong:drop-shadow-md prose-strong:font-semibold
         prose-ul:list-disc prose-ol:list-decimal prose-ul:pl-8 prose-ol:pl-8 prose-ul:mb-8 prose-ol:mb-8
-        prose-li:text-black/80 dark:prose-li:text-[#CBD5E1] prose-li:font-literary prose-li:text-[18px] md:prose-li:text-[20px] prose-li:leading-[1.9] prose-li:mb-3
-        first-letter:float-left first-letter:text-[6rem] first-letter:pr-6 first-letter:pt-3 first-letter:font-cinematic first-letter:text-black dark:first-letter:text-white first-letter:leading-[0.7] first-letter:drop-shadow-md
+        prose-li:text-black dark:prose-li:text-white dark:prose-li:drop-shadow-md prose-li:font-literary prose-li:text-[18px] md:prose-li:text-[20px] prose-li:leading-[1.9] prose-li:mb-3
+        first-letter:float-left first-letter:text-[6rem] first-letter:pr-6 first-letter:pt-3 first-letter:font-cinematic first-letter:text-black dark:first-letter:text-white first-letter:leading-[0.7] first-letter:drop-shadow-xl
       ">
         <slot />
       </article>
