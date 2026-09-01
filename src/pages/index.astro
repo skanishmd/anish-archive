@@ -21,11 +21,7 @@ const species = [
       // Boot Sequence
       const tl = gsap.timeline();
       
-      // Animate Boot Overlay
-      tl.to('#boot-overlay', { opacity: 0, duration: 1, delay: 1, ease: 'power2.inOut', onComplete: () => {
-         const overlay = document.getElementById('boot-overlay');
-         if(overlay) overlay.style.display = 'none';
-      }});
+      
 
       // Animate Main UI
       tl.fromTo('#hero-logo', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5');
@@ -65,13 +61,7 @@ const species = [
     });
   </script>
 
-  <!-- Boot Overlay (Sulkysubject style) -->
-  <div id="boot-overlay" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0A0A0A] text-white">
-      <div class="font-mono text-xs uppercase tracking-[0.3em] mb-4 text-[#FF7594]">The Cruel Standard.</div>
-      <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50 animate-pulse">Compiling context...</div>
-  </div>
-
-  <main class="h-screen w-full bg-transparent text-bone overflow-hidden relative selection:bg-white selection:text-black dark:selection:bg-black dark:selection:text-white">
+<main class="h-screen w-full bg-transparent text-bone overflow-hidden relative selection:bg-white selection:text-black dark:selection:bg-black dark:selection:text-white">
     
     <!-- THE SCENE -->
     <div id="scene" class="absolute inset-0 z-0 w-full h-full">
@@ -160,3 +150,6 @@ const species = [
     to { opacity: 1; filter: blur(0px); transform: scale(1); }
   }
 </style>
+
+
+
