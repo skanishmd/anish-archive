@@ -36,10 +36,10 @@ function FiveToneShader({ theme }: { theme: 'light' | 'dark' }) {
           /vec4\s+diffuseColor\s*=\s*vec4\([\s\S]*?vPos\.z\),\s*1\);/,
           `
           // Calibrated Representation:
-          // 30% Royal Velvet (#6A1B9A)
-          // 30% Toxic Emerald (#006E51)
-          // 20% Crimson Rust (#B53A18)
-          // 20% Amber Gold (#F29900)
+          // 35% Royal Velvet (#6A1B9A)
+          // 35% Toxic Emerald (#006E51)
+          // 15% Crimson Rust (#B53A18)
+          // 15% Amber Gold (#F29900)
           // Depth Troughs: Midnight Obsidian (#08040C)
           vec3 cVelvet   = vec3(0.416, 0.106, 0.604); // #6A1B9A
           vec3 cRust     = vec3(0.710, 0.227, 0.094); // #B53A18
@@ -59,23 +59,23 @@ function FiveToneShader({ theme }: { theme: 'light' | 'dark' }) {
           float t = clamp(rawFluid * 0.5 + 0.5, 0.0, 1.0);
 
           // Calibrated Distribution:
-          // [0.00 - 0.30] -> Royal Velvet (30%)
-          // [0.30 - 0.50] -> Crimson Rust (20%)
-          // [0.50 - 0.70] -> Amber Gold   (20%)
-          // [0.70 - 1.00] -> Toxic Emerald (30%)
+          // [0.00 - 0.35] -> Royal Velvet (35%)
+          // [0.35 - 0.50] -> Crimson Rust (15%)
+          // [0.50 - 0.65] -> Amber Gold   (15%)
+          // [0.65 - 1.00] -> Toxic Emerald (35%)
           vec3 fluidColor;
-          if (t < 0.30) {
-            float p = smoothstep(0.18, 0.30, t);
-            fluidColor = mix(cVelvet, cRust, p * 0.6);
+          if (t < 0.35) {
+            float p = smoothstep(0.22, 0.35, t);
+            fluidColor = mix(cVelvet, cRust, p * 0.5);
           } else if (t < 0.50) {
-            float p = smoothstep(0.30, 0.50, t);
+            float p = smoothstep(0.35, 0.50, t);
             fluidColor = mix(cRust, cGold, p);
-          } else if (t < 0.70) {
-            float p = smoothstep(0.50, 0.70, t);
+          } else if (t < 0.65) {
+            float p = smoothstep(0.50, 0.65, t);
             fluidColor = mix(cGold, cEmerald, p);
           } else {
-            float p = smoothstep(0.70, 0.85, t);
-            fluidColor = mix(cEmerald, cVelvet, p * 0.4);
+            float p = smoothstep(0.65, 0.80, t);
+            fluidColor = mix(cEmerald, cVelvet, p * 0.35);
           }
 
           // Dynamic crest luster: Amber Gold catches high 3D wave ridges across the dunes
@@ -156,16 +156,16 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
         <FiveToneShader theme={theme} />
       </ShaderGradientCanvas>
       
-      {/* 30/30/20/20 Organic Fluid Atmosphere (Dark Mode) */}
+      {/* 35/35/15/15 Organic Fluid Atmosphere (Dark Mode) */}
       {!isLight && (
         <div 
           className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-50"
           style={{
             backgroundImage: `
-              radial-gradient(ellipse 65% 55% at 30% 35%, rgba(106, 27, 154, 0.45) 0%, transparent 70%),
-              radial-gradient(ellipse 65% 55% at 70% 65%, rgba(0, 110, 81, 0.45) 0%, transparent 70%),
-              radial-gradient(ellipse 50% 45% at 65% 30%, rgba(181, 58, 24, 0.38) 0%, transparent 65%),
-              radial-gradient(ellipse 50% 45% at 35% 70%, rgba(242, 153, 0, 0.35) 0%, transparent 65%)
+              radial-gradient(ellipse 70% 60% at 28% 35%, rgba(106, 27, 154, 0.50) 0%, transparent 72%),
+              radial-gradient(ellipse 70% 60% at 72% 65%, rgba(0, 110, 81, 0.50) 0%, transparent 72%),
+              radial-gradient(ellipse 45% 40% at 65% 30%, rgba(181, 58, 24, 0.32) 0%, transparent 60%),
+              radial-gradient(ellipse 45% 40% at 35% 70%, rgba(242, 153, 0, 0.30) 0%, transparent 60%)
             `
           }}
         />
