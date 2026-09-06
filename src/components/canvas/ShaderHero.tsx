@@ -35,33 +35,56 @@ function FiveToneShader({ theme }: { theme: 'light' | 'dark' }) {
         shader.fragmentShader = shader.fragmentShader.replace(
           /vec4\s+diffuseColor\s*=\s*vec4\([\s\S]*?vPos\.z\),\s*1\);/,
           `
-          vec3 cViolet   = vec3(0.416, 0.106, 0.604); // #6A1B9A
+          // Calibrated Representation:
+          // 30% Royal Velvet (#6A1B9A)
+          // 30% Toxic Emerald (#006E51)
+          // 20% Crimson Rust (#B53A18)
+          // 20% Amber Gold (#F29900)
+          // Depth Troughs: Midnight Obsidian (#08040C)
+          vec3 cVelvet   = vec3(0.416, 0.106, 0.604); // #6A1B9A
           vec3 cRust     = vec3(0.710, 0.227, 0.094); // #B53A18
           vec3 cGold     = vec3(0.949, 0.600, 0.000); // #F29900
           vec3 cEmerald  = vec3(0.000, 0.431, 0.318); // #006E51
           vec3 cObsidian = vec3(0.031, 0.016, 0.047); // #08040C
 
-          // Normalize x coordinate across the plane [-3.2, 3.2] -> [0.0, 1.0]
-          float nx = clamp((vPos.x + 3.2) / 6.4, 0.0, 1.0);
+          // Omnidirectional, non-linear organic fluid field
+          // Multi-axis harmonic interference perturbed by live 3D wave elevation (vPos.z)
+          // Completely eliminates any directional "left/right/top/bottom" confinement!
+          float f1 = sin(vPos.x * 0.72 + vPos.y * 0.48 + vPos.z * 1.7);
+          float f2 = cos(vPos.x * 0.42 - vPos.y * 0.78 + vPos.z * 1.3);
+          float f3 = sin((vPos.x + vPos.y) * 0.58 - vPos.z * 1.5);
+          float rawFluid = (f1 + f2 + f3) / 3.0; // range ~ [-1.0, 1.0]
 
-          vec3 baseBand;
-          if (nx < 0.25) {
-            float f = smoothstep(0.0, 0.25, nx);
-            baseBand = mix(cViolet, cRust, f);
-          } else if (nx < 0.50) {
-            float f = smoothstep(0.25, 0.50, nx);
-            baseBand = mix(cRust, cGold, f);
-          } else if (nx < 0.75) {
-            float f = smoothstep(0.50, 0.75, nx);
-            baseBand = mix(cGold, cEmerald, f);
+          // Normalized scalar field t in [0.0, 1.0]
+          float t = clamp(rawFluid * 0.5 + 0.5, 0.0, 1.0);
+
+          // Calibrated Distribution:
+          // [0.00 - 0.30] -> Royal Velvet (30%)
+          // [0.30 - 0.50] -> Crimson Rust (20%)
+          // [0.50 - 0.70] -> Amber Gold   (20%)
+          // [0.70 - 1.00] -> Toxic Emerald (30%)
+          vec3 fluidColor;
+          if (t < 0.30) {
+            float p = smoothstep(0.18, 0.30, t);
+            fluidColor = mix(cVelvet, cRust, p * 0.6);
+          } else if (t < 0.50) {
+            float p = smoothstep(0.30, 0.50, t);
+            fluidColor = mix(cRust, cGold, p);
+          } else if (t < 0.70) {
+            float p = smoothstep(0.50, 0.70, t);
+            fluidColor = mix(cGold, cEmerald, p);
           } else {
-            float f = smoothstep(0.75, 1.00, nx);
-            baseBand = mix(cEmerald, cViolet, f);
+            float p = smoothstep(0.70, 0.85, t);
+            fluidColor = mix(cEmerald, cVelvet, p * 0.4);
           }
 
-          // Depth sculpting: Midnight Obsidian grounds all wave troughs & shadow contours
-          float depthFactor = smoothstep(-0.5, 0.4, vPos.z);
-          vec3 finalSurface = mix(cObsidian, baseBand, depthFactor);
+          // Dynamic crest luster: Amber Gold catches high 3D wave ridges across the dunes
+          float crest = smoothstep(0.35, 0.85, vPos.z);
+          fluidColor = mix(fluidColor, cGold, crest * 0.30);
+
+          // Depth sculpting: Midnight Obsidian grounds the wave troughs & shadow contours
+          float depthFactor = smoothstep(-0.55, 0.30, vPos.z);
+          vec3 finalSurface = mix(cObsidian, fluidColor, depthFactor);
 
           vec4 diffuseColor = vec4(finalSurface, 1.0);
           `
@@ -103,10 +126,10 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           animate="on"
           enableTransition={false}
           // Light Mode: Balanced warm desert sand
-          // Dark Mode Fallback: Distributed warm & cool tones
-          color1={isLight ? "#BFB5A9" : "#B53A18"} 
-          color2={isLight ? "#B7ADA1" : "#F29900"} 
-          color3={isLight ? "#C5BCB0" : "#6A1B9A"} 
+          // Dark Mode Fallback: 30% Velvet, 30% Emerald, 20% Rust
+          color1={isLight ? "#BFB5A9" : "#6A1B9A"} 
+          color2={isLight ? "#B7ADA1" : "#006E51"} 
+          color3={isLight ? "#C5BCB0" : "#B53A18"} 
           // Centered horizontally & vertically for balanced bilateral movement
           positionX={0}
           positionY={0}
@@ -133,16 +156,16 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
         <FiveToneShader theme={theme} />
       </ShaderGradientCanvas>
       
-      {/* 5-Color Equal Representation Atmosphere (Dark Mode) */}
+      {/* 30/30/20/20 Organic Fluid Atmosphere (Dark Mode) */}
       {!isLight && (
         <div 
-          className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-55"
+          className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-50"
           style={{
             backgroundImage: `
-              radial-gradient(circle at 15% 25%, rgba(106, 27, 154, 0.45) 0%, transparent 45%),
-              radial-gradient(circle at 35% 75%, rgba(181, 58, 24, 0.55) 0%, transparent 45%),
-              radial-gradient(circle at 50% 35%, rgba(242, 153, 0, 0.50) 0%, transparent 42%),
-              radial-gradient(circle at 85% 30%, rgba(0, 110, 81, 0.45) 0%, transparent 45%)
+              radial-gradient(ellipse 65% 55% at 30% 35%, rgba(106, 27, 154, 0.45) 0%, transparent 70%),
+              radial-gradient(ellipse 65% 55% at 70% 65%, rgba(0, 110, 81, 0.45) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 45% at 65% 30%, rgba(181, 58, 24, 0.38) 0%, transparent 65%),
+              radial-gradient(ellipse 50% 45% at 35% 70%, rgba(242, 153, 0, 0.35) 0%, transparent 65%)
             `
           }}
         />
