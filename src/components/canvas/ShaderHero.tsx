@@ -21,6 +21,7 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
+          enableTransition={false}
           // Balanced, refined warm sand palette (subtle desaturation)
           color1={isLight ? "#BFB5A9" : "#0A0A0A"} 
           color2={isLight ? "#B7ADA1" : "#1F2326"}

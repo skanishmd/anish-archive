@@ -226,11 +226,12 @@
 }
 
 .ambient-light-bg {
-  background-color: #D6CBC0;
+  background-color: #BFB5A9;
   background-image: 
-    radial-gradient(at 20% 15%, rgba(190, 176, 158, 0.6) 0px, transparent 60%),
-    radial-gradient(at 80% 80%, rgba(181, 165, 147, 0.6) 0px, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(201, 186, 168, 0.5) 0px, transparent 70%);
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sandNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sandNoise)' opacity='0.22'/%3E%3C/svg%3E"),
+    radial-gradient(at 20% 15%, rgba(197, 188, 176, 0.7) 0px, transparent 60%),
+    radial-gradient(at 80% 80%, rgba(183, 173, 161, 0.7) 0px, transparent 60%),
+    radial-gradient(at 50% 50%, rgba(191, 181, 169, 0.8) 0px, transparent 70%);
 }
 
 .ambient-bg {
