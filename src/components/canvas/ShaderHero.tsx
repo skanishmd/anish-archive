@@ -21,10 +21,10 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
-          // Balanced, subtle warm desert sand palette
-          color1={isLight ? "#C2B5A5" : "#0A0A0A"} 
-          color2={isLight ? "#BAAC9C" : "#1F2326"}
-          color3={isLight ? "#C8BCAA" : "#2D3748"}
+          // Balanced, refined warm sand palette (subtle desaturation)
+          color1={isLight ? "#BFB5A9" : "#0A0A0A"} 
+          color2={isLight ? "#B7ADA1" : "#1F2326"}
+          color3={isLight ? "#C5BCB0" : "#2D3748"}
           // Centered horizontally & vertically for balanced bilateral movement
           positionX={0}
           positionY={0}
@@ -32,7 +32,7 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           rotationX={0}
           rotationY={0}
           rotationZ={0}
-          uSpeed={0.14}
+          uSpeed={0.2}
           uStrength={isLight ? 1.2 : 1.6}
           uDensity={1.8}
           uFrequency={4.8}
