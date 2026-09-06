@@ -44,15 +44,39 @@ const color = TYPE_COLORS[type] || 'text-bone';
       </div>
       
       <a href={Astro.url.pathname} class="block group">
-        <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-black dark:text-white leading-[1.05] tracking-tight mb-8 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.01] group-hover:drop-shadow-2xl">
-          {title}
-        </h1>
+        {title.toLowerCase().includes('bluff') ? (
+          <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-black dark:text-white leading-[1.05] tracking-tight mb-6 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.005]">
+            The Art of <span class="relative inline-block font-bold">
+              <span class="relative z-10 text-black dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#6A1B9A] dark:via-[#F29900] dark:to-[#006E51] transition-transform duration-300 hover:scale-105 inline-block cursor-pointer">Bluff</span>
+              <span class="hidden dark:inline-block absolute -top-3 -right-5 text-sm font-mono text-[#F29900] opacity-80 select-none animate-bounce">🃏</span>
+            </span>
+            <span class="block mt-4 text-3xl md:text-4xl lg:text-5xl font-cinematic font-normal text-black/80 dark:text-white/80">
+              <span class="text-black dark:text-[#F29900] font-semibold tracking-wide">Confidence</span>
+              <span class="font-mono text-xl md:text-2xl text-black/30 dark:text-white/30 mx-3 select-none">//</span>
+              <span class="font-serif italic text-black/70 dark:text-[#006E51]">Competence</span>
+            </span>
+          </h1>
+        ) : (
+          <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-black dark:text-white leading-[1.05] tracking-tight mb-8 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.01] group-hover:drop-shadow-2xl">
+            {title}
+          </h1>
+        )}
       </a>
       
       {description && (
         <p class="font-literary text-2xl text-black/60 dark:text-white/60 italic leading-relaxed max-w-3xl border-l-2 border-black/20 dark:border-white/20 pl-6">
           {description}
         </p>
+      )}
+
+      {title.toLowerCase().includes('bluff') && (
+        <div class="mt-6 flex items-center gap-3 text-black/40 dark:text-white/40 pl-6">
+          <span class="font-mono text-[9px] uppercase tracking-[0.25em] text-[#B53A18]">TREMOR SIGNAL</span>
+          <svg class="h-6 w-48 text-[#B53A18] dark:text-[#006E51]" viewBox="0 0 160 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 12 H58 L64 4 L70 20 L76 7 L82 17 L88 12 H160" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="animate-[pulse_3s_ease-in-out_infinite]" />
+          </svg>
+          <span class="font-mono text-[9px] uppercase tracking-[0.25em] text-black/40 dark:text-white/40">R = 0.22 CORRELATION</span>
+        </div>
       )}
     </header>
 
@@ -84,5 +108,58 @@ const color = TYPE_COLORS[type] || 'text-bone';
     </div>
 
   </main>
+
+  <script>
+    // Automatically link in-text citations [1] to #ref-1 and handle smooth jump
+    document.addEventListener('DOMContentLoaded', () => {
+      const article = document.querySelector('article');
+      if (!article) return;
+
+      // Wrap numeric citations in text like [1] or [12, 13] with clickable links
+      const walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT);
+      const textNodes: Text[] = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.parentElement && !['A', 'BUTTON', 'SCRIPT', 'STYLE', 'CODE', 'SPAN'].includes(node.parentElement.tagName)) {
+          if (/\[\d+(?:,\s*\d+)*\]/.test(node.nodeValue || '')) {
+            textNodes.push(node as Text);
+          }
+        }
+      }
+
+      textNodes.forEach(textNode => {
+        const span = document.createElement('span');
+        span.innerHTML = (textNode.nodeValue || '').replace(/\[(\d+(?:\s*,\s*\d+)*)\]/g, (match, nums) => {
+          const links = nums.split(/\s*,\s*/).map(n => `<a href="#ref-${n}" class="citation-tag font-mono text-[12px] text-[#B53A18] dark:text-[#006E51] hover:text-[#F29900] dark:hover:text-[#F29900] font-semibold no-underline transition-colors px-0.5 select-none">${n}</a>`).join(', ');
+          return `[${links}]`;
+        });
+        textNode.replaceWith(span);
+      });
+
+      // Handle clicking citation anchors
+      document.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement).closest('a[href^="#ref-"]');
+        if (!target) return;
+        const refId = target.getAttribute('href');
+        if (!refId) return;
+
+        // If the references dossier drawer is closed, open it!
+        const details = document.getElementById('references-dossier') as HTMLDetailsElement;
+        if (details && !details.open) {
+          details.open = true;
+        }
+
+        const refEl = document.querySelector(refId);
+        if (refEl) {
+          e.preventDefault();
+          refEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          refEl.classList.add('ring-2', 'ring-[#006E51]', 'bg-[#006E51]/20', 'scale-[1.02]');
+          setTimeout(() => {
+            refEl.classList.remove('ring-2', 'ring-[#006E51]', 'bg-[#006E51]/20', 'scale-[1.02]');
+          }, 2500);
+        }
+      });
+    });
+  </script>
 </BaseLayout>
 
