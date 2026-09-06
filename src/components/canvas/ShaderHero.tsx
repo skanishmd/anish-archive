@@ -52,11 +52,24 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
         />
       </ShaderGradientCanvas>
       
-      {/* Overlay gradient to blend edges softly */}
-      <div className={`absolute inset-0 z-[2] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/40 via-transparent to-[#050508]/60'}`}></div>
+      {/* 5-Color Joker Atmospheric Accents (Dark Mode): Crimson Rust (#B53A18) & Amber Gold (#F29900) */}
+      {!isLight && (
+        <div 
+          className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-45"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 18% 82%, rgba(181, 58, 24, 0.45) 0%, transparent 48%),
+              radial-gradient(circle at 72% 22%, rgba(242, 153, 0, 0.35) 0%, transparent 42%)
+            `
+          }}
+        />
+      )}
+
+      {/* Overlay gradient to blend edges softly and protect typography contrast */}
+      <div className={`absolute inset-0 z-[3] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/40 via-transparent to-[#050508]/65'}`}></div>
       
       {/* Subtle fine film grain overlay */}
-      <div className="absolute inset-0 z-[3] pointer-events-none mix-blend-overlay opacity-[0.07]" 
+      <div className="absolute inset-0 z-[4] pointer-events-none mix-blend-overlay opacity-[0.07]" 
            style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
       </div>
     </div>
