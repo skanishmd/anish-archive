@@ -21,12 +21,12 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
-          // Refined, muted warm sand palette (restrained luxury saturation)
-          color1={isLight ? "#E6DFD5" : "#0A0A0A"} 
-          color2={isLight ? "#C5B9AA" : "#1F2326"}
-          color3={isLight ? "#D4C7B5" : "#2D3748"}
+          // Balanced, non-blown-out warm desert sand palette
+          color1={isLight ? "#BEB09E" : "#0A0A0A"} 
+          color2={isLight ? "#B5A593" : "#1F2326"}
+          color3={isLight ? "#C9BAA8" : "#2D3748"}
           uSpeed={0.2}
-          uStrength={isLight ? 1.4 : 1.6}
+          uStrength={isLight ? 1.5 : 1.6}
           uDensity={1.8}
           uFrequency={4.8}
           uAmplitude={isLight ? 1.0 : 1.2}
@@ -36,18 +36,18 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           cameraZoom={1.0}
           lightType="env"
           envPreset="city"
-          brightness={isLight ? 1.0 : 0.8}
-          reflection={isLight ? 0.2 : 0.4}
+          brightness={isLight ? 0.9 : 0.8}
+          reflection={isLight ? 0.05 : 0.4}
           grain="on"
           wireframe={false}
         />
       </ShaderGradientCanvas>
       
       {/* Overlay gradient to blend edges softly */}
-      <div className={`absolute inset-0 z-[2] pointer-events-none bg-gradient-to-b ${isLight ? 'from-[#F7F5F0]/20 via-transparent to-[#F7F5F0]/30' : 'from-[#050508]/80 via-transparent to-[#050508]/90'}`}></div>
+      <div className={`absolute inset-0 z-[2] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/80 via-transparent to-[#050508]/90'}`}></div>
       
       {/* Film grain overlay for texture */}
-      <div className="absolute inset-0 z-[3] pointer-events-none mix-blend-overlay opacity-30" 
+      <div className="absolute inset-0 z-[3] pointer-events-none mix-blend-overlay opacity-15" 
            style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
       </div>
     </div>
