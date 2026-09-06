@@ -226,11 +226,11 @@
 }
 
 .ambient-light-bg {
-  background-color: #F5EFEB;
+  background-color: #F7F5F0;
   background-image: 
-    radial-gradient(at 20% 15%, rgba(191, 160, 119, 0.45) 0px, transparent 60%),
-    radial-gradient(at 80% 80%, rgba(214, 181, 136, 0.5) 0px, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(234, 209, 176, 0.55) 0px, transparent 70%);
+    radial-gradient(at 20% 15%, rgba(197, 185, 170, 0.35) 0px, transparent 60%),
+    radial-gradient(at 80% 80%, rgba(212, 199, 181, 0.4) 0px, transparent 60%),
+    radial-gradient(at 50% 50%, rgba(230, 223, 213, 0.45) 0px, transparent 70%);
 }
 
 .ambient-bg {
