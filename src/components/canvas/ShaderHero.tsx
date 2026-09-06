@@ -20,10 +20,10 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
-          // Sophisticated, moody, mature colors (Sulkysubject37 / Pryzm aesthetic)
-          color1={isLight ? "#E5E0D8" : "#0A0A0A"} 
-          color2={isLight ? "#C4BCB3" : "#1F2326"}
-          color3={isLight ? "#D1C9C0" : "#2D3748"}
+          // Sophisticated, moody, mature colors (Sulkysubject37 / Pryzm aesthetic - with rich warm sand saturation)
+          color1={isLight ? "#EAD1B0" : "#0A0A0A"} 
+          color2={isLight ? "#BFA077" : "#1F2326"}
+          color3={isLight ? "#D8B588" : "#2D3748"}
           uSpeed={0.15}
           uStrength={isLight ? 1.0 : 1.5}
           uDensity={1.8}
@@ -35,7 +35,7 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           cameraZoom={1.0}
           lightType="env"
           envPreset="city"
-          brightness={isLight ? 1.2 : 0.8}
+          brightness={isLight ? 1.05 : 0.8}
           reflection={isLight ? 0.2 : 0.4}
           grain="on"
           wireframe={false}
@@ -43,10 +43,10 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
       </ShaderGradientCanvas>
       
       {/* Overlay gradient to blend edges */}
-      <div className={`absolute inset-0 z-0 bg-gradient-to-b ${isLight ? 'from-[#F6F4F0]/60 via-transparent to-[#F6F4F0]/80' : 'from-[#050508]/80 via-transparent to-[#050508]/90'}`}></div>
+      <div className={`absolute inset-0 z-0 bg-gradient-to-b ${isLight ? 'from-[#F6F4F0]/25 via-transparent to-[#F6F4F0]/35' : 'from-[#050508]/80 via-transparent to-[#050508]/90'}`}></div>
       
       {/* Film grain overlay for texture */}
-      <div className="absolute inset-0 z-10 pointer-events-none mix-blend-overlay opacity-50" 
+      <div className="absolute inset-0 z-10 pointer-events-none mix-blend-overlay opacity-30" 
            style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
       </div>
     </div>

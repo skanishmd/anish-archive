@@ -226,11 +226,11 @@
 }
 
 .ambient-light-bg {
-  background-color: #F0EDE8;
+  background-color: #F5EFEB;
   background-image: 
-    radial-gradient(at 20% 15%, rgba(196, 188, 179, 0.4) 0px, transparent 60%),
-    radial-gradient(at 80% 80%, rgba(209, 201, 192, 0.5) 0px, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(229, 224, 216, 0.6) 0px, transparent 70%);
+    radial-gradient(at 20% 15%, rgba(191, 160, 119, 0.45) 0px, transparent 60%),
+    radial-gradient(at 80% 80%, rgba(214, 181, 136, 0.5) 0px, transparent 60%),
+    radial-gradient(at 50% 50%, rgba(234, 209, 176, 0.55) 0px, transparent 70%);
 }
 
 .ambient-bg {
@@ -480,14 +480,6 @@ html[data-mode="author"] .prose h3 {
 @theme {
   --animate-fade-in-up: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade-in: fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.ambient-light-bg {
-  background-color: #F6F4F0;
-  background-image: 
-    radial-gradient(at 20% 15%, rgba(255, 117, 148, 0.65) 0px, transparent 60%),
-    radial-gradient(at 80% 80%, rgba(68, 201, 253, 0.55) 0px, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(255, 216, 113, 0.45) 0px, transparent 70%);
 }
 
 
