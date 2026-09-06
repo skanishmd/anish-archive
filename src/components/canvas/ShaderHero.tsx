@@ -1,5 +1,85 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useThree } from '@react-three/fiber';
+import * as THREE from 'three';
 import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient';
+
+function FiveToneShader({ theme }: { theme: 'light' | 'dark' }) {
+  const { scene } = useThree();
+
+  useEffect(() => {
+    if (theme === 'light') return;
+
+    let timeoutId: any;
+    const patchMaterial = () => {
+      const mesh = scene.getObjectByName('shadergradient-mesh') as THREE.Mesh;
+      if (!mesh || !mesh.material) {
+        timeoutId = setTimeout(patchMaterial, 30);
+        return;
+      }
+
+      const mat = mesh.material as THREE.MeshPhysicalMaterial;
+      mat.customProgramCacheKey = () => 'five-tone-joker-patch-v2';
+
+      const originalOnBeforeCompile = mat.onBeforeCompile;
+      mat.onBeforeCompile = (shader, renderer) => {
+        if (originalOnBeforeCompile) {
+          originalOnBeforeCompile(shader, renderer);
+        }
+
+        // Equal representation for all 5 colors in the WebGL fragment shader:
+        // 1. Royal Violet (#6A1B9A)
+        // 2. Crimson Rust (#B53A18)
+        // 3. Amber Gold (#F29900)
+        // 4. Toxic Emerald (#006E51)
+        // 5. Midnight Obsidian (#08040C)
+        shader.fragmentShader = shader.fragmentShader.replace(
+          /vec4\s+diffuseColor\s*=\s*vec4\([\s\S]*?vPos\.z\),\s*1\);/,
+          `
+          vec3 cViolet   = vec3(0.416, 0.106, 0.604); // #6A1B9A
+          vec3 cRust     = vec3(0.710, 0.227, 0.094); // #B53A18
+          vec3 cGold     = vec3(0.949, 0.600, 0.000); // #F29900
+          vec3 cEmerald  = vec3(0.000, 0.431, 0.318); // #006E51
+          vec3 cObsidian = vec3(0.031, 0.016, 0.047); // #08040C
+
+          // Normalize x coordinate across the plane [-3.2, 3.2] -> [0.0, 1.0]
+          float nx = clamp((vPos.x + 3.2) / 6.4, 0.0, 1.0);
+
+          vec3 baseBand;
+          if (nx < 0.25) {
+            float f = smoothstep(0.0, 0.25, nx);
+            baseBand = mix(cViolet, cRust, f);
+          } else if (nx < 0.50) {
+            float f = smoothstep(0.25, 0.50, nx);
+            baseBand = mix(cRust, cGold, f);
+          } else if (nx < 0.75) {
+            float f = smoothstep(0.50, 0.75, nx);
+            baseBand = mix(cGold, cEmerald, f);
+          } else {
+            float f = smoothstep(0.75, 1.00, nx);
+            baseBand = mix(cEmerald, cViolet, f);
+          }
+
+          // Depth sculpting: Midnight Obsidian grounds all wave troughs & shadow contours
+          float depthFactor = smoothstep(-0.5, 0.4, vPos.z);
+          vec3 finalSurface = mix(cObsidian, baseBand, depthFactor);
+
+          vec4 diffuseColor = vec4(finalSurface, 1.0);
+          `
+        );
+      };
+
+      mat.needsUpdate = true;
+    };
+
+    patchMaterial();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [scene, theme]);
+
+  return null;
+}
 
 export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
   const isLight = theme === 'light';
@@ -23,10 +103,10 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           animate="on"
           enableTransition={false}
           // Light Mode: Balanced warm desert sand
-          // Dark Mode: Joker Theme (Royal Violet on Left, Toxic Emerald on Right, Midnight Obsidian in Troughs)
-          color1={isLight ? "#BFB5A9" : "#6A1B9A"} 
-          color2={isLight ? "#B7ADA1" : "#006E51"} 
-          color3={isLight ? "#C5BCB0" : "#08040C"} 
+          // Dark Mode Fallback: Distributed warm & cool tones
+          color1={isLight ? "#BFB5A9" : "#B53A18"} 
+          color2={isLight ? "#B7ADA1" : "#F29900"} 
+          color3={isLight ? "#C5BCB0" : "#6A1B9A"} 
           // Centered horizontally & vertically for balanced bilateral movement
           positionX={0}
           positionY={0}
@@ -50,16 +130,19 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           grain="on"
           wireframe={false}
         />
+        <FiveToneShader theme={theme} />
       </ShaderGradientCanvas>
       
-      {/* 5-Color Joker Atmospheric Accents (Dark Mode): Crimson Rust (#B53A18) & Amber Gold (#F29900) */}
+      {/* 5-Color Equal Representation Atmosphere (Dark Mode) */}
       {!isLight && (
         <div 
-          className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-45"
+          className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-55"
           style={{
             backgroundImage: `
-              radial-gradient(circle at 18% 82%, rgba(181, 58, 24, 0.45) 0%, transparent 48%),
-              radial-gradient(circle at 72% 22%, rgba(242, 153, 0, 0.35) 0%, transparent 42%)
+              radial-gradient(circle at 15% 25%, rgba(106, 27, 154, 0.45) 0%, transparent 45%),
+              radial-gradient(circle at 35% 75%, rgba(181, 58, 24, 0.55) 0%, transparent 45%),
+              radial-gradient(circle at 50% 35%, rgba(242, 153, 0, 0.50) 0%, transparent 42%),
+              radial-gradient(circle at 85% 30%, rgba(0, 110, 81, 0.45) 0%, transparent 45%)
             `
           }}
         />
