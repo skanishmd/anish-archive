@@ -21,13 +21,20 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           control="props"
           type="waterPlane"
           animate="on"
-          // Balanced, non-blown-out warm desert sand palette
-          color1={isLight ? "#BEB09E" : "#0A0A0A"} 
-          color2={isLight ? "#B5A593" : "#1F2326"}
-          color3={isLight ? "#C9BAA8" : "#2D3748"}
-          uSpeed={0.2}
-          uStrength={isLight ? 1.5 : 1.6}
-          uDensity={1.8}
+          // Realistic desert sand dunes: balanced bilateral symmetry
+          color1={isLight ? "#C2A888" : "#0A0A0A"} 
+          color2={isLight ? "#BEA383" : "#1F2326"}
+          color3={isLight ? "#D0BD9F" : "#2D3748"}
+          // Center and align the mesh to ensure consistent movement on both sides
+          positionX={0}
+          positionY={0}
+          positionZ={0}
+          rotationX={0}
+          rotationY={0}
+          rotationZ={0}
+          uSpeed={0.15}
+          uStrength={isLight ? 1.8 : 1.6}
+          uDensity={1.3}
           uFrequency={4.8}
           uAmplitude={isLight ? 1.0 : 1.2}
           cAzimuthAngle={180}
@@ -37,8 +44,8 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           lightType="env"
           envPreset="city"
           brightness={isLight ? 0.9 : 0.8}
-          reflection={isLight ? 0.05 : 0.4}
-          grain="on"
+          reflection={isLight ? 0.02 : 0.4}
+          grain="off"
           wireframe={false}
         />
       </ShaderGradientCanvas>
@@ -46,9 +53,14 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
       {/* Overlay gradient to blend edges softly */}
       <div className={`absolute inset-0 z-[2] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/80 via-transparent to-[#050508]/90'}`}></div>
       
-      {/* Film grain overlay for texture */}
-      <div className="absolute inset-0 z-[3] pointer-events-none mix-blend-overlay opacity-15" 
-           style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
+      {/* Tactile, monochromatic fine sand grain */}
+      <div 
+        className="absolute inset-0 z-[3] pointer-events-none mix-blend-overlay opacity-20" 
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundSize: '160px 160px'
+        }}
+      >
       </div>
     </div>
   );
