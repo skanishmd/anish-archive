@@ -22,10 +22,11 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           type="waterPlane"
           animate="on"
           enableTransition={false}
-          // Balanced, refined warm sand palette (subtle desaturation)
-          color1={isLight ? "#BFB5A9" : "#0A0A0A"} 
-          color2={isLight ? "#B7ADA1" : "#1F2326"}
-          color3={isLight ? "#C5BCB0" : "#2D3748"}
+          // Light Mode: Balanced warm desert sand
+          // Dark Mode: Joker Theme (Royal Violet on Left, Toxic Emerald on Right, Midnight Obsidian in Troughs)
+          color1={isLight ? "#BFB5A9" : "#6A1B9A"} 
+          color2={isLight ? "#B7ADA1" : "#006E51"} 
+          color3={isLight ? "#C5BCB0" : "#08040C"} 
           // Centered horizontally & vertically for balanced bilateral movement
           positionX={0}
           positionY={0}
@@ -34,25 +35,25 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           rotationY={0}
           rotationZ={0}
           uSpeed={0.2}
-          uStrength={isLight ? 1.2 : 1.6}
+          uStrength={isLight ? 1.2 : 1.5}
           uDensity={1.8}
           uFrequency={4.8}
-          uAmplitude={isLight ? 0.8 : 1.2}
+          uAmplitude={isLight ? 0.8 : 1.1}
           cAzimuthAngle={180}
           cPolarAngle={90}
           cDistance={2.8}
           cameraZoom={1.0}
           lightType="env"
           envPreset="city"
-          brightness={isLight ? 0.9 : 0.8}
-          reflection={isLight ? 0.05 : 0.4}
+          brightness={isLight ? 0.9 : 0.85}
+          reflection={isLight ? 0.05 : 0.25}
           grain="on"
           wireframe={false}
         />
       </ShaderGradientCanvas>
       
       {/* Overlay gradient to blend edges softly */}
-      <div className={`absolute inset-0 z-[2] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/80 via-transparent to-[#050508]/90'}`}></div>
+      <div className={`absolute inset-0 z-[2] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/40 via-transparent to-[#050508]/60'}`}></div>
       
       {/* Subtle fine film grain overlay */}
       <div className="absolute inset-0 z-[3] pointer-events-none mix-blend-overlay opacity-[0.07]" 
