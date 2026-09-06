@@ -16,15 +16,15 @@ const color = TYPE_COLORS[type] || 'text-bone';
   <!-- Deep Background Scene (Fixed) -->
   <div class="fixed inset-0 z-0 w-full h-full pointer-events-none">
     <!-- Light Mode: Fluid Shader Hero with Instant Warm Sand CSS Fallback -->
-    <div class="block dark:hidden absolute inset-0 ambient-light-bg opacity-100">
-      <div class="absolute inset-0">
+    <div class="block dark:hidden absolute inset-0 ambient-light-bg">
+      <div class="absolute inset-0 z-10">
         <ShaderHero client:only="react" theme="light" />
       </div>
     </div>
 
     <!-- Dark Mode: Fluid Shader Hero with Instant CSS Fallback -->
-    <div class="hidden dark:block absolute inset-0 ambient-bg opacity-100">
-      <div class="absolute inset-0">
+    <div class="hidden dark:block absolute inset-0 ambient-bg">
+      <div class="absolute inset-0 z-10">
         <ShaderHero client:only="react" theme="dark" />
       </div>
     </div>

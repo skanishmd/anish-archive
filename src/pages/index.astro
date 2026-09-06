@@ -65,11 +65,15 @@ const species = [
     
     <!-- THE SCENE -->
     <div id="scene" class="absolute inset-0 z-0 w-full h-full">
-      <div class="block dark:hidden absolute inset-0 ambient-light-bg opacity-100">
-        <ShaderHero client:only="react" theme="light" />
+      <div class="block dark:hidden absolute inset-0 ambient-light-bg">
+        <div class="absolute inset-0 z-10">
+          <ShaderHero client:only="react" theme="light" />
+        </div>
       </div>
-      <div class="hidden dark:block absolute inset-0 ambient-bg opacity-100">
-        <ShaderHero client:only="react" theme="dark" />
+      <div class="hidden dark:block absolute inset-0 ambient-bg">
+        <div class="absolute inset-0 z-10">
+          <ShaderHero client:only="react" theme="dark" />
+        </div>
       </div>
     </div>
 
