@@ -98,6 +98,20 @@ const color = TYPE_COLORS[type] || 'text-bone';
 
   </main>
 
+  <style is:global>
+    a.citation-tag {
+      color: #FF00FF !important;
+      text-decoration: none !important;
+      transition: color 0.25s ease, transform 0.2s ease;
+    }
+    a.citation-tag:hover,
+    a.citation-tag:active,
+    a.citation-tag:focus,
+    a.citation-tag.citation-touched {
+      color: #B53A18 !important;
+    }
+  </style>
+
   <script>
     // Automatically link in-text citations [1] to #ref-1 and handle smooth jump
     document.addEventListener('DOMContentLoaded', () => {
@@ -119,8 +133,8 @@ const color = TYPE_COLORS[type] || 'text-bone';
       textNodes.forEach(textNode => {
         const span = document.createElement('span');
         span.innerHTML = (textNode.nodeValue || '').replace(/\[(\d+(?:\s*,\s*\d+)*)\]/g, (match, nums) => {
-          const links = nums.split(/\s*,\s*/).map(n => `<a href="#ref-${n}" class="citation-tag font-mono text-[12px] text-[#B53A18] dark:text-[#006E51] hover:text-[#F29900] dark:hover:text-[#F29900] font-semibold no-underline transition-colors px-0.5 select-none">${n}</a>`).join(', ');
-          return `[${links}]`;
+          const links = nums.split(/\s*,\s*/).map(n => `<a href="#ref-${n}" class="citation-tag font-mono text-[13px] font-bold no-underline transition-colors px-0.5 select-none hover:scale-110 inline-block cursor-pointer">${n}</a>`).join(', ');
+          return `<span class="inline-flex items-baseline font-mono text-[13px] text-black/60 dark:text-white/80 select-none">[${links}]</span>`;
         });
         textNode.replaceWith(span);
       });
@@ -132,19 +146,16 @@ const color = TYPE_COLORS[type] || 'text-bone';
         const refId = target.getAttribute('href');
         if (!refId) return;
 
-        // If an accordion drawer exists, open it safely
-        const details = document.getElementById('references-dossier') as HTMLDetailsElement | null;
-        if (details && !details.open) {
-          details.open = true;
-        }
+        // Turn citation to Crimson Rust after touch/click
+        target.classList.add('citation-touched');
 
         const refEl = document.querySelector(refId);
         if (refEl) {
           e.preventDefault();
           refEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          refEl.classList.add('ring-2', 'ring-[#006E51]', 'bg-[#006E51]/20', 'scale-[1.02]');
+          refEl.classList.add('ring-2', 'ring-[#FF00FF]', 'bg-[#FF00FF]/15', 'dark:bg-[#FF00FF]/20', 'scale-[1.02]');
           setTimeout(() => {
-            refEl.classList.remove('ring-2', 'ring-[#006E51]', 'bg-[#006E51]/20', 'scale-[1.02]');
+            refEl.classList.remove('ring-2', 'ring-[#FF00FF]', 'bg-[#FF00FF]/15', 'dark:bg-[#FF00FF]/20', 'scale-[1.02]');
           }, 2500);
         }
       });
