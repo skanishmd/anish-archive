@@ -28,7 +28,7 @@ featured: true
     </div>
   </div>
   <p class="font-literary text-[20px] md:text-[22px] leading-[2.1] text-black dark:text-white dark:drop-shadow-md">
-    <strong class="font-semibold text-black dark:text-white tracking-wide">hink about the man</strong> who is effortlessly charismatic around his friends. He is witty, sharp and never loses his ocean of thoughts. But the moment he is left alone with the one woman he actually has genuine, terrifying feelings for, he freezes. His natural rhythm collapses, filters every sentence, overthinks his own thoughts and suddenly becomes rigid and guarded. And she walks away thinking he lacks depth or personality [1, 2].
+    hink about the man who is effortlessly charismatic around his friends. He is witty, sharp and never loses his ocean of thoughts. But the moment he is left alone with the one woman he actually has genuine, terrifying feelings for, he freezes. His natural rhythm collapses, filters every sentence, overthinks his own thoughts and suddenly becomes rigid and guarded. And she walks away thinking he lacks depth or personality [1, 2].
   </p>
 </div>
 
