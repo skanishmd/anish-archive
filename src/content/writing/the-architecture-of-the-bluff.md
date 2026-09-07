@@ -511,55 +511,55 @@ We have to demand the mechanics, track the record, watch the response to failure
   <h2 class="font-cinematic text-3xl md:text-4xl font-semibold text-black dark:text-white mb-8">References</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
   <div id="ref-1" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[01]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[1]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Hughes, S. M., Harrison, M. A., & de Haan, K. M. (2020). Perceived nervous reactions during initial attraction. <span class="italic text-black dark:text-white font-serif">Adaptive Human Behavior and Physiology</span>, 6, 219-247.
     </div>
   </div>
   <div id="ref-2" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[02]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[2]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Meston, C. M., & Frohlich, P. F. (2003). Love at first fright: Partner salience moderates roller-coaster-induced excitation transfer. <span class="italic text-black dark:text-white font-serif">Archives of Sexual Behavior</span>, 32(6), 537-544.
     </div>
   </div>
   <div id="ref-3" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[03]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[3]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Eastwick, P. W., & Finkel, E. J. (2008). Sex differences in mate preferences revisited: Do people know what they initially desire in a romantic partner? <span class="italic text-black dark:text-white font-serif">Journal of Personality and Social Psychology</span>, 94(2), 245-264.
     </div>
   </div>
   <div id="ref-4" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[04]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[4]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Aron, A., Dutton, D. G., Aron, E. N., & Iversen, A. (1989). Experiences of falling in love. <span class="italic text-black dark:text-white font-serif">Journal of Social and Personal Relationships</span>, 6(3), 243-257.
     </div>
   </div>
   <div id="ref-5" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[05]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[5]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Haselton, M. G., & Buss, D. M. (2000). Error management theory: A new perspective on biases in cross-sex mind reading. <span class="italic text-black dark:text-white font-serif">Journal of Personality and Social Psychology</span>, 78(1), 81-91.
     </div>
   </div>
   <div id="ref-6" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[06]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[6]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Jonason, P. K., Li, N. P., Webster, G. D., & Schmitt, D. P. (2009). The dark triad: Facilitating a short-term mating strategy in men. <span class="italic text-black dark:text-white font-serif">European Journal of Personality</span>, 23(1), 5-18.
     </div>
   </div>
   <div id="ref-7" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[07]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[7]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Leary, M. R., & Kowalski, R. M. (1995). <span class="italic text-black dark:text-white font-serif">Social Anxiety</span>. Guilford Press.
     </div>
   </div>
   <div id="ref-8" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[08]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[8]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Gonzaga, G. C., Keltner, D., Londahl, E. A., & Smith, M. D. (2001). Love and the commitment problem in romantic relations and friendship. <span class="italic text-black dark:text-white font-serif">Journal of Personality and Social Psychology</span>, 81(2), 247-262.
     </div>
   </div>
   <div id="ref-9" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
-    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[09]</span>
+    <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[9]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
       Anderson, C., Brion, S., Moore, D. A., & Kennedy, J. A. (2012). A status-enhancement account of overconfidence. <span class="italic text-black dark:text-white font-serif">Journal of Personality and Social Psychology</span>, 103(4), 718-735.
     </div>
