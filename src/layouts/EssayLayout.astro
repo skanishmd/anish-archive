@@ -132,8 +132,8 @@ const color = TYPE_COLORS[type] || 'text-bone';
         const refId = target.getAttribute('href');
         if (!refId) return;
 
-        // If the references dossier drawer is closed, open it!
-        const details = document.getElementById('references-dossier') as HTMLDetailsElement;
+        // If an accordion drawer exists, open it safely
+        const details = document.getElementById('references-dossier') as HTMLDetailsElement | null;
         if (details && !details.open) {
           details.open = true;
         }

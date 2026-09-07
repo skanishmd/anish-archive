@@ -506,23 +506,9 @@ We have to demand the mechanics, track the record, watch the response to failure
   <span class="font-cinematic not-italic text-black dark:text-white font-bold text-3xl block mt-2">"I don't know yet, but let's find out."</span>
 </blockquote>
 
-<!-- EVIDENCE LEDGER (101 EMPIRICAL CITATIONS) -->
-<div class="not-prose mt-32 pt-12 border-t border-black/10 dark:border-white/10">
-  <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-black/10 dark:border-white/10 gap-4">
-    <div>
-      <div class="flex items-center gap-2 mb-2">
-        <span class="w-2 h-2 rounded-full bg-[#006E51]"></span>
-        <span class="font-mono text-[11px] uppercase tracking-[0.25em] text-[#006E51] font-bold">EMPIRICAL ARCHITECTURE</span>
-      </div>
-      <h3 class="font-cinematic text-3xl font-semibold text-black dark:text-white">The Evidence Ledger</h3>
-      <p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">101 peer-reviewed clinical, behavioral, and organizational citations.</p>
-    </div>
-    <div class="font-mono text-xs text-black/40 dark:text-white/40 tracking-widest uppercase">
-      TOTAL ENTRIES: 101 // VERIFIED
-    </div>
-  </div>
-
-  <!-- Landmark Studies 01-10 -->
+<!-- REFERENCES -->
+<div class="not-prose mt-24 pt-12 border-t border-black/10 dark:border-white/10">
+  <h2 class="font-cinematic text-3xl md:text-4xl font-semibold text-black dark:text-white mb-8">References</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
   <div id="ref-1" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
     <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[01]</span>
@@ -584,18 +570,6 @@ We have to demand the mechanics, track the record, watch the response to failure
       Vaughan, D. (1996). <span class="italic text-black dark:text-white font-serif">The Challenger Launch Decision: Risky Technology, Culture, and Deviance at NASA</span>. University of Chicago Press.
     </div>
   </div>
-  </div>
-
-  <!-- Collapsible Dossier 11-101 -->
-  <details id="references-dossier" class="group/dossier mt-6">
-    <summary class="cursor-pointer list-none flex items-center justify-between p-4 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/10 dark:border-white/10 hover:border-[#006E51]/50 hover:bg-[#006E51]/5 transition-all duration-200 select-none">
-      <div class="flex items-center gap-3">
-        <span class="font-mono text-xs uppercase tracking-widest text-[#006E51] font-semibold">EXPAND COMPLETE EVIDENCE DOSSIER (STUDIES 11 – 101)</span>
-        <span class="font-mono text-[10px] text-black/40 dark:text-white/40 tracking-wider">91 ADDITIONAL STUDIES</span>
-      </div>
-      <span class="font-mono text-xs text-black/40 dark:text-white/40 transition-transform duration-200 group-open/dossier:rotate-180">▼</span>
-    </summary>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4 pt-2">
   <div id="ref-11" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
     <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[11]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
@@ -1142,6 +1116,5 @@ We have to demand the mechanics, track the record, watch the response to failure
       Vosoughi, S., Roy, D., & Aral, S. (2018). The spread of true and false news online. <span class="italic text-black dark:text-white font-serif">Science</span>, 359(6380), 1146-1151.
     </div>
   </div>
-    </div>
-  </details>
+  </div>
 </div>
