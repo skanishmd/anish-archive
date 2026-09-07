@@ -167,62 +167,55 @@ But look at what actually happened. The original judgment made in the first few 
 This is one of the cruelest loops in human judgment:
 
 <!-- VERTICAL CAUSAL CHAIN 1: THE CRUEL LOOP -->
-<div class="not-prose my-12 p-6 md:p-10 rounded-2xl bg-black/[0.03] dark:bg-black/40 border border-black/10 dark:border-[#B53A18]/40 shadow-2xl relative overflow-hidden backdrop-blur-xl">
-  <div class="flex items-center justify-between mb-8 pb-4 border-b border-black/10 dark:border-white/10">
-    <div class="flex items-center gap-2.5">
-      <span class="w-2.5 h-2.5 rounded-full bg-[#B53A18] animate-ping"></span>
-      <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#B53A18] font-bold">THE CLOSED LOOP OF PREJUDICE</span>
-    </div>
-    <span class="font-mono text-[10px] uppercase text-black/40 dark:text-white/40 tracking-widest">FIG 5.1 // SYSTEMIC TRAP</span>
-  </div>
-
-  <div class="relative pl-8 md:pl-10 space-y-6 before:absolute before:left-3 md:before:left-4 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-[#B53A18] before:via-[#F29900] before:to-[#6A1B9A]">
-    
-    <div class="relative group">
-      <div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#B53A18] shadow-[0_0_10px_#B53A18]"></div>
-      <div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
-        <div class="font-mono text-[11px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">01 // THE FAULTY MEASUREMENT</div>
-        <div class="font-literary text-lg text-black dark:text-white font-semibold">Misinterpreting a biological stress tremor as incompetence</div>
-        <p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">First impressions formed in 100ms mistake adrenaline for lack of depth.</p>
-      </div>
-    </div>
-
-    <div class="relative group">
-      <div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#F29900] shadow-[0_0_10px_#F29900]"></div>
-      <div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
-        <div class="font-mono text-[11px] uppercase tracking-widest text-[#F29900] mb-1 font-semibold">02 // REDUCED OPPORTUNITY</div>
-        <div class="font-literary text-lg text-black dark:text-white font-semibold">Gatekeeping & denial of high-stakes practice</div>
-        <p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">The nervous expert is denied stage time, leadership roles, and mentorship.</p>
-      </div>
-    </div>
-
-    <div class="relative group">
-      <div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#6A1B9A] shadow-[0_0_10px_#6A1B9A]"></div>
-      <div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
-        <div class="font-mono text-[11px] uppercase tracking-widest text-[#6A1B9A] mb-1 font-semibold">03 // PERFORMANCE ATROPHY</div>
-        <div class="font-literary text-lg text-black dark:text-white font-semibold">Skill degradation under chronic starvation</div>
-        <p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">Without opportunities to perform, actual capacity weakens under prolonged isolation.</p>
-      </div>
-    </div>
-
-    <div class="relative group">
-      <div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#B53A18] shadow-[0_0_10px_#B53A18]"></div>
-      <div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
-        <div class="font-mono text-[11px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">04 // THE FABRICATED "PROOF"</div>
-        <div class="font-literary text-lg text-black dark:text-white font-semibold">Systemic confirmation bias seals the verdict</div>
-        <p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">The room points to the thin record: "See? They were never capable to begin with."</p>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="mt-6 pt-4 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono text-black/50 dark:text-white/50">
-    <span class="flex items-center gap-1.5 text-[#B53A18] font-semibold">
-      <span>↺</span>
-      <span>CYCLES BACK TO STEP 01 AS THE PERPETUAL BASELINE</span>
-    </span>
-    <span class="text-[10px] tracking-widest uppercase">SELF-FULFILLING PROPHECY</span>
-  </div>
+<div class="not-prose my-12 p-6 md:p-8 rounded-2xl bg-black/[0.03] dark:bg-black/40 border border-black/10 dark:border-[#B53A18]/40 shadow-xl relative overflow-hidden backdrop-blur-xl">
+<div class="flex items-center justify-between mb-6 pb-4 border-b border-black/10 dark:border-white/10">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#B53A18] animate-ping"></span>
+<span class="font-mono text-xs uppercase tracking-[0.2em] text-[#B53A18] font-bold">THE CLOSED LOOP OF PREJUDICE</span>
+</div>
+<span class="font-mono text-[10px] uppercase text-black/40 dark:text-white/40 tracking-widest">FIG 5.1 // SYSTEMIC TRAP</span>
+</div>
+<div class="relative pl-8 md:pl-10 space-y-4 before:absolute before:left-3 md:before:left-4 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-[#B53A18] before:via-[#F29900] before:to-[#6A1B9A]">
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#B53A18] shadow-[0_0_10px_#B53A18]"></div>
+<div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
+<div class="font-mono text-[11px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">01 // THE FAULTY MEASUREMENT</div>
+<div class="font-literary text-lg text-black dark:text-white font-semibold">Misinterpreting a biological stress tremor as incompetence</div>
+<p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">First impressions formed in 100ms mistake adrenaline for lack of depth.</p>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#F29900] shadow-[0_0_10px_#F29900]"></div>
+<div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
+<div class="font-mono text-[11px] uppercase tracking-widest text-[#F29900] mb-1 font-semibold">02 // REDUCED OPPORTUNITY</div>
+<div class="font-literary text-lg text-black dark:text-white font-semibold">Gatekeeping & denial of high-stakes practice</div>
+<p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">The nervous expert is denied stage time, leadership roles, and mentorship.</p>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#6A1B9A] shadow-[0_0_10px_#6A1B9A]"></div>
+<div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
+<div class="font-mono text-[11px] uppercase tracking-widest text-[#6A1B9A] mb-1 font-semibold">03 // PERFORMANCE ATROPHY</div>
+<div class="font-literary text-lg text-black dark:text-white font-semibold">Skill degradation under chronic starvation</div>
+<p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">Without opportunities to perform, actual capacity weakens under prolonged isolation.</p>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[34px] top-1.5 w-4 h-4 rounded-full bg-[#06050A] border-2 border-[#B53A18] shadow-[0_0_10px_#B53A18]"></div>
+<div class="p-4 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-black/5 dark:border-white/10">
+<div class="font-mono text-[11px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">04 // THE FABRICATED "PROOF"</div>
+<div class="font-literary text-lg text-black dark:text-white font-semibold">Systemic confirmation bias seals the verdict</div>
+<p class="font-sans text-sm text-black/60 dark:text-white/60 mt-1">The room points to the thin record: "See? They were never capable to begin with."</p>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono text-black/50 dark:text-white/50">
+<span class="flex items-center gap-1.5 text-[#B53A18] font-semibold">
+<span>↺</span>
+<span>CYCLES BACK TO STEP 01 AS THE PERPETUAL BASELINE</span>
+</span>
+<span class="text-[10px] tracking-widest uppercase">SELF-FULFILLING PROPHECY</span>
+</div>
 </div>
 
 A single nervous moment can become a self-fulfilling prophecy that follows someone for decades.
@@ -271,65 +264,56 @@ A nervous person may be highly capable. They may also be completely unprepared [
 
 <!-- VERTICAL CAUSAL CHAINS 2 & 3: THE TRUE PATH VS THE BLUFF PATH -->
 <div class="not-prose my-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-  
-  <!-- Stele 1: The True Path (Demonstrated Competence -> Justified Confidence) -->
-  <div class="p-6 md:p-8 rounded-2xl bg-black/[0.02] dark:bg-[#006E51]/10 border border-[#006E51]/30 shadow-xl relative overflow-hidden backdrop-blur-md">
-    <div class="flex items-center justify-between mb-6 pb-3 border-b border-[#006E51]/20">
-      <span class="font-mono text-xs uppercase tracking-widest text-[#006E51] font-semibold flex items-center gap-1.5">
-        <span>✓</span> <span>THE GROUNDED PATH</span>
-      </span>
-      <span class="font-mono text-[10px] uppercase text-[#006E51]/60 tracking-wider">EVIDENCE-BASED</span>
-    </div>
-
-    <div class="flex flex-col items-center space-y-3">
-      <div class="w-full p-4 rounded-xl bg-white/60 dark:bg-white/[0.04] border border-[#006E51]/30 text-center">
-        <div class="font-mono text-[10px] uppercase tracking-widest text-[#006E51] mb-1 font-semibold">FOUNDATIONAL SUBSTRATE</div>
-        <div class="font-cinematic text-lg font-bold text-black dark:text-white">Demonstrated Competence</div>
-        <div class="text-xs font-sans text-black/60 dark:text-white/60 mt-1">Scars of error correction, verifiable repetitions, skin in the game.</div>
-      </div>
-
-      <div class="flex flex-col items-center text-[#006E51] my-1">
-        <span class="h-6 w-0.5 bg-[#006E51]"></span>
-        <span class="text-sm font-bold">↓</span>
-      </div>
-
-      <div class="w-full p-4 rounded-xl bg-white/60 dark:bg-white/[0.04] border border-[#006E51]/30 text-center">
-        <div class="font-mono text-[10px] uppercase tracking-widest text-[#006E51] mb-1 font-semibold">CALIBRATED RESULT</div>
-        <div class="font-cinematic text-lg font-bold text-black dark:text-white">Justified Confidence</div>
-        <div class="text-xs font-sans text-black/60 dark:text-white/60 mt-1">Signal backed by an authentic, tested source.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stele 2: The Bluff Path (Displayed Confidence -> Assumed Competence) -->
-  <div class="p-6 md:p-8 rounded-2xl bg-black/[0.02] dark:bg-[#B53A18]/10 border border-dashed border-[#B53A18]/40 shadow-xl relative overflow-hidden backdrop-blur-md">
-    <div class="flex items-center justify-between mb-6 pb-3 border-b border-[#B53A18]/20">
-      <span class="font-mono text-xs uppercase tracking-widest text-[#B53A18] font-semibold flex items-center gap-1.5">
-        <span>⚠️</span> <span>THE DANGEROUS SHORTCUT</span>
-      </span>
-      <span class="font-mono text-[10px] uppercase text-[#B53A18]/60 tracking-wider">COGNITIVE LEAP</span>
-    </div>
-
-    <div class="flex flex-col items-center space-y-3">
-      <div class="w-full p-4 rounded-xl bg-white/60 dark:bg-white/[0.04] border border-[#B53A18]/30 text-center">
-        <div class="font-mono text-[10px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">SURFACE POSTURE</div>
-        <div class="font-cinematic text-lg font-bold text-black dark:text-white">Displayed Confidence</div>
-        <div class="text-xs font-sans text-black/60 dark:text-white/60 mt-1">Loud volume, unbothered posture, scripted swagger.</div>
-      </div>
-
-      <div class="flex flex-col items-center text-[#B53A18] my-1">
-        <span class="h-6 w-0.5 border-l border-dashed border-[#B53A18]"></span>
-        <span class="text-sm font-bold animate-pulse">⤓</span>
-      </div>
-
-      <div class="w-full p-4 rounded-xl bg-white/60 dark:bg-white/[0.04] border border-[#B53A18]/30 text-center">
-        <div class="font-mono text-[10px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">LAZY VERDICT</div>
-        <div class="font-cinematic text-lg font-bold text-black dark:text-white">Assumed Competence</div>
-        <div class="text-xs font-sans text-black/60 dark:text-white/60 mt-1">Observers surrender judgment to the performance.</div>
-      </div>
-    </div>
-  </div>
-
+<div class="p-6 rounded-2xl bg-black/[0.02] dark:bg-[#006E51]/10 border border-[#006E51]/30 shadow-lg">
+<div class="flex items-center justify-between pb-3 border-b border-[#006E51]/20 mb-5">
+<span class="font-mono text-xs uppercase tracking-widest text-[#006E51] font-semibold flex items-center gap-1.5">
+<span>✓</span> <span>THE GROUNDED PATH</span>
+</span>
+<span class="font-mono text-[10px] uppercase text-[#006E51]/70 tracking-wider">EVIDENCE-BASED</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#006E51] mb-1 font-semibold">01 // FOUNDATIONAL SUBSTRATE</div>
+<div class="font-cinematic text-lg font-bold text-black dark:text-white">Demonstrated Competence</div>
+<p class="text-xs font-sans text-black/70 dark:text-white/70 mt-1 leading-relaxed">Scars of error correction, verifiable repetitions, skin in the game.</p>
+</div>
+<div class="flex items-center gap-2 text-[#006E51] py-1">
+<span class="h-5 w-0.5 bg-[#006E51]"></span>
+<span class="font-mono text-[10px] font-bold tracking-widest uppercase">PRODUCES</span>
+<span class="text-sm font-bold">↓</span>
+</div>
+<div>
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#006E51] mb-1 font-semibold">02 // CALIBRATED RESULT</div>
+<div class="font-cinematic text-lg font-bold text-black dark:text-white">Justified Confidence</div>
+<p class="text-xs font-sans text-black/70 dark:text-white/70 mt-1 leading-relaxed">Signal backed by an authentic, tested source.</p>
+</div>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-black/[0.02] dark:bg-[#B53A18]/10 border border-dashed border-[#B53A18]/40 shadow-lg">
+<div class="flex items-center justify-between pb-3 border-b border-[#B53A18]/20 mb-5">
+<span class="font-mono text-xs uppercase tracking-widest text-[#B53A18] font-semibold flex items-center gap-1.5">
+<span>⚠️</span> <span>THE DANGEROUS SHORTCUT</span>
+</span>
+<span class="font-mono text-[10px] uppercase text-[#B53A18]/70 tracking-wider">COGNITIVE LEAP</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">01 // SURFACE POSTURE</div>
+<div class="font-cinematic text-lg font-bold text-black dark:text-white">Displayed Confidence</div>
+<p class="text-xs font-sans text-black/70 dark:text-white/70 mt-1 leading-relaxed">Loud volume, unbothered posture, scripted swagger.</p>
+</div>
+<div class="flex items-center gap-2 text-[#B53A18] py-1">
+<span class="h-5 w-0.5 border-l border-dashed border-[#B53A18]"></span>
+<span class="font-mono text-[10px] font-bold tracking-widest uppercase">MISTAKEN FOR</span>
+<span class="text-sm font-bold animate-pulse">⤓</span>
+</div>
+<div>
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#B53A18] mb-1 font-semibold">02 // LAZY VERDICT</div>
+<div class="font-cinematic text-lg font-bold text-black dark:text-white">Assumed Competence</div>
+<p class="text-xs font-sans text-black/70 dark:text-white/70 mt-1 leading-relaxed">Observers surrender judgment to the performance.</p>
+</div>
+</div>
+</div>
 </div>
 
 Both can lead to the same conclusion but only one starts from evidence [33].
@@ -611,8 +595,7 @@ We have to demand the mechanics, track the record, watch the response to failure
       </div>
       <span class="font-mono text-xs text-black/40 dark:text-white/40 transition-transform duration-200 group-open/dossier:rotate-180">▼</span>
     </summary>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4 pt-2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4 pt-2">
   <div id="ref-11" class="transition-all duration-300 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 hover:border-[#006E51]/40 flex gap-3.5 items-start">
     <span class="font-mono text-xs font-bold text-[#B53A18] dark:text-[#006E51] px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 select-none shrink-0">[11]</span>
     <div class="font-sans text-xs md:text-sm leading-relaxed text-black/80 dark:text-white/80">
