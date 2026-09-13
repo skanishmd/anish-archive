@@ -125,11 +125,11 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           type="waterPlane"
           animate="on"
           enableTransition={false}
-          // Light Mode: Circadian Dawn (Sunrise Amber, Sky Mist, Dawn Rose)
+          // Light Mode: Warm cinematic desert sand dunes
           // Dark Mode Fallback: 30% Velvet, 30% Emerald, 20% Rust
-          color1={isLight ? "#FED7AA" : "#6A1B9A"} 
-          color2={isLight ? "#BAE6FD" : "#006E51"} 
-          color3={isLight ? "#FBCFE8" : "#B53A18"} 
+          color1={isLight ? "#C8BCAF" : "#6A1B9A"} 
+          color2={isLight ? "#BEB1A2" : "#006E51"} 
+          color3={isLight ? "#D4C9BD" : "#B53A18"} 
           // Centered horizontally & vertically for balanced bilateral movement
           positionX={0}
           positionY={0}
@@ -148,16 +148,16 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           cameraZoom={1.0}
           lightType="env"
           envPreset="city"
-          brightness={isLight ? 1.05 : 0.85}
-          reflection={isLight ? 0.12 : 0.25}
-          grain={isLight ? "off" : "on"}
+          brightness={isLight ? 0.92 : 0.85}
+          reflection={isLight ? 0.08 : 0.25}
+          grain="on"
           wireframe={false}
         />
         <FiveToneShader theme={theme} />
       </ShaderGradientCanvas>
       
-      {/* Organic Fluid Atmosphere */}
-      {!isLight ? (
+      {/* 35/35/15/15 Organic Fluid Atmosphere (Dark Mode) */}
+      {!isLight && (
         <div 
           className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-50"
           style={{
@@ -169,24 +169,13 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
             `
           }}
         />
-      ) : (
-        <div 
-          className="absolute inset-0 z-[2] pointer-events-none mix-blend-soft-light opacity-70"
-          style={{
-            backgroundImage: `
-              radial-gradient(ellipse 75% 65% at 20% 25%, rgba(254, 215, 170, 0.50) 0%, transparent 70%),
-              radial-gradient(ellipse 75% 65% at 80% 75%, rgba(186, 230, 253, 0.45) 0%, transparent 70%),
-              radial-gradient(ellipse 50% 50% at 50% 35%, rgba(251, 207, 232, 0.35) 0%, transparent 60%)
-            `
-          }}
-        />
       )}
 
       {/* Overlay gradient to blend edges softly and protect typography contrast */}
-      <div className={`absolute inset-0 z-[3] pointer-events-none bg-gradient-to-b ${isLight ? 'from-[#FAF9F6]/40 via-transparent to-[#FAF9F6]/60' : 'from-[#050508]/40 via-transparent to-[#050508]/65'}`}></div>
+      <div className={`absolute inset-0 z-[3] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/40 via-transparent to-[#050508]/65'}`}></div>
       
       {/* Subtle fine film grain overlay */}
-      <div className={`absolute inset-0 z-[4] pointer-events-none mix-blend-overlay ${isLight ? 'opacity-[0.02]' : 'opacity-[0.07]'}`} 
+      <div className="absolute inset-0 z-[4] pointer-events-none mix-blend-overlay opacity-[0.07]" 
            style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
       </div>
     </div>
