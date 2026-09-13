@@ -39,16 +39,16 @@
 
 @layer base {
   :root {
-    /* LIGHT MODE FOUNDATION */
-    --color-void-theme: #F6F4F0;
+    /* LIGHT MODE FOUNDATION (Circadian Dawn) */
+    --color-void-theme: #FAF9F6;
     --color-void-raised-theme: #FFFFFF;
-    --color-void-deep-theme: #EEEEEE;
-    --color-bone-theme: #050505;
-    --color-bone-muted-theme: #4A4A4A;
-    --color-ash-theme: #6A6A6A;
-    --color-hairline-theme: #E5E5E5;
-    --color-hairline-hover-theme: #D5D5D5;
-    --color-graphite-theme: #E0E0E0;
+    --color-void-deep-theme: #F4F1EA;
+    --color-bone-theme: #111111;
+    --color-bone-muted-theme: #4B5563;
+    --color-ash-theme: #6B7280;
+    --color-hairline-theme: rgba(0, 0, 0, 0.08);
+    --color-hairline-hover-theme: rgba(0, 0, 0, 0.16);
+    --color-graphite-theme: #E5E7EB;
 
     --color-signal-research-theme: #FF2A00;
     --color-signal-project-theme: #0038FF;
@@ -226,12 +226,12 @@
 }
 
 .ambient-light-bg {
-  background-color: #BFB5A9;
+  background-color: #FAF9F6;
   background-image: 
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sandNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sandNoise)' opacity='0.22'/%3E%3C/svg%3E"),
-    radial-gradient(at 20% 15%, rgba(197, 188, 176, 0.7) 0px, transparent 60%),
-    radial-gradient(at 80% 80%, rgba(183, 173, 161, 0.7) 0px, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(191, 181, 169, 0.8) 0px, transparent 70%);
+    radial-gradient(ellipse 70% 60% at 15% 20%, rgba(254, 215, 170, 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 60% at 85% 80%, rgba(186, 230, 253, 0.40) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 50% 40%, rgba(251, 207, 232, 0.30) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 75% 25%, rgba(254, 240, 138, 0.25) 0%, transparent 60%);
 }
 
 .ambient-bg {
