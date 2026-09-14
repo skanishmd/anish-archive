@@ -70,11 +70,8 @@ const color = TYPE_COLORS[type] || 'text-bone';
       )}
     </header>
 
-    <!-- Reading Container (Boxed with glass in light mode; unboxed, transparent free-float in dark mode) -->
-    <div class="rounded-2xl p-8 md:p-16 lg:p-20 opacity-0 translate-y-12 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards] shadow-[0_0_80px_rgba(0,0,0,0.1)] dark:shadow-none relative overflow-hidden bg-[#F6F4F0]/80 dark:bg-transparent backdrop-blur-[40px] dark:backdrop-blur-none border border-black/5 dark:border-transparent">
-      
-      <!-- Subtle Specular Mouse Highlight via CSS (light mode only) -->
-      <div class="glass-specular hidden md:block dark:hidden"></div>
+    <!-- Reading Container (Unboxed, transparent free-float in both light and dark mode) -->
+    <div class="p-8 md:p-16 lg:p-20 opacity-0 translate-y-12 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards] shadow-none relative bg-transparent backdrop-blur-none border-transparent">
 
       <article class="relative z-10 prose prose-lg md:prose-xl max-w-[70ch] mx-auto
         dark:prose-invert 
