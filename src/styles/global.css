@@ -39,16 +39,16 @@
 
 @layer base {
   :root {
-    /* LIGHT MODE FOUNDATION (Warm Desert Sand) */
-    --color-void-theme: #F6F4F0;
+    /* LIGHT MODE FOUNDATION (White Ice Storm / Glacial Cryo) */
+    --color-void-theme: #F0F4F8;
     --color-void-raised-theme: #FFFFFF;
-    --color-void-deep-theme: #EEEEEE;
-    --color-bone-theme: #050505;
-    --color-bone-muted-theme: #4A4A4A;
-    --color-ash-theme: #6A6A6A;
-    --color-hairline-theme: #E5E5E5;
-    --color-hairline-hover-theme: #D5D5D5;
-    --color-graphite-theme: #E0E0E0;
+    --color-void-deep-theme: #E2E8F0;
+    --color-bone-theme: #0A0F14;
+    --color-bone-muted-theme: #334155;
+    --color-ash-theme: #64748B;
+    --color-hairline-theme: rgba(15, 23, 42, 0.08);
+    --color-hairline-hover-theme: rgba(15, 23, 42, 0.16);
+    --color-graphite-theme: #CBD5E1;
 
     --color-signal-research-theme: #FF2A00;
     --color-signal-project-theme: #0038FF;
@@ -226,12 +226,12 @@
 }
 
 .ambient-light-bg {
-  background-color: #E8DED1;
+  background-color: #F0F4F8;
   background-image: 
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sandNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sandNoise)' opacity='0.10'/%3E%3C/svg%3E"),
-    radial-gradient(at 20% 15%, rgba(245, 237, 226, 0.9) 0px, transparent 60%),
-    radial-gradient(at 80% 80%, rgba(235, 223, 208, 0.8) 0px, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(240, 230, 218, 0.85) 0px, transparent 70%);
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='iceNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23iceNoise)' opacity='0.04'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 80% 70% at 20% 15%, rgba(212, 234, 247, 0.85) 0px, transparent 65%),
+    radial-gradient(ellipse 75% 65% at 80% 85%, rgba(255, 255, 255, 0.95) 0px, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 50% 45%, rgba(226, 232, 240, 0.75) 0px, transparent 70%);
 }
 
 .ambient-bg {

@@ -13,12 +13,12 @@ featured: true
 
 <div class="not-prose mb-8">
   <div class="float-left mr-6 mb-2 group/dropcap cursor-pointer relative select-none">
-    <div class="w-24 h-32 rounded-lg p-1.5 bg-gradient-to-b from-white/15 to-white/5 dark:from-[#6A1B9A]/40 dark:to-[#006E51]/40 border border-black/10 dark:border-white/20 shadow-xl dark:shadow-[0_0_25px_rgba(106,27,154,0.3)] backdrop-blur-xl flex flex-col justify-between transition-transform duration-300 group-hover/dropcap:scale-105 group-hover/dropcap:-rotate-2">
-      <div class="flex justify-between items-center text-[10px] font-mono text-black/50 dark:text-white/60 px-1 pt-0.5">
+    <div class="w-24 h-32 rounded-lg p-1.5 bg-white/75 dark:bg-gradient-to-b dark:from-[#6A1B9A]/40 dark:to-[#006E51]/40 border border-slate-300/80 dark:border-white/20 shadow-[0_8px_24px_rgba(15,23,42,0.06)] dark:shadow-[0_0_25px_rgba(106,27,154,0.3)] backdrop-blur-xl flex flex-col justify-between transition-transform duration-300 group-hover/dropcap:scale-105 group-hover/dropcap:-rotate-2">
+      <div class="flex justify-between items-center text-[10px] font-mono text-slate-600 dark:text-white/60 px-1 pt-0.5">
         <span class="text-[#F29900]">🃏</span>
         <span class="tracking-widest">ACT I</span>
       </div>
-      <div class="text-center font-cinematic text-6xl font-bold leading-none bg-gradient-to-b from-black to-black/70 dark:from-[#F29900] dark:via-[#F0EDE8] dark:to-[#006E51] bg-clip-text text-transparent drop-shadow-md py-1">
+      <div class="text-center font-cinematic text-6xl font-bold leading-none bg-gradient-to-b from-[#0A0F14] to-slate-700 dark:from-[#F29900] dark:via-[#F0EDE8] dark:to-[#006E51] bg-clip-text text-transparent drop-shadow-sm py-1">
         T
       </div>
       <div class="flex justify-between items-center text-[9px] font-mono tracking-widest text-[#B53A18] px-1 pb-0.5 uppercase">
@@ -27,7 +27,7 @@ featured: true
       </div>
     </div>
   </div>
-  <p class="font-literary text-[20px] md:text-[22px] leading-[2.1] text-black dark:text-white dark:drop-shadow-md">
+  <p class="font-literary font-medium text-[20px] md:text-[22px] leading-[2.1] text-[#0A0F14] dark:text-white dark:drop-shadow-md">
     hink about the man who is effortlessly charismatic around his friends. He is witty, sharp and never loses his ocean of thoughts. But the moment he is left alone with the one woman he actually has genuine, terrifying feelings for, he freezes. His natural rhythm collapses, filters every sentence, overthinks his own thoughts and suddenly becomes rigid and guarded. And she walks away thinking he lacks depth or personality [1, 2].
   </p>
 </div>
