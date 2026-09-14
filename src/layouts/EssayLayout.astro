@@ -30,7 +30,7 @@ const color = TYPE_COLORS[type] || 'text-bone';
     </div>
     
     <!-- Instant fine sand grain overlay (paints at 0ms, prevents flat fallback flash) -->
-    <div class="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-20 dark:opacity-15" 
+    <div class="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-8 dark:opacity-15" 
          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
     </div>
   </div>
@@ -38,9 +38,9 @@ const color = TYPE_COLORS[type] || 'text-bone';
   <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 pt-10 md:pt-14 pb-48 selection:bg-white/20">
     
     <header class="mb-16 opacity-0 translate-y-8 animate-[fade-in-up_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]">
-      <div class="flex justify-between items-center mb-12 pb-4 border-b border-black/10 dark:border-white/10">
-        <a href="/archive" class="font-mono text-[10px] uppercase tracking-[0.2em] text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors">← RETURN TO ARCHIVE</a>
-        <span class="font-mono text-[10px] uppercase tracking-widest text-black/40 dark:text-white/40">{formattedDate}</span>
+      <div class="flex justify-between items-center mb-12 pb-4 border-b border-black/15 dark:border-white/10">
+        <a href="/archive" class="font-mono text-[10px] uppercase tracking-[0.2em] text-black font-semibold hover:opacity-75 dark:text-white/50 dark:hover:text-white transition-colors">← RETURN TO ARCHIVE</a>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-black/70 dark:text-white/60 font-semibold">{formattedDate}</span>
       </div>
       
       <a href={Astro.url.pathname} class="block group">
@@ -50,10 +50,10 @@ const color = TYPE_COLORS[type] || 'text-bone';
               <span class="relative z-10 text-black dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#6A1B9A] dark:via-[#F29900] dark:to-[#006E51] transition-transform duration-300 hover:scale-105 inline-block cursor-pointer">Bluff</span>
               <span class="hidden dark:inline-block absolute -top-3 -right-5 text-sm font-mono text-[#F29900] opacity-80 select-none animate-bounce">🃏</span>
             </span>
-            <span class="block mt-4 text-3xl md:text-4xl lg:text-5xl font-cinematic font-normal text-black/80 dark:text-white/80">
-              <span class="text-black dark:text-[#F29900] font-semibold tracking-wide">Confidence</span>
-              <span class="font-mono text-xl md:text-2xl text-black/30 dark:text-white/30 mx-3 select-none">//</span>
-              <span class="font-serif italic text-black/70 dark:text-[#006E51]">Competence</span>
+            <span class="block mt-4 text-3xl md:text-4xl lg:text-5xl font-cinematic font-normal text-black dark:text-white/80">
+              <span class="text-black dark:text-[#F29900] font-bold tracking-wide">Confidence</span>
+              <span class="font-mono text-xl md:text-2xl text-black/60 dark:text-white/30 mx-3 select-none">//</span>
+              <span class="font-serif italic text-black dark:text-[#006E51] font-semibold">Competence</span>
             </span>
           </h1>
         ) : (
@@ -64,7 +64,7 @@ const color = TYPE_COLORS[type] || 'text-bone';
       </a>
       
       {description && (
-        <p class="font-literary text-2xl text-black/60 dark:text-white/60 italic leading-relaxed max-w-3xl border-l-2 border-black/20 dark:border-white/20 pl-6">
+        <p class="font-literary text-2xl text-black/90 dark:text-white/70 italic font-medium leading-relaxed max-w-3xl border-l-2 border-black/30 dark:border-white/20 pl-6">
           {description}
         </p>
       )}
@@ -75,14 +75,14 @@ const color = TYPE_COLORS[type] || 'text-bone';
 
       <article class="relative z-10 prose prose-lg md:prose-xl max-w-[70ch] mx-auto
         dark:prose-invert 
-        prose-p:font-literary prose-p:text-[20px] md:prose-p:text-[22px] prose-p:leading-[2.1] prose-p:text-black dark:prose-p:text-white dark:prose-p:drop-shadow-md prose-p:mb-8
-        prose-headings:font-cinematic prose-headings:text-black dark:prose-headings:text-white dark:prose-headings:drop-shadow-md prose-headings:font-normal prose-headings:mt-20 prose-headings:mb-10
+        prose-p:font-literary prose-p:font-medium prose-p:text-[20px] md:prose-p:text-[22px] prose-p:leading-[2.1] prose-p:text-black dark:prose-p:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)] dark:drop-shadow-md prose-p:mb-8
+        prose-headings:font-cinematic prose-headings:text-black dark:prose-headings:text-white prose-headings:font-bold prose-headings:mt-20 prose-headings:mb-10
         prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
-        prose-a:text-black dark:prose-a:text-white prose-a:underline prose-a:decoration-black/30 dark:prose-a:decoration-white/30 hover:prose-a:decoration-black dark:hover:prose-a:decoration-white transition-colors
-        prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-black dark:prose-blockquote:text-white dark:prose-blockquote:drop-shadow-md prose-blockquote:border-l-black/20 dark:prose-blockquote:border-l-white/20 prose-blockquote:bg-black/5 dark:prose-blockquote:bg-white/5 prose-blockquote:p-8 prose-blockquote:rounded-r-xl
-        prose-strong:text-black dark:prose-strong:text-white dark:prose-strong:drop-shadow-md prose-strong:font-semibold
+        prose-a:text-black dark:prose-a:text-white prose-a:underline prose-a:decoration-black/50 dark:prose-a:decoration-white/30 hover:prose-a:decoration-black dark:hover:prose-a:decoration-white transition-colors
+        prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:font-medium prose-blockquote:text-black dark:prose-blockquote:text-white border-l-black/40 dark:border-l-white/20 prose-blockquote:bg-black/5 dark:prose-blockquote:bg-white/5 prose-blockquote:p-8 prose-blockquote:rounded-r-xl
+        prose-strong:text-black dark:prose-strong:text-white prose-strong:font-bold
         prose-ul:list-disc prose-ol:list-decimal prose-ul:pl-8 prose-ol:pl-8 prose-ul:mb-8 prose-ol:mb-8
-        prose-li:text-black dark:prose-li:text-white dark:prose-li:drop-shadow-md prose-li:font-literary prose-li:text-[18px] md:prose-li:text-[20px] prose-li:leading-[1.9] prose-li:mb-3
+        prose-li:text-black dark:prose-li:text-white prose-li:font-literary prose-li:font-medium prose-li:text-[18px] md:prose-li:text-[20px] prose-li:leading-[1.9] prose-li:mb-3
       ">
         <slot />
       </article>

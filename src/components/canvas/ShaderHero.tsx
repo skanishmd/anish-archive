@@ -125,11 +125,11 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           type="waterPlane"
           animate="on"
           enableTransition={false}
-          // Light Mode: Warm cinematic desert sand dunes
+          // Light Mode: Sunlit golden desert sand dunes
           // Dark Mode Fallback: 30% Velvet, 30% Emerald, 20% Rust
-          color1={isLight ? "#C8BCAF" : "#6A1B9A"} 
-          color2={isLight ? "#BEB1A2" : "#006E51"} 
-          color3={isLight ? "#D4C9BD" : "#B53A18"} 
+          color1={isLight ? "#E8DED1" : "#6A1B9A"} 
+          color2={isLight ? "#DECFC0" : "#006E51"} 
+          color3={isLight ? "#F4EDE3" : "#B53A18"} 
           // Centered horizontally & vertically for balanced bilateral movement
           positionX={0}
           positionY={0}
@@ -148,8 +148,8 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           cameraZoom={1.0}
           lightType="env"
           envPreset="city"
-          brightness={isLight ? 0.92 : 0.85}
-          reflection={isLight ? 0.08 : 0.25}
+          brightness={isLight ? 1.15 : 0.85}
+          reflection={isLight ? 0.12 : 0.25}
           grain="on"
           wireframe={false}
         />
