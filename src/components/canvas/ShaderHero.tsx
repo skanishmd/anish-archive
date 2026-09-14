@@ -125,11 +125,11 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           type="waterPlane"
           animate="on"
           enableTransition={false}
-          // Light Mode: White Ice Storm / Glacial Cryo
+          // Light Mode: Balanced warm desert sand
           // Dark Mode Fallback: 30% Velvet, 30% Emerald, 20% Rust
-          color1={isLight ? "#FFFFFF" : "#6A1B9A"} 
-          color2={isLight ? "#D4EAF7" : "#006E51"} 
-          color3={isLight ? "#E2E8F0" : "#B53A18"} 
+          color1={isLight ? "#BFB5A9" : "#6A1B9A"} 
+          color2={isLight ? "#B7ADA1" : "#006E51"} 
+          color3={isLight ? "#C5BCB0" : "#B53A18"} 
           // Centered horizontally & vertically for balanced bilateral movement
           positionX={0}
           positionY={0}
@@ -137,27 +137,27 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
           rotationX={0}
           rotationY={0}
           rotationZ={0}
-          uSpeed={0.25}
-          uStrength={isLight ? 1.5 : 1.5}
+          uSpeed={0.2}
+          uStrength={isLight ? 1.2 : 1.5}
           uDensity={1.8}
-          uFrequency={4.4}
-          uAmplitude={isLight ? 0.9 : 1.1}
+          uFrequency={4.8}
+          uAmplitude={isLight ? 0.8 : 1.1}
           cAzimuthAngle={180}
           cPolarAngle={90}
           cDistance={2.8}
           cameraZoom={1.0}
           lightType="env"
           envPreset="city"
-          brightness={isLight ? 1.22 : 0.85}
-          reflection={isLight ? 0.35 : 0.25}
+          brightness={isLight ? 0.9 : 0.85}
+          reflection={isLight ? 0.05 : 0.25}
           grain="on"
           wireframe={false}
         />
         <FiveToneShader theme={theme} />
       </ShaderGradientCanvas>
       
-      {/* Atmosphere (Dark Mode: Velvet/Emerald/Rust; Light Mode: Arctic Ice Storm Radiance) */}
-      {!isLight ? (
+      {/* 35/35/15/15 Organic Fluid Atmosphere (Dark Mode) */}
+      {!isLight && (
         <div 
           className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-50"
           style={{
@@ -169,24 +169,13 @@ export default function ShaderHero({ theme = 'dark' }: { theme?: 'light' | 'dark
             `
           }}
         />
-      ) : (
-        <div 
-          className="absolute inset-0 z-[2] pointer-events-none mix-blend-screen opacity-40"
-          style={{
-            backgroundImage: `
-              radial-gradient(ellipse 80% 70% at 25% 20%, rgba(212, 234, 247, 0.55) 0%, transparent 70%),
-              radial-gradient(ellipse 70% 60% at 75% 80%, rgba(255, 255, 255, 0.70) 0%, transparent 70%),
-              radial-gradient(ellipse 60% 50% at 50% 30%, rgba(226, 232, 240, 0.45) 0%, transparent 60%)
-            `
-          }}
-        />
       )}
 
       {/* Overlay gradient to blend edges softly and protect typography contrast */}
-      <div className={`absolute inset-0 z-[3] pointer-events-none bg-gradient-to-b ${isLight ? 'from-[#F0F4F8]/30 via-transparent to-[#F0F4F8]/60' : 'from-[#050508]/40 via-transparent to-[#050508]/65'}`}></div>
+      <div className={`absolute inset-0 z-[3] pointer-events-none bg-gradient-to-b ${isLight ? 'opacity-0' : 'from-[#050508]/40 via-transparent to-[#050508]/65'}`}></div>
       
-      {/* Subtle fine diamond dust / film grain overlay */}
-      <div className={`absolute inset-0 z-[4] pointer-events-none mix-blend-overlay ${isLight ? 'opacity-[0.03]' : 'opacity-[0.07]'}`} 
+      {/* Subtle fine film grain overlay */}
+      <div className="absolute inset-0 z-[4] pointer-events-none mix-blend-overlay opacity-[0.07]" 
            style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
       </div>
     </div>

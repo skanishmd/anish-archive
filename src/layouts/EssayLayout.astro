@@ -29,8 +29,8 @@ const color = TYPE_COLORS[type] || 'text-bone';
       </div>
     </div>
     
-    <!-- Instant fine diamond dust shimmer (paints at 0ms, prevents flat fallback flash) -->
-    <div class="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-[0.04] dark:opacity-15" 
+    <!-- Instant fine sand grain overlay (paints at 0ms, prevents flat fallback flash) -->
+    <div class="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-20 dark:opacity-15" 
          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}>
     </div>
   </div>
@@ -39,50 +39,53 @@ const color = TYPE_COLORS[type] || 'text-bone';
     
     <header class="mb-16 opacity-0 translate-y-8 animate-[fade-in-up_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]">
       <div class="flex justify-between items-center mb-12 pb-4 border-b border-black/10 dark:border-white/10">
-        <a href="/archive" class="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-800 hover:text-black dark:text-white/50 dark:hover:text-white font-semibold transition-colors">← RETURN TO ARCHIVE</a>
-        <span class="font-mono text-[10px] uppercase tracking-widest text-slate-500 dark:text-white/60 font-semibold">{formattedDate}</span>
+        <a href="/archive" class="font-mono text-[10px] uppercase tracking-[0.2em] text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors">← RETURN TO ARCHIVE</a>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-black/40 dark:text-white/40">{formattedDate}</span>
       </div>
       
       <a href={Astro.url.pathname} class="block group">
         {title.toLowerCase().includes('bluff') ? (
-          <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-[#0A0F14] dark:text-white leading-[1.05] tracking-tight mb-6 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.005]">
+          <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-black dark:text-white leading-[1.05] tracking-tight mb-6 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.005]">
             The Art of <span class="relative inline-block font-bold">
-              <span class="relative z-10 text-[#0A0F14] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#6A1B9A] dark:via-[#F29900] dark:to-[#006E51] transition-transform duration-300 hover:scale-105 inline-block cursor-pointer">Bluff</span>
+              <span class="relative z-10 text-black dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#6A1B9A] dark:via-[#F29900] dark:to-[#006E51] transition-transform duration-300 hover:scale-105 inline-block cursor-pointer">Bluff</span>
               <span class="hidden dark:inline-block absolute -top-3 -right-5 text-sm font-mono text-[#F29900] opacity-80 select-none animate-bounce">🃏</span>
             </span>
-            <span class="block mt-4 text-3xl md:text-4xl lg:text-5xl font-cinematic font-normal text-[#0A0F14] dark:text-white/80">
-              <span class="text-[#0A0F14] dark:text-[#F29900] font-bold tracking-wide">Confidence</span>
-              <span class="font-mono text-xl md:text-2xl text-slate-400 dark:text-white/30 mx-3 select-none">//</span>
-              <span class="font-serif italic text-slate-700 dark:text-[#006E51] font-semibold">Competence</span>
+            <span class="block mt-4 text-3xl md:text-4xl lg:text-5xl font-cinematic font-normal text-black/80 dark:text-white/80">
+              <span class="text-black dark:text-[#F29900] font-semibold tracking-wide">Confidence</span>
+              <span class="font-mono text-xl md:text-2xl text-black/30 dark:text-white/30 mx-3 select-none">//</span>
+              <span class="font-serif italic text-black/70 dark:text-[#006E51]">Competence</span>
             </span>
           </h1>
         ) : (
-          <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-[#0A0F14] dark:text-white leading-[1.05] tracking-tight mb-8 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.01] group-hover:drop-shadow-2xl">
+          <h1 class="font-literary text-5xl md:text-6xl lg:text-7xl text-black dark:text-white leading-[1.05] tracking-tight mb-8 drop-shadow-xl transition-all duration-500 group-hover:scale-[1.01] group-hover:drop-shadow-2xl">
             {title}
           </h1>
         )}
       </a>
       
       {description && (
-        <p class="font-literary text-2xl text-[#1E293B] dark:text-white/70 italic font-medium leading-relaxed max-w-3xl border-l-2 border-slate-300 dark:border-white/20 pl-6">
+        <p class="font-literary text-2xl text-black/60 dark:text-white/60 italic leading-relaxed max-w-3xl border-l-2 border-black/20 dark:border-white/20 pl-6">
           {description}
         </p>
       )}
     </header>
 
-    <!-- Reading Container (Unboxed, transparent free-float in both light and dark mode) -->
-    <div class="p-8 md:p-16 lg:p-20 opacity-0 translate-y-12 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards] shadow-none relative bg-transparent backdrop-blur-none border-transparent">
+    <!-- Reading Container (Boxed with glass in light mode; unboxed, transparent free-float in dark mode) -->
+    <div class="rounded-2xl p-8 md:p-16 lg:p-20 opacity-0 translate-y-12 animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards] shadow-[0_0_80px_rgba(0,0,0,0.1)] dark:shadow-none relative overflow-hidden bg-[#F6F4F0]/80 dark:bg-transparent backdrop-blur-[40px] dark:backdrop-blur-none border border-black/5 dark:border-transparent">
+      
+      <!-- Subtle Specular Mouse Highlight via CSS (light mode only) -->
+      <div class="glass-specular hidden md:block dark:hidden"></div>
 
       <article class="relative z-10 prose prose-lg md:prose-xl max-w-[70ch] mx-auto
         dark:prose-invert 
-        prose-p:font-literary prose-p:font-medium prose-p:text-[20px] md:prose-p:text-[22px] prose-p:leading-[2.1] prose-p:text-[#0A0F14] dark:prose-p:text-white dark:prose-p:drop-shadow-md prose-p:mb-8
-        prose-headings:font-cinematic prose-headings:text-[#0A0F14] dark:prose-headings:text-white dark:prose-headings:drop-shadow-md prose-headings:font-bold prose-headings:mt-20 prose-headings:mb-10
+        prose-p:font-literary prose-p:text-[20px] md:prose-p:text-[22px] prose-p:leading-[2.1] prose-p:text-black dark:prose-p:text-white dark:prose-p:drop-shadow-md prose-p:mb-8
+        prose-headings:font-cinematic prose-headings:text-black dark:prose-headings:text-white dark:prose-headings:drop-shadow-md prose-headings:font-normal prose-headings:mt-20 prose-headings:mb-10
         prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
-        prose-a:text-[#0A0F14] dark:prose-a:text-white prose-a:underline prose-a:decoration-slate-400 dark:prose-a:decoration-white/30 hover:prose-a:decoration-black dark:hover:prose-a:decoration-white transition-colors
-        prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:font-medium prose-blockquote:text-[#0A0F14] dark:prose-blockquote:text-white dark:prose-blockquote:drop-shadow-md border-l-slate-400 dark:border-l-white/20 prose-blockquote:bg-slate-900/5 dark:prose-blockquote:bg-white/5 prose-blockquote:p-8 prose-blockquote:rounded-r-xl
-        prose-strong:text-[#0A0F14] dark:prose-strong:text-white prose-strong:font-bold
+        prose-a:text-black dark:prose-a:text-white prose-a:underline prose-a:decoration-black/30 dark:prose-a:decoration-white/30 hover:prose-a:decoration-black dark:hover:prose-a:decoration-white transition-colors
+        prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-black dark:prose-blockquote:text-white dark:prose-blockquote:drop-shadow-md prose-blockquote:border-l-black/20 dark:prose-blockquote:border-l-white/20 prose-blockquote:bg-black/5 dark:prose-blockquote:bg-white/5 prose-blockquote:p-8 prose-blockquote:rounded-r-xl
+        prose-strong:text-black dark:prose-strong:text-white dark:prose-strong:drop-shadow-md prose-strong:font-semibold
         prose-ul:list-disc prose-ol:list-decimal prose-ul:pl-8 prose-ol:pl-8 prose-ul:mb-8 prose-ol:mb-8
-        prose-li:text-[#0A0F14] dark:prose-li:text-white dark:prose-li:drop-shadow-md prose-li:font-literary prose-li:font-medium prose-li:text-[18px] md:prose-li:text-[20px] prose-li:leading-[1.9] prose-li:mb-3
+        prose-li:text-black dark:prose-li:text-white dark:prose-li:drop-shadow-md prose-li:font-literary prose-li:text-[18px] md:prose-li:text-[20px] prose-li:leading-[1.9] prose-li:mb-3
       ">
         <slot />
       </article>
