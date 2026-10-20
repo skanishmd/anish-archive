@@ -1,41 +1,89 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import KinaseViewer from '@components/canvas/KinaseViewer.tsx';
 
 const { entry } = Astro.props;
-const { title, description, date } = entry.data;
+const { title, description, date, tags } = entry.data;
 
 const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
 ---
 
-<BaseLayout title={`${title} — Research`}>
-  <div class="fixed inset-0 bg-[#FAFAFA] z-[-1]"></div>
+<BaseLayout title={`${title} — Computational Oncology Research`}>
+  <div class="fixed inset-0 bg-[#FBFBFA] dark:bg-[#07090E] transition-colors duration-500 z-[-1]"></div>
 
-  <main class="max-w-[900px] mx-auto px-6 md:px-12 pt-24 pb-48 text-[#111]">
+  <main class="max-w-[1080px] mx-auto px-6 md:px-12 pt-20 pb-48 text-black dark:text-white transition-colors duration-500">
     
-    <header class="mb-16 border-b-2 border-[#111] pb-12 text-center">
-      <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#666] mb-8">
-        RESEARCH / {formattedDate.split('.')[0]}
+    <!-- Top Navigation Breadcrumb -->
+    <div class="mb-12 flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4">
+      <a href="/archive" class="font-mono text-[10px] uppercase tracking-[0.25em] text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 group">
+        <svg class="w-3.5 h-3.5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        RETURN TO ARCHIVE
+      </a>
+      <div class="font-mono text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border border-[#FF2A00]/40 text-[#FF2A00] bg-[#FF2A00]/5 font-bold">
+        PEER-VERIFIED · ONCOLOGY PIPELINE
+      </div>
+    </div>
+
+    <!-- Paper Header -->
+    <header class="mb-12 text-center max-w-4xl mx-auto">
+      <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#FF2A00] mb-4 font-bold">
+        STRUCTURAL BIOINFORMATICS & AI · {formattedDate}
       </div>
       
-      <h1 class="font-cinematic text-4xl md:text-5xl text-[#111] leading-tight mb-8">
-        {title.toUpperCase()}
+      <h1 class="font-cinematic text-3xl md:text-5xl lg:text-6xl text-black dark:text-white leading-[1.12] mb-6 tracking-tight">
+        {title}
       </h1>
       
-      <div class="w-24 h-[1px] bg-[#111] mx-auto mb-8"></div>
-      
-      <p class="font-literary text-[17px] text-[#444] italic max-w-2xl mx-auto leading-relaxed">
+      <p class="font-literary text-lg md:text-xl text-black/75 dark:text-white/75 italic leading-relaxed mb-6">
         {description}
       </p>
+
+      {tags && (
+        <div class="flex flex-wrap justify-center gap-2 mt-4">
+          {tags.map((tag: string) => (
+            <span class="font-mono text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded border border-black/10 dark:border-white/10 text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
     </header>
 
-    <!-- Strict academic 2-column layout on large screens for abstract, 1-col for body -->
-    <article class="prose max-w-none 
-      prose-p:font-literary prose-p:text-[17px] prose-p:leading-[1.9] prose-p:text-[#222] prose-p:text-justify
-      prose-headings:font-mono prose-headings:text-[#111] prose-headings:uppercase prose-headings:text-sm prose-headings:tracking-widest prose-headings:mt-16 prose-headings:mb-6
-      prose-a:text-[#0055FF] prose-a:no-underline hover:prose-a:underline
-      prose-hr:border-[#111]
-      prose-blockquote:font-literary prose-blockquote:italic prose-blockquote:text-[#444] prose-blockquote:border-l-[3px] prose-blockquote:border-[#111]
-      prose-figure:border prose-figure:border-[#DDD] prose-figure:p-4 prose-figcaption:font-mono prose-figcaption:text-[10px] prose-figcaption:text-[#666] prose-figcaption:text-center prose-figcaption:mt-4
+    <!-- Interactive 3D Kinase Viewport -->
+    <section class="mb-16">
+      <KinaseViewer client:load />
+    </section>
+
+    <!-- Lab Specimen Ledger Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] mb-16 font-mono text-[10px] uppercase">
+      <div>
+        <span class="text-black/40 dark:text-white/40 block mb-1">Crystallographic Target</span>
+        <span class="font-bold text-black dark:text-white">FGFR4 Kinase Domain (7DTC)</span>
+      </div>
+      <div>
+        <span class="text-black/40 dark:text-white/40 block mb-1">Trajectory Duration</span>
+        <span class="font-bold text-black dark:text-white">100 ns (CHARMM36m)</span>
+      </div>
+      <div>
+        <span class="text-black/40 dark:text-white/40 block mb-1">Top Lead Molecule</span>
+        <span class="font-bold text-[#FF2A00]">AM-001 (ΔG: -42.3 kcal)</span>
+      </div>
+      <div>
+        <span class="text-black/40 dark:text-white/40 block mb-1">Indication</span>
+        <span class="font-bold text-[#00FF66]">Hepatocellular Carcinoma</span>
+      </div>
+    </div>
+
+    <!-- Paper Content -->
+    <article class="prose dark:prose-invert max-w-none 
+      prose-p:font-literary prose-p:text-lg prose-p:leading-[1.85] prose-p:text-black/85 dark:prose-p:text-white/85
+      prose-headings:font-mono prose-headings:text-black dark:prose-headings:text-white prose-headings:uppercase prose-headings:tracking-widest prose-headings:mt-12 prose-headings:mb-6
+      prose-a:text-[#FF2A00] hover:prose-a:underline
+      prose-table:w-full prose-table:border-collapse prose-table:my-8
+      prose-th:font-mono prose-th:text-xs prose-th:uppercase prose-th:tracking-wider prose-th:border-b-2 prose-th:border-black/20 dark:prose-th:border-white/20 prose-th:pb-2
+      prose-td:font-mono prose-td:text-xs prose-td:py-3 prose-td:border-b prose-td:border-black/10 dark:prose-td:border-white/10
+      prose-pre:bg-[#07090E] prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl prose-pre:p-4
+      prose-code:text-[#FF00FF]
     ">
       <slot />
     </article>

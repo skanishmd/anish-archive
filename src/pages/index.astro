@@ -2,14 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ShaderHero from '@components/canvas/ShaderHero.tsx';
 import LiquidLogo from '@components/canvas/LiquidLogo.tsx';
-
-const species = [
-  { name: 'Research', type: 'research', color: 'bg-[#FF2A00]' },
-  { name: 'Technical', type: 'project', color: 'bg-[#0038FF]' },
-  { name: 'Essays', type: 'writing', color: 'bg-[#00FF66]' },
-  { name: 'Experiments', type: 'experiment', color: 'bg-[#00F0FF]' },
-  { name: 'Achievements', type: 'achievement', color: 'bg-[#FFAA00]' },
-];
+import DossierDeck from '@components/canvas/DossierDeck.tsx';
 ---
 
 <BaseLayout noHeaderFooter={true}>
@@ -20,8 +13,6 @@ const species = [
     document.addEventListener('DOMContentLoaded', () => {
       // Boot Sequence
       const tl = gsap.timeline();
-      
-      
 
       // Animate Main UI
       tl.fromTo('#hero-logo', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5');
@@ -61,7 +52,7 @@ const species = [
     });
   </script>
 
-<main class="h-screen w-full bg-transparent text-bone overflow-hidden relative selection:bg-white selection:text-black dark:selection:bg-black dark:selection:text-white">
+  <main class="h-screen w-full bg-transparent text-bone overflow-hidden relative selection:bg-white selection:text-black dark:selection:bg-black dark:selection:text-white">
     
     <!-- THE SCENE -->
     <div id="scene" class="absolute inset-0 z-0 w-full h-full">
@@ -84,7 +75,7 @@ const species = [
     </div>
 
     <!-- Spatial Cinematic UI -->
-    <div class="absolute inset-0 z-20 flex flex-col items-center justify-between p-8 md:p-12 pointer-events-none">
+    <div class="absolute inset-0 z-20 flex flex-col items-center justify-between p-6 md:p-10 pointer-events-none">
       
       <!-- Top: Identity -->
       <div id="hero-logo" class="w-full flex justify-between items-start pointer-events-auto opacity-0">
@@ -97,8 +88,8 @@ const species = [
       </div>
 
       <!-- Center: Kinetic Quote -->
-      <div class="w-full max-w-4xl mx-auto flex flex-col items-center text-center pointer-events-none z-30 text-black dark:text-white">
-        <h2 class="font-literary text-4xl md:text-5xl lg:text-7xl leading-[1.1] tracking-tight drop-shadow-xl dark:drop-shadow-[0_4px_24px_rgba(0,0,0,1)] flex flex-wrap justify-center gap-x-[0.25em] gap-y-2">
+      <div class="w-full max-w-4xl mx-auto flex flex-col items-center text-center pointer-events-none z-30 text-black dark:text-white my-auto">
+        <h2 class="font-literary text-3xl md:text-5xl lg:text-6xl leading-[1.15] tracking-tight drop-shadow-xl dark:drop-shadow-[0_4px_24px_rgba(0,0,0,1)] flex flex-wrap justify-center gap-x-[0.25em] gap-y-2">
           
           <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">There</span></span>
           <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">are</span></span>
@@ -118,30 +109,21 @@ const species = [
         </h2>
       </div>
 
-      <!-- Bottom: The Six Species Horizontal Dock -->
-      <div id="nav-dock" class="w-full flex flex-col items-center gap-6 pointer-events-auto z-40 opacity-0">
-        
-        <div class="font-mono text-[9px] text-black/50 dark:text-white/50 uppercase tracking-[0.4em] drop-shadow-md">
-          Index [{species.length}]
+      <!-- Bottom: The 3D Dossier Deck (Godly Polar Arc Spread) -->
+      <div id="nav-dock" class="w-full flex flex-col items-center pointer-events-auto z-40 opacity-0 pb-1">
+        <DossierDeck client:load />
+
+        <div class="mt-3 flex items-center gap-5">
+          <a href="/archive" class="font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 group">
+            Complete Evidence Archive
+            <svg class="w-3 h-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </a>
+          <span class="text-black/30 dark:text-white/30 text-[10px]">·</span>
+          <a href="/timeline" class="font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 group">
+            Timeline Chronicle
+            <svg class="w-3 h-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </a>
         </div>
-
-        <div class="flex flex-wrap justify-center gap-3 md:gap-4">
-          {species.map((s, i) => (
-            <a href={`/archive?type=${s.type}`} class="group relative px-6 py-3 rounded-full border border-black/10 dark:border-white/10 bg-white/5 dark:bg-black/5 backdrop-blur-xl hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-500 ease-out hover:scale-110 overflow-hidden">
-              <div class="flex items-center gap-3 relative z-10">
-                <div class="w-1.5 h-1.5 rounded-full transition-transform duration-500 group-hover:scale-[3]" class:list={[s.color]}></div>
-                <span class="font-mono text-xs font-medium tracking-[0.2em] text-black dark:text-white uppercase">{s.name}</span>
-              </div>
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500" class:list={[s.color]}></div>
-            </a>
-          ))}
-        </div>
-
-        <a href="/archive" class="mt-4 font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 group">
-          View All Objects 
-          <svg class="w-3 h-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-        </a>
-
       </div>
 
     </div>
@@ -154,6 +136,3 @@ const species = [
     to { opacity: 1; filter: blur(0px); transform: scale(1); }
   }
 </style>
-
-
-

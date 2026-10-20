@@ -4,6 +4,7 @@ import EssayLayout from '@layouts/EssayLayout.astro';
 import DossierLayout from '@layouts/DossierLayout.astro';
 import LabLayout from '@layouts/LabLayout.astro';
 import ResearchLayout from '@layouts/ResearchLayout.astro';
+import CreativeLayout from '@layouts/CreativeLayout.astro';
 
 export async function getStaticPaths() {
   const collectionNames = ['observations', 'projects', 'research', 'writing', 'achievements', 'creative'] as const;
@@ -27,19 +28,22 @@ export async function getStaticPaths() {
 const { entry, collectionName } = Astro.props;
 const { Content } = await render(entry);
 
-// Determine the layout based on the content species
+// Determine the layout based on content species
+// Each type gets its own curated visual universe (Anthology Architecture)
 const type = entry.data.type || 'writing';
 
-let Layout = EssayLayout; // Default to literary
+let Layout = EssayLayout; // Default: Investigative Broadsheet (dark Joker sand)
 
 if (type === 'project' || type === 'system') {
-  Layout = DossierLayout;
+  Layout = DossierLayout;          // ChronoBase: Space-grade HUD + Circadian Engine
 } else if (type === 'experiment') {
-  Layout = LabLayout;
+  Layout = LabLayout;              // Lab notebook aesthetic
 } else if (type === 'research') {
-  Layout = ResearchLayout;
+  Layout = ResearchLayout;         // Clinical Crystallography + 3D Kinase Viewer
 } else if (type === 'achievement') {
-  Layout = EssayLayout; // We'll make a specific RecordLayout later
+  Layout = EssayLayout;            // Clean literary record
+} else if (type === 'creative') {
+  Layout = CreativeLayout;         // Ghazal: Mughal/Renaissance velvet + amber stardust
 }
 ---
 
