@@ -1,61 +1,75 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ShaderHero from '@components/canvas/ShaderHero.tsx';
-import LiquidLogo from '@components/canvas/LiquidLogo.tsx';
-import DossierDeck from '@components/canvas/DossierDeck.tsx';
+import ChromeCenterpiece from '@components/canvas/ChromeCenterpiece.tsx';
+import ThemeToggle from '@components/ThemeToggle.astro';
+
+const portals = [
+  {
+    number: '01',
+    title: 'FGFR4 Inhibitor Discovery',
+    category: 'COMPUTATIONAL ONCOLOGY',
+    tag: '3D KINASE VIEWPORT',
+    desc: 'Targeting HCC through ML virtual screening and extended 100ns+ all-atom MD simulations.',
+    href: '/archive/research/fgfr4-hcc-discovery',
+    accent: '#FF2A00',
+    borderHover: 'hover:border-[#FF2A00]',
+    badgeBg: 'bg-[#FF2A00]/10 text-[#FF2A00] border-[#FF2A00]/30',
+  },
+  {
+    number: '02',
+    title: 'ChronoBase Platform',
+    category: 'CHRONOTHERAPEUTICS',
+    tag: '24H CIRCADIAN ENGINE',
+    desc: 'Multi-omics platform optimizing drug administration timing via circadian feedback loops.',
+    href: '/archive/projects/chronobase',
+    accent: '#0055FF',
+    borderHover: 'hover:border-[#0055FF]',
+    badgeBg: 'bg-[#0055FF]/10 text-[#0055FF] border-[#0055FF]/30',
+  },
+  {
+    number: '03',
+    title: 'The Architecture of the Bluff',
+    category: 'EMPIRICAL ESSAY',
+    tag: '101 CLINICAL CITATIONS',
+    desc: 'An investigative evidence ledger dismantling institutional pretense and cognitive posturing.',
+    href: '/archive/writing/the-architecture-of-the-bluff',
+    accent: '#00FF66',
+    borderHover: 'hover:border-[#00FF66]',
+    badgeBg: 'bg-[#00FF66]/10 text-[#00FF66] border-[#00FF66]/30',
+  },
+  {
+    number: '04',
+    title: 'Ghazal on Discovery',
+    category: 'SCIENCE × HUMANISM',
+    tag: 'DIWAN & POETRY',
+    desc: 'Two languages for one truth: molecular kinetics at midnight, Urdu couplets at dawn.',
+    href: '/archive/creative/ghazal-on-discovery',
+    accent: '#FFAA00',
+    borderHover: 'hover:border-[#FFAA00]',
+    badgeBg: 'bg-[#FFAA00]/10 text-[#FFAA00] border-[#FFAA00]/30',
+  },
+];
 ---
 
 <BaseLayout noHeaderFooter={true}>
   <script>
-    import 'liquid-glass-js';
     import gsap from 'gsap';
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Boot Sequence
       const tl = gsap.timeline();
 
-      // Animate Main UI
-      tl.fromTo('#hero-logo', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5');
-      tl.fromTo('#nav-dock', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.8');
-
-      // Kinetic Quote GSAP Animation
-      const quoteWords = document.querySelectorAll('.quote-word');
-      if (quoteWords.length > 0) {
-        tl.fromTo(quoteWords, 
-          { y: '120%', opacity: 0, rotationZ: 5 }, 
-          { y: '0%', opacity: 1, rotationZ: 0, duration: 1.2, ease: 'power4.out', stagger: 0.05 },
-          '-=0.8'
-        );
-      }
-
-      // Lens Tracker
-      const lensContainer = document.getElementById('lens-tracker');
-      if (lensContainer && window.innerWidth >= 768) {
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let lensX = mouseX;
-        let lensY = mouseY;
-        
-        window.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-        });
-
-        function animate() {
-          lensX += (mouseX - lensX) * 0.1;
-          lensY += (mouseY - lensY) * 0.1;
-          lensContainer.style.transform = `translate(${lensX - window.innerWidth/2}px, ${lensY - window.innerHeight/2}px)`;
-          requestAnimationFrame(animate);
-        }
-        animate();
-      }
+      // Orchestrated Entrance
+      tl.fromTo('#hero-header', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+      tl.fromTo('#hero-centerpiece', { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, '-=0.5');
+      tl.fromTo('#hero-portals', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out' }, '-=0.7');
     });
   </script>
 
-  <main class="h-screen w-full bg-transparent text-bone overflow-hidden relative selection:bg-white selection:text-black dark:selection:bg-black dark:selection:text-white">
+  <main class="min-h-screen w-full bg-transparent text-black dark:text-white relative overflow-x-hidden selection:bg-[#00FF66] selection:text-black">
     
-    <!-- THE SCENE -->
-    <div id="scene" class="absolute inset-0 z-0 w-full h-full">
+    <!-- BACKGROUND SCENE -->
+    <div id="scene" class="fixed inset-0 z-0 w-full h-full pointer-events-none">
       <div class="block dark:hidden absolute inset-0 ambient-light-bg">
         <div class="absolute inset-0 z-10">
           <ShaderHero client:only="react" theme="light" />
@@ -66,73 +80,158 @@ import DossierDeck from '@components/canvas/DossierDeck.tsx';
           <ShaderHero client:only="react" theme="dark" />
         </div>
       </div>
-    </div>
-
-    <!-- Liquid Glass Lens Tracker -->
-    <div id="lens-tracker" class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none mix-blend-normal will-change-transform">
-      <liquid-glass background="#scene" width="600" height="600" scale="50" radius="300" chroma="0.25" tint="0.0" edge="0.6" class="pointer-events-none hidden md:block opacity-0 animate-[fade-in_3s_ease-out_1s_forwards] drop-shadow-[0_0_80px_rgba(255,255,255,0.1)] dark:drop-shadow-[0_0_80px_rgba(0,0,0,0.4)]"></liquid-glass>
-      <liquid-glass background="#scene" width="340" height="500" scale="40" radius="170" chroma="0.3" tint="0.0" edge="0.6" draggable="true" class="pointer-events-auto block md:hidden opacity-0 animate-[fade-in_3s_ease-out_1s_forwards]"></liquid-glass>
-    </div>
-
-    <!-- Spatial Cinematic UI -->
-    <div class="absolute inset-0 z-20 flex flex-col items-center justify-between p-6 md:p-10 pointer-events-none">
       
-      <!-- Top: Identity -->
-      <div id="hero-logo" class="w-full flex justify-between items-start pointer-events-auto opacity-0">
-        <div class="scale-[1.2] origin-top-left">
-          <LiquidLogo client:only="react" text="SK ANISH MD" color="currentColor" />
-        </div>
-        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-black dark:text-white text-right drop-shadow-md">
-          Polymath<br/>Scientist
-        </div>
+      <!-- Fine Sand Overlay -->
+      <div class="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-20 dark:opacity-15" 
+           style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');">
       </div>
+    </div>
 
-      <!-- Center: Kinetic Quote -->
-      <div class="w-full max-w-4xl mx-auto flex flex-col items-center text-center pointer-events-none z-30 text-black dark:text-white my-auto">
-        <h2 class="font-literary text-3xl md:text-5xl lg:text-6xl leading-[1.15] tracking-tight drop-shadow-xl dark:drop-shadow-[0_4px_24px_rgba(0,0,0,1)] flex flex-wrap justify-center gap-x-[0.25em] gap-y-2">
-          
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">There</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">are</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">poems</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">inside</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">you</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left italic font-light opacity-80">that</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left italic font-light opacity-80">even</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left italic font-light opacity-80">the</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left italic font-light opacity-80">paper</span></span>
-          
-          <div class="w-full h-0"></div> <!-- Force line break here -->
-          
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">can't</span></span>
-          <span class="overflow-hidden inline-flex"><span class="quote-word inline-block origin-bottom-left">handle.</span></span>
-          
-        </h2>
-      </div>
-
-      <!-- Bottom: The 3D Dossier Deck (Godly Polar Arc Spread) -->
-      <div id="nav-dock" class="w-full flex flex-col items-center pointer-events-auto z-40 opacity-0 pb-1">
-        <DossierDeck client:load />
-
-        <div class="mt-3 flex items-center gap-5">
-          <a href="/archive" class="font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 group">
-            Complete Evidence Archive
-            <svg class="w-3 h-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+    <!-- MAIN EDITORIAL CONTENT -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-8 flex flex-col justify-between min-h-screen">
+      
+      <!-- TOP NAVIGATION BAR -->
+      <header id="hero-header" class="w-full flex items-center justify-between pb-6 border-b border-black/10 dark:border-white/10 opacity-0">
+        <!-- Identity -->
+        <div class="flex items-center gap-3">
+          <a href="/" class="font-cinematic text-xl md:text-2xl font-bold tracking-tight text-black dark:text-white no-underline hover:opacity-80 transition-opacity">
+            SK ANISH MD
           </a>
-          <span class="text-black/30 dark:text-white/30 text-[10px]">·</span>
-          <a href="/timeline" class="font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 group">
-            Timeline Chronicle
-            <svg class="w-3 h-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          <div class="hidden sm:flex items-center gap-2 pl-3 border-l border-black/15 dark:border-white/15">
+            <span class="w-2 h-2 rounded-full bg-[#00FF66] animate-pulse"></span>
+            <span class="font-mono text-[9px] uppercase tracking-[0.25em] text-black/60 dark:text-white/60">
+              POLYMATH SCIENTIST · MAKAUT '27
+            </span>
+          </div>
+        </div>
+
+        <!-- Center Nav Items -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="/archive/research/fgfr4-hcc-discovery" class="font-mono text-[11px] uppercase tracking-[0.2em] text-black/70 dark:text-white/70 hover:text-[#FF2A00] transition-colors">
+            ONCOLOGY
+          </a>
+          <a href="/archive/projects/chronobase" class="font-mono text-[11px] uppercase tracking-[0.2em] text-black/70 dark:text-white/70 hover:text-[#0055FF] transition-colors">
+            CHRONOBASE
+          </a>
+          <a href="/archive/writing/the-architecture-of-the-bluff" class="font-mono text-[11px] uppercase tracking-[0.2em] text-black/70 dark:text-white/70 hover:text-[#00FF66] transition-colors">
+            ESSAYS [101]
+          </a>
+          <a href="/archive/creative/ghazal-on-discovery" class="font-mono text-[11px] uppercase tracking-[0.2em] text-black/70 dark:text-white/70 hover:text-[#FFAA00] transition-colors">
+            GHAZALS
+          </a>
+          <a href="/timeline" class="font-mono text-[11px] uppercase tracking-[0.2em] text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors">
+            TIMELINE
+          </a>
+        </nav>
+
+        <!-- Right: Theme Switcher & Full Archive Button -->
+        <div class="flex items-center gap-4">
+          <a href="/archive" class="hidden md:inline-flex font-mono text-[10px] uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full border border-black/15 dark:border-white/15 bg-white/40 dark:bg-black/40 backdrop-blur-md hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+            ARCHIVE [06] ↗
+          </a>
+          <ThemeToggle />
+        </div>
+      </header>
+
+      <!-- HERO CENTERPIECE STAGE -->
+      <section id="hero-centerpiece" class="relative w-full my-auto flex flex-col items-center justify-center py-6 opacity-0">
+        
+        <!-- Big Architectural Typography Behind Sculpture -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
+          <h1 class="font-cinematic text-[clamp(2.5rem,8vw,7.5rem)] font-black tracking-[-0.04em] leading-[0.95] text-center text-black/[0.07] dark:text-white/[0.07] uppercase whitespace-nowrap">
+            STRUCTURAL ONCOLOGY
+          </h1>
+          <h2 class="font-cinematic text-[clamp(2rem,6.5vw,6rem)] font-light tracking-[-0.02em] leading-[0.95] text-center text-black/[0.05] dark:text-white/[0.05] uppercase italic whitespace-nowrap">
+            CIRCADIAN DYNAMICS
+          </h2>
+        </div>
+
+        <!-- 3D Liquid Chrome Centerpiece Canvas -->
+        <div class="relative z-10 w-full max-w-4xl mx-auto">
+          <ChromeCenterpiece client:only="react" />
+        </div>
+
+        <!-- Flanking Floating Precision Badges -->
+        <div class="w-full flex flex-col md:flex-row items-center justify-between gap-4 mt-2 relative z-20 pointer-events-auto">
+          
+          <div class="p-3.5 rounded-xl border border-black/10 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-lg max-w-sm">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF2A00]"></span>
+              <span class="font-mono text-[9px] uppercase tracking-[0.2em] font-bold text-black dark:text-white">
+                TARGET: FGFR4 KINASE
+              </span>
+            </div>
+            <p class="font-mono text-[10px] text-black/70 dark:text-white/70 leading-relaxed">
+              Extended 100ns+ all-atom MD simulations (PDB: 7DTC) & MM-PBSA ΔG lead inhibitor discovery.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-black/10 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-lg max-w-sm text-right md:text-right">
+            <div class="flex items-center justify-end gap-2 mb-1">
+              <span class="font-mono text-[9px] uppercase tracking-[0.2em] font-bold text-black dark:text-white">
+                STARTUP: CHRONOBASE
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#0055FF]"></span>
+            </div>
+            <p class="font-mono text-[10px] text-black/70 dark:text-white/70 leading-relaxed">
+              Optimizing cancer therapeutics timing via 24-hour circadian gene transcription feedback loops.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- BOTTOM 4-PORTAL SHELF (Direct Access to Distinct Worlds) -->
+      <footer id="hero-portals" class="w-full pt-8 pb-4 opacity-0">
+        
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+            EXPLORE DISTINCT UNIVERSES [04]
+          </span>
+          <a href="/timeline" class="font-mono text-[10px] uppercase tracking-[0.25em] text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white flex items-center gap-1.5 transition-colors">
+            VIEW TIMELINE CV →
           </a>
         </div>
-      </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {portals.map((portal) => (
+            <a
+              href={portal.href}
+              class={`group p-5 rounded-2xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-[#0B0D13]/70 backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1.5 shadow-md hover:shadow-2xl flex flex-col justify-between ${portal.borderHover}`}
+            >
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="font-mono text-xs font-bold text-black/40 dark:text-white/40 group-hover:text-black dark:group-hover:text-white transition-colors">
+                    {portal.number}
+                  </span>
+                  <span class={`font-mono text-[8px] uppercase tracking-wider px-2 py-0.5 rounded-full border ${portal.badgeBg} font-semibold`}>
+                    {portal.tag}
+                  </span>
+                </div>
+
+                <h3 class="font-cinematic text-lg font-bold text-black dark:text-white leading-snug mb-2 group-hover:text-black dark:group-hover:text-white">
+                  {portal.title}
+                </h3>
+
+                <p class="font-literary text-xs text-black/70 dark:text-white/70 leading-relaxed line-clamp-2">
+                  {portal.desc}
+                </p>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-black/5 dark:border-white/5 flex items-center justify-between font-mono text-[9px] uppercase tracking-wider text-black/50 dark:text-white/50 group-hover:text-black dark:group-hover:text-white transition-colors">
+                <span>Enter Universe</span>
+                <span class="transition-transform duration-300 group-hover:translate-x-1" style={`color: ${portal.accent};`}>
+                  →
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+      </footer>
 
     </div>
+
   </main>
 </BaseLayout>
-
-<style>
-  @keyframes fade-in {
-    from { opacity: 0; filter: blur(10px); transform: scale(0.95); }
-    to { opacity: 1; filter: blur(0px); transform: scale(1); }
-  }
-</style>
